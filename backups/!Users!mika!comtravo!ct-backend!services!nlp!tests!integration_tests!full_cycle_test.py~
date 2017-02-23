@@ -1,0 +1,164 @@
+from nlp_api.app import create_app
+from flask_testing import TestCase
+from unittest.mock import patch
+import json
+
+
+@patch('nlp_api.controllers.annotate.mail_tagger')
+class AnnotateTest(TestCase):
+
+    @patch('nlp_api.app._init_event_models')
+    @patch('nlp_api.app._init_msg_type_models')
+    @patch('nlp_api.app._init_spacy')
+    def create_app(self, init_spacy_mock, init_mt_mock, init_em_mock):
+        app = create_app()
+        app.app.config['TESTING'] = True
+        return app.app
+
+    def test_roundtrip_annotate(self, tag_mail_mock):
+        payload = json.dumps(
+            {
+                'body': 'Hallo Welt',
+                'subject': 'A test',
+                'from': {'email': 'test@test.com', 'name': 'Test User'},
+                'to': [{'email': 'test@test.com', 'name': 'Test User'}],
+                'cc': [],
+                'date': 0,
+                'zendesk_ticket_id': 777
+            })
+
+        def tag_mail_helper(msg, res):
+            res.update({
+                'language': 'en',
+                'label': None,
+                'source': 'email',
+                'annotations': [],
+                'content': {'flight': 1.0},
+                'users': [{'id': '2', 'roles': [{'role': 'traveler', 'probability': 1.0}]}],
+                'companies': [{'id': 'id', 'probability': 1.0}],
+                'p_booking': 0.0})
+            return 1  # TagStatus.success
+
+        tag_mail_mock.side_effect = tag_mail_helper
+        response = self.client.post('/v1/annotate',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json',
+                                             'Authorization': 'JWT eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAY29tdHJhdm8uY29tIn0.sbVqKnkNwEzPdhugjJtq-u3ehhD9M22pYvkObxoqD-8a5SJKD-Tnap79m1Ipjm5qJ2LtVmmUwLexjaS1tkt4_2Whrtub4vK1fsSiBv2-Q11oJl8a-WF-B5rC16o3v_QAKpOIP-9BtcKeoAtoJDJ16V16k7FxMNLvm2bQRuno9Ao'})  # noqa
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, {
+            'language': 'en',
+            'p_booking': 0.0,
+            'content': {'flight': 1.0},
+            'source': 'email',
+            'zendesk_ticket_id': 777,
+            'users': [{'id': '2', 'roles': [{'role': 'traveler', 'probability': 1.0}]}],
+            'companies': [{'id': 'id', 'probability': 1.0}]
+        })
+
+    def test_roundtrip_annotate_verbose(self, tag_mail_mock):
+        payload = json.dumps(
+            {
+                'body': 'Hallo Welt',
+                'subject': 'A test',
+                'from': {'email': 'test@test.com', 'name': 'Test User'},
+                'to': [{'email': 'test@test.com', 'name': 'Test User'}],
+                'cc': [],
+                'date': 0,
+                'zendesk_ticket_id': 777
+            })
+
+        def tag_mail_helper(msg, res):
+            res.update({
+                'language': 'en',
+                'label': None,
+                'source': 'email',
+                'annotations': [],
+                'crm': {'companies': {}, 'users': {}},
+                'p_booking': 0.0})
+            return 1  # TagStatus.success
+
+        tag_mail_mock.side_effect = tag_mail_helper
+        response = self.client.post('/v1/annotate/verbose',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json',
+                                             'Authorization': 'JWT eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAY29tdHJhdm8uY29tIn0.sbVqKnkNwEzPdhugjJtq-u3ehhD9M22pYvkObxoqD-8a5SJKD-Tnap79m1Ipjm5qJ2LtVmmUwLexjaS1tkt4_2Whrtub4vK1fsSiBv2-Q11oJl8a-WF-B5rC16o3v_QAKpOIP-9BtcKeoAtoJDJ16V16k7FxMNLvm2bQRuno9Ao'})  # noqa
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, {
+            'language': 'en',
+            'source': 'email',
+            'annotations': [],
+            'crm': {'companies': {}, 'users': {}},
+            'p_booking': 0.0,
+            'zendesk_ticket_id': 777})
+
+    def test_roundtrip_annotate_verbose_tokens(self, tag_mail_mock):
+        payload = json.dumps(
+            {
+                'body': 'Hallo Welt',
+                'subject': 'A test',
+                'from': {'email': 'test@test.com', 'name': 'Test User'},
+                'to': [{'email': 'test@test.com', 'name': 'Test User'}],
+                'cc': [],
+                'date': 0,
+                'zendesk_ticket_id': 777
+            })
+        res = {
+                'language': 'en',
+                'label': None,
+                'source': 'email',
+                'annotations': [{
+                    'start': 0, 'length': 1, 'where': 'body', 'text': '1', 'after': '',
+                    'ner': 'n', 'shape': 's', 'tag': 't', 'pos': 'p', 'sentence': 0,
+                    'rner': 'r', 'prediction': 'p', 'probability': 0.0}],
+                'crm': {'companies': {}, 'users': {}},
+                'p_booking': 0.0,
+                'zendesk_ticket_id': 777}
+
+        def tag_mail_helper(msg, r):
+            r.update(res)
+            return 1  # TagStatus.success
+
+        tag_mail_mock.side_effect = tag_mail_helper
+        response = self.client.post('/v1/annotate/verbose',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json',
+                                             'Authorization': 'JWT eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAY29tdHJhdm8uY29tIn0.sbVqKnkNwEzPdhugjJtq-u3ehhD9M22pYvkObxoqD-8a5SJKD-Tnap79m1Ipjm5qJ2LtVmmUwLexjaS1tkt4_2Whrtub4vK1fsSiBv2-Q11oJl8a-WF-B5rC16o3v_QAKpOIP-9BtcKeoAtoJDJ16V16k7FxMNLvm2bQRuno9Ao'})  # noqa
+        self.assertEqual(response.status_code, 200)
+        res.pop('label')
+        self.assertEqual(response.json, res)
+
+    def test_unauthorized(self, tag_mail_mock):
+        payload = json.dumps(
+            {
+                'body': 'Hallo Welt',
+                'subject': 'A test',
+                'from': {'email': 'test@test.com', 'name': 'Test User'},
+                'to': [{'email': 'test@test.com', 'name': 'Test User'}],
+                'cc': [],
+                'date': 0,
+                'zendesk_ticket_id': 777
+            })
+        tag_mail_mock.return_value = None
+        response = self.client.post('/v1/annotate',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json',
+                                             'Authorization': 'JWT not.a.token'})
+        self.assertEquals(response.status_code, 401)
+        self.assertEquals(response.json, {'detail': 'Authorization invalid', 'status': 401,
+                                          'title': 'Not Authorized'})
+
+        response = self.client.post('/v1/annotate',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json',
+                                             'Authorization': 'wrong format'})
+        self.assertEquals(response.status_code, 401)
+        self.assertEquals(response.json, {'status': 401, 'detail': 'Invalid authorization header',
+                                          'title': 'Not Authorized'})
+
+        response = self.client.post('/v1/annotate',
+                                    data=payload,
+                                    headers={'Content-Type': 'application/json'})
+        self.assertEquals(response.status_code, 401)
+        self.assertEquals(response.json, {'status': 401,
+                                          'detail': 'No authorization token provided',
+                                          'title': 'Not Authorized'})

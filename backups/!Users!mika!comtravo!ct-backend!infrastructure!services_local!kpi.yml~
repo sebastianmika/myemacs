@@ -1,0 +1,4 @@
+nlp:
+  extends:
+    file: ../services/nlp.yml
+    service: nlp

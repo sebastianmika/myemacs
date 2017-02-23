@@ -1,0 +1,5 @@
+T1	RequestProperties 0 7	SUBJECT
+E1	RequestProperties:T1 
+A1	language E1 de
+A2	other E1
+

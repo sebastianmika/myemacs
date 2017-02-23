@@ -1,0 +1,13 @@
+import json
+
+
+es_data = None
+
+
+def mock_es(es_data):
+    def mock(query):
+        if 'aggs' in query and 'unique_companies' in query['aggs']:
+            # get_companies query
+            pass
+        return {'status': 200, 'result': r.json()}
+    return mock

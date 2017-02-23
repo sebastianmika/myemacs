@@ -1,0 +1,26 @@
+import os
+import logging
+from jose.jwt import decode, JWTError
+from . get_keys import get_public_keys
+
+
+logger = logging.getLogger(__name__)
+
+
+def decode_token(token):
+    options = {
+        'verify_exp': False
+    }
+    keys = get_public_keys()
+    for key_name, key in keys.items():
+        try:
+            return decode(token, key,
+                          algorithms=['RS256'],
+                          audience=os.environ.get('GIT_AUDIENCE', None),
+                          issuer=os.environ.get('GIT_ISSUER', None),
+                          options=options)
+        except JWTError:
+            pass
+    logger.warning("failed to authenticate - no valid key found")
+    return None
+           

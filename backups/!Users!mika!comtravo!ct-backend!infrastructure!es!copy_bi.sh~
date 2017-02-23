@@ -1,0 +1,25 @@
+# Uncomment this to copy the mapping from SOURCE to TARGET (i.e. keep as is)
+if [ $KEEP_INDEX ]
+then
+   elasticdump \
+     --input=$SOURCE_URI \
+     --output=$TARGET_URI \
+     --type=mapping \
+     --awsAccessKeyId=$ACCESS_KEY \
+     --awsSecretAccessKey=$SECRET_KEY
+else
+  curl -XPUT $TARGET_URI -d @$INDEX_SPEC
+fi
+elasticdump \
+  --input=$SOURCE_URI \
+  --output=$TARGET_URI \
+  --type=analyzer \
+  --awsAccessKeyId=$ACCESS_KEY \
+  --awsSecretAccessKey=$SECRET_KEY
+elasticdump \
+  --input=$SOURCE_URI \
+  --output=$TARGET_URI \
+  --type=data \
+  # --searchBody='{"query": { "match_all": {} }, "fields": ["*"], "_source": {"exclude": ["_*"] }}' \
+  --awsAccessKeyId=$ACCESS_KEY \
+  --awsSecretAccessKey=$SECRET_KEY

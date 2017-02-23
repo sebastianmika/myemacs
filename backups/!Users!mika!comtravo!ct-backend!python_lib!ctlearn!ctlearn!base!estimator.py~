@@ -1,0 +1,11 @@
+from abc import ABCMeta, abstractmethod
+from .transformer import Transformer
+
+
+class Estimator(Transformer, metaclass=ABCMeta):
+    '''An estimator is something that can transform data (i.e. add
+    fields), but additionally can be fitted to data/label sequences.
+    '''
+    @abstractmethod
+    def fit(self, X, y, **fit_params):
+        return self

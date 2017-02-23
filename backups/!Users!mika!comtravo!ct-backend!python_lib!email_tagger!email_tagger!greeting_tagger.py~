@@ -1,0 +1,71 @@
+# Need future regex module for matching of unicode character classes ('\p{L}')
+from . helpers import tag_wrapper, TagStatus
+from collections import OrderedDict
+import regex as re
+from brat_io import bratify_ann
+
+_regexs = None
+
+
+def _init_regexs():
+    # ignore rest of text
+    rot = r'(?:.*)$'  # with re.DOTALL only!
+    # Match any sequence of capitalized unicode words separated by whitespaces
+    name_part = r"(?:\p{Upper}\p{Lower}+|von|van|d'|(?i)comtravo(?-i))"
+    rname = r'({name_part}(?:[- \t]+{name_part})*)'.format(name_part=name_part)
+
+    regexs = OrderedDict()
+
+    r30 = (r'((?:Lieber Herr|Liebe Frau|'
+           'Sehr geehrter Herr|Sehr geehrte Frau|'
+           '(?:Schönen guten|Guten) (?:Morgen|Tag|Abend)(?:[ \t]+(?:Herr|Frau))?)'
+           '[ \t]+{rname}[,!\s]+){rot}').format(
+               rot=rot, rname=rname)
+    regexs['r30'] = re.compile(r30, re.DOTALL | re.VERSION1)
+
+    r30en = (r'((?i)Good (morning|evening)[ \t]+{rname}[,!\s]+){rot}').format(
+               rot=rot, rname=rname)
+    regexs['r30en'] = re.compile(r30en, re.DOTALL | re.VERSION1)
+
+    # Match first occurence of "Liebe(r) Xyz,"
+    r20 = (r'((?:Liebe[rs]?|Hi|Moin|Dear|'
+           'Hey|Ahoi|Hallo|Hello)[ \t](?:liebe[rs]? )?{rname}[,!\s]+){rot}').format(
+               rot=rot, rname=rname)
+    regexs['r20'] = re.compile(r20, re.DOTALL | re.VERSION1)
+
+    r20en = (r'((?i)(?:(?:Dear|Hi)\s+(?:Comtravo[ -]*Team|Team|guys|there))(?-i)[,!\s]+)'
+             '{rot}').format(rot=rot, rname=rname)
+    regexs['r20en'] = re.compile(r20en, re.DOTALL | re.VERSION1)
+
+    # Match "Hi, ...", "Hallo(space followed by small caps)"
+    r10 = (r'((?i)(?:Hi|Hey|Hallo|Halli Hallo|Hello|Moin|'
+           'Guten (?:Tag|Morgen|Abend|Mittag))(?: zusammen| everyone| ihr lieben)?'
+           '(?-i)(?:(?:,|!|:|\)|-|\s)*'
+           '(?:,|!|\s(?=\p{{Lower}})|\n))){rot}').format(
+               rot=rot)
+    regexs['r10'] = re.compile(r10, re.DOTALL | re.VERSION1)
+
+    r10en = (r'((?i)(?:Good (?:day|morning))(?-i)(?:,|!|:|\)|-|\s)*'
+             '(?:,|!|\s(?=\p{{Lower}})|\n)){rot}').format(rot=rot)
+    regexs['r10en'] = re.compile(r10en, re.DOTALL | re.VERSION1)
+
+    # Pathological cases
+    r5 = (r'((?:Sehr geehrte Damen und Herren|'
+          'Sehr geehrtes Comtravo[ -]Team)(?:,|!|\s)){rot}').format(rot=rot)
+    regexs['r5'] = re.compile(r5, re.DOTALL | re.VERSION1)
+
+    return regexs
+
+
+@tag_wrapper("greeting")
+def tag_greeting(msg, result):
+    txt = msg['body']  # only uses the message text so far
+    global _regexs
+    if _regexs is None:
+        _regexs = _init_regexs()
+    for key, r in _regexs.items():
+        m = r.match(txt)
+        if m:
+            result['annotations'].append(bratify_ann(msg, 'Greeting', m.start(1), m.end(1)))
+            return TagStatus.success, key
+    return TagStatus.success, None

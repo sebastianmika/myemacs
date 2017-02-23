@@ -1,0 +1,6 @@
+(
+ ;;
+
+ #"(?<=\s|\p{{P}}|\||^)(?i)(?P<airline_code>LH|AB)\s*(?P<flight_number>\d{{3,4}})(?!\s*EUR|USD|\p{{Sc}})(?=\s|\p{{P}}|\||$)"
+ {:dim :flight-number :value {:code (group %1) :number (group %2)}}
+)

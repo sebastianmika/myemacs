@@ -1,0 +1,10 @@
+[nosetests]
+with-coverage=True
+cover-package=nlp_api
+cover-erase=True
+# cover-min-percentage=75
+cover-inclusive=True
+
+[flake8]
+max-line-length = 100
+exclude = .tox

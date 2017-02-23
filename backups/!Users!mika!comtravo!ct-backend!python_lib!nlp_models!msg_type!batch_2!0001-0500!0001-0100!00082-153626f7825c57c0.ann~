@@ -1,0 +1,46 @@
+T1	Attributes 170 170	
+#1	AnnotatorNotes T1	{"language": "en", "source": "email", "request_type": "booking"}
+T2	Greeting 180 183	Hi,
+T3	Person 762 783	CARLOS SOARES MOREIRA
+#2	AnnotatorNotes T3	{"crm_ids": ["56e1c81662fd37010051d2b6", "56e1ec3f62fd37010051d2b7"]}
+T4	TimeRange 544 567	April 3rd to April  6th
+#3	AnnotatorNotes T4	{"to": {"value": "2016-04-07T00:00:00.000Z", "grain": "day"}, "type": "interval", "from": {"value": "2016-04-03T00:00:00.000Z", "grain": "day"}}
+T5	TimePoint 235 244	April 2nd
+#4	AnnotatorNotes T5	{"type": "value", "value": "2016-04-02T00:00:00.000Z", "grain": "day"}
+T8	Location 216 218	LA
+#7	AnnotatorNotes T8	{"geonames_ids": [5368361]}
+T9	HotelName 305 322	SLS Beverly Hills
+#8	AnnotatorNotes T9	{"geonames_ids": [5328041]}
+T10	Location 385 398	Beverly Hills
+#9	AnnotatorNotes T10	{"geonames_ids": [5328041]}
+T11	Location 400 428	West Hollywood, Santa Monica
+#10	AnnotatorNotes T11	{"geonames_ids": [5408076]}
+T13	Location 602 615	Beverly hills
+#12	AnnotatorNotes T13	{"geonames_ids": [4930505]}
+T14	Location 650 662	Santa Monica
+#13	AnnotatorNotes T14	{"geonames_ids": [5393212]}
+T15	Location 706 719	Beverly
+Hills
+#14	AnnotatorNotes T15	{"geonames_ids": [4930505]}
+T16	Location 954 962	New York
+#15	AnnotatorNotes T16	{"geonames_ids": [5128581]}
+T17	Location 19 21	LA
+#16	AnnotatorNotes T17	{"geonames_ids": [5368361]}
+T18	EndOfMsg 739 741;742 760;762 783;784 812;813 836;838 855;856 873;875 900;901 922;923 943;944 953;954 972;973 976;978 1013;1014 1032;1033 1051	-- [image: GLOSSYBOX] CARLOS SOARES MOREIRA HEAD OF BUSINESS DEVELOPMENT GLOSSYBOX NORTH AMERICA +1 (646) 420-8584 www.glossybox.com GLOSSYBOX is a product of Beauty Trend USA Inc. 401 Greenwich Street 3rd Floor New York, NY 10013 USA [image: Facebook]  [image: Twitter] [image: Pinterest] [image: Instagram]
+T19	CountRooms 246 252	1 room
+T20	CountPersons 257 267	one person
+T7	HotelName 326 331	Mr C.
+T21	CategoryOrClass 358 365	5 stars
+T12	HotelName 433 441	Sheraton
+T22	HotelName 446 451	Hyatt
+T23	OtherOption 497 501	pool
+T24	CategoryOrClass 506 514	Business
+T25	CountRooms 517 524	2 rooms
+T26	CountPersons 529 537	1 person
+T6	Location 706 713;714 719	Beverly Hills
+T27	HotelName 577 580	SLS
+T28	HotelName 582 586	MR C
+T29	Hotel 9 15	Hotels
+E1	Hotel:T29 check_in:T5 cnt:T19 cnt2:T20 with:T30 name:T9 name2:T7 with2:T21 plc2:T10 name3:T12 name4:T22 with3:T23 with4:T24 cnt3:T25 cnt4:T26 check_in2:T4 name5:T27 name6:T28 plc:T13 with5:T31
+T30	PriceLimit 270 284	max $300/night
+T31	PriceLimit 664 691	Max $250 per night per room

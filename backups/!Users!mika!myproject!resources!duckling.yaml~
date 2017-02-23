@@ -1,0 +1,107 @@
+swagger: '2.0'
+
+info:
+  title: 'wit.ai/duckling API'
+  version: '1.0'
+
+basePath: /v1
+
+schemes:
+  - http
+
+paths:
+  /duckling:
+    post:
+      description: annotate incoming text
+      tags:
+        - Duckling
+      operationId: duckling.api/duckling
+      produces:
+        - application/json
+      parameters:
+        - name: requestBody
+          in: body
+          description: the text to annotate + meta data
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+              date:
+                type: integer
+                minimum: 0
+              lang:
+                type: string
+                enum: ['en', 'de']
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/ducklingResponse'
+
+definitions:
+  ducklingResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          $ref: '#/definitions/ducklingItem'
+
+  ducklingItem:
+    type: object
+    properties:
+      dim:
+        type: string
+        enum: ['time']
+      body:
+        type: string
+      value:
+        type: object
+        properties:
+          type:
+            $ref: '#/definitions/timeType'
+          value:
+            type: string
+            format: date-time
+          grain:
+            $ref: '#/definitions/timeGrain'                  
+          values:
+            type: array
+            items:
+              type: object
+              properties:
+                type:
+                  $ref: '#/definitions/timeType'
+                value:
+                  type: string
+                  format: date-time
+                grain:
+                  $ref: '#/definitions/timeGrain'
+                from:
+                  $ref: '#/definitions/timeIntervalValue'                   
+                to:
+                  $ref: '#/definitions/timeIntervalValue'                   
+      start:
+        type: integer
+        minimum: 0
+      end:
+        type: integer
+        minimim: 0
+
+  timeType:
+    type: string
+    enum: ['value', 'interval']
+
+  timeGrain:
+    type: string
+    enum: ['month', 'week', 'day', 'hour', 'minute', 'second']
+
+  timeIntervalValue:
+    type: object
+    properties:
+      value:
+        type: string
+        format: date-time
+      grain:
+        $ref: '#/definitions/timeGrain'              

@@ -1,0 +1,158 @@
+import regex as re
+from functools import reduce
+from . set_cover import set_cover  # noqa
+
+
+def _merge_attributes(m1, m2):
+    if m1['text'] != m2['text']:
+        raise Exception(
+            'trying to merge two matches with different texts: {} <-> {}'.format(
+                m1, m2))
+    for k, v in m2['attributes'].items():
+        # Iterate over all attributes
+        # - not in target -> copy
+        # - in target: both must be lists and we append them,
+        #   but only keep unique values
+        # - else: error
+        if k not in m1['attributes']:
+            m1['attributes'][k] = v
+        elif type(v) is list and type(m1['attributes'][k]) is list:
+            # keep list sorted to have deterministic results (e.g. for tests)
+            m1['attributes'][k] = sorted(list(set(m1['attributes'][k] + v)))
+        elif m1['attributes'][k] == v:
+            pass  # ok, same value
+        else:
+            raise Exception('cannot merge attribute {} with val {} into {}'.format(
+                k, v, m1['attributes'][k]))
+
+
+def _merge_double_matches(matches):
+    """Given a list of annotations (in brat.ann2brat.bratify_ann format:
+
+    {
+        'spans': [{'start': s, 'end': e}, ...],
+        'type': type,
+        'attributes': attr
+    }
+
+    find all matches with identical spans and type and merge them into
+    one match.
+
+    DO NOT CALL THIS on lists of matches that are already related to
+    events - the ids will not update.
+
+    """
+    def hash_match(m):
+        # Generate a unique hash for each span
+        spans = sorted(m['spans'], key=lambda x: x['start'])
+        return (m['type'] + m['where'] +
+                '+'.join(['{}-{}'.format(s['start'], s['end']) for s in spans]))
+
+    # Group matches with identical spans and type
+    same_matches = {}
+    for m in matches:
+        key = hash_match(m)
+        if key not in same_matches:
+            same_matches[key] = []
+        same_matches[key].append(m)
+    # for each set of matches with same type and span, merge them into
+    # the first and remove the rest
+    for groups in same_matches.values():
+        # keep this one
+        m1 = groups[0]
+        # Iterate over all other in group and merge
+        for mi in groups[1:]:
+            # type is same, spans is same, text should be same
+            _merge_attributes(m1, mi)
+            matches.remove(mi)
+    return matches
+
+
+def _get_longest_match(matches):
+    """Given a list of annotations (in brat.ann2brat.bratify_ann format:
+
+    {
+        'spans': [{'start': s, 'end': e}, ...],
+    }
+
+    reduce to non-overlapping annotations by selecting those whose
+    total span (sum of all span lengths) is largest. If there are
+    overlapping annotations that have the same total span, they are
+    kept depending on their type with the following precedence:
+    1. Person
+    2. Location
+    3. FlightNumber
+    4. TimeRange
+    5. TimePoint
+    """
+    # Create a sorted list (segment, match, len) of all segments, annotated with
+    # the total length len of the original match
+    score = {'Person': 1,
+             'Location': 2,
+             'FlightNumber': 3,
+             'Luggage': 4,
+             'TimeRange': 5,
+             'TimePoint': 6,
+             'CategoryOrClass': 7,
+             'AirlineOrAlliance': 8
+             }
+
+    print(matches)
+    sorted_matches = sorted([(x, m, reduce(lambda x, y: x + y['end'] - y['start'],
+                                           [s for s in m['spans']], 0))
+                             for m in matches for x in m['spans']], key=lambda x: x[0]['start'])
+    for i, (s1, m1, l1) in enumerate(sorted_matches):
+        for s2, m2, l2 in sorted_matches[i+1:]:
+            if m1['where'] != m2['where']:
+                # if the annotations are not in the same document part - ignore
+                continue
+            if s2['start'] < s1['end']:
+                if l1 < l2:
+                    if m1 in matches:
+                        matches.remove(m1)
+                elif l1 > l2:
+                    if m2 in matches:
+                        matches.remove(m2)
+                elif m1['type'] == m2['type']:
+                    if m2 in matches:
+                        # 100% tie, same span and type; keep m1, but
+                        # merge in attributes from m2 iff this matched
+                        # the same text (e.g. two possible person
+                        # matches)
+                        if m1['text'] == m2['text']:
+                            _merge_attributes(m1, m2)
+                        matches.remove(m2)
+                elif score[m1['type']] < score[m2['type']]:
+                    if m2 in matches:
+                        matches.remove(m2)
+                elif m1 in matches:
+                    matches.remove(m1)
+    return matches
+
+
+def _del_reply(s):
+    """Given a string s, remove any reply indidicators like 'RE:', 'AW:'
+    in the beginning of the string and return the result.
+    """
+    re_re = r'(?:(?:AW|aw|Aw|RE|re|Re)(?::|\s)\s*)*(.*)'
+    return re.match(re_re, s).group(1).strip()
+
+
+def _insert_non_ascii_matching(s):
+    """Given some string, replace all occurences of ascii transcriptions
+    for "special characters" like öäüß by regular expressions matching
+    both, either the transcription (oe) or the true character (ö)"""
+    # German sharp s (ß) - only lower case
+    s = s.replace('ss', '(?:ss|ß)')
+    # German umlaute
+    s = s.replace('oe', '(?:oe|ö|o\u00eb)')
+    s = s.replace('ue', '(?:ue|ü)')
+    s = s.replace('ae', '(?:ae|ä)')
+    s = s.replace('Oe', '(?:Oe|Ö)')
+    s = s.replace('Ue', '(?:Ue|Ü)')
+    s = s.replace('Ae', '(?:Ae|Ä)')
+    s = s.replace('e', '(?:e|é)')
+    return s
+    # for k, v in _ucodes.items():
+    #     s = s.replace(k, '(?:{})'.format(v))
+    # return s

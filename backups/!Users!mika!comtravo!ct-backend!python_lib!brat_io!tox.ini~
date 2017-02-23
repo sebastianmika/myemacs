@@ -1,0 +1,12 @@
+[tox]
+envlist = py35
+
+[testenv]
+deps=
+   --editable=file:///{toxinidir}/../nlp_models/msg_type/
+   nose
+   coverage
+   flake8
+commands=
+   nosetests {posargs}
+   flake8

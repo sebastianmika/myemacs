@@ -1,0 +1,51 @@
+T1	Attributes 197 197	
+#1	AnnotatorNotes T1	{"language": "en", "source": "email", "request_type": "booking"}
+T2	Greeting 207 217	Dear team,
+T3	Person 255 269	Marat Sitdikov
+#2	AnnotatorNotes T3	{"crm_ids": ["570284b82c9e490100f8dc28"]}
+T4	Person 34 42	Sitdikov
+#3	AnnotatorNotes T4	{"crm_ids": ["570284b82c9e490100f8dc28"]}
+T5	Person 545 564	Tatyana Novopashina
+#4	AnnotatorNotes T5	{"crm_ids": ["56e7ceeb0e120101007caa07"]}
+T6	FlightNumber 315 322	SU 1852
+#5	AnnotatorNotes T6	{"flight_number": "1852", "airline_code": "SU"}
+T7	FlightNumber 377 383	J2 854
+#6	AnnotatorNotes T7	{"flight_number": "854", "airline_code": "J2"}
+T8	TimePoint 345 353	20.05.16
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-05-12T20:05:16.000Z", "grain": "second"}
+T9	TimePoint 283 291	17.05.16
+#8	AnnotatorNotes T9	{"type": "value", "value": "2016-05-12T17:05:16.000Z", "grain": "second"}
+T12	TimePoint 323 327	0010
+#11	AnnotatorNotes T12	{"type": "value", "value": "2016-05-12T22:00:00.000Z", "grain": "hour"}
+T13	Location 299 305	Moscow
+#12	AnnotatorNotes T13	{"geonames_ids": [524901, 5601538]}
+T14	Location 306 310	Baku
+#13	AnnotatorNotes T14	{"geonames_ids": [587084]}
+T15	Location 361 365	Baku
+#14	AnnotatorNotes T15	{"geonames_ids": [587084]}
+T16	Location 366 372	Moscow
+#15	AnnotatorNotes T16	{"geonames_ids": [524901, 5601538]}
+T17	Location 695 701	Moscow
+#16	AnnotatorNotes T17	{"geonames_ids": [524901, 5601538]}
+T18	EndOfMsg 490 511;512 544;545 564;565 600;601 643;644 657;658 687;688 701;702 720;722 746;747 770;772 804;805 829	Thank you in advance! ________________________________ Tatyana Novopashina Assistant to administrative manager [cid:DBAB7B51-CFF7-4ACC-86AD-DF63352F9262] Bryanston CIS 10 Palikha Str., Building 5C3 127055 Moscow Russian Federation Tel.: +7 (495) 789 23 50 Mob.: +7 905  744 18 74 tatyana.novopashina@bryanston.ch http://www.bryanston.ch/
+T19	TimeRange 0 386	SUBJECT: Booking flight request / Sitdikov
+DATE: 2016-05-12 15:19:34
+FROM: Tatyana Novopashina | Bryanston - tatyana.novopashina@bryanston.ch
+TO: Comtravo - buchung@comtravo.com
+------ End of header -------
+Dear team,
+Please send me non-binding offer for Marat Sitdikov as follows:
+
+17.05.16        Moscow Baku     SU 1852 0010-0410       SVO F
+20.05.16        Baku Moscow     J2 854  1
+T20	CategoryOrClass 406 419	Economy class
+T10	ReturnFlight 245 250	offer
+E1	ReturnFlight:T10 who:T3 org:T13 dst:T14 fn_outbnd:T6 fn_inbnd:T7 with:T20 dpt_inbound:T11 arv_inbound:T21 dpt_outbound:T12 arv_outbound:T22
+R1	about Arg1:T9 Arg2:T12	
+R2	latest Arg1:T8 Arg2:T19	
+T11	TimePoint 385 389	1900
+T21	TimePoint 390 394	2110
+R3	about Arg1:T8 Arg2:T11	
+R4	about Arg1:T8 Arg2:T21	
+T22	TimePoint 328 332	0410
+R5	about Arg1:T9 Arg2:T22	

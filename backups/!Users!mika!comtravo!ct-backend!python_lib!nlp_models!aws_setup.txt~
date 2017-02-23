@@ -1,0 +1,14 @@
+From AMI here https://aws.amazon.com/marketplace/pp/B00FYCDDTE?qid=1477650388732&sr=0-1&ref_=srh_res_product_title
+
+
+sudo yum update
+Set THEANO_FLAGS='cuda.root=/opt/nvidia/cuda,device=gpu,floatX=float32'
+
+
+
+install python3
+install 
+
+Set LD_LIBRARY_PATH to cuda-root
+Set CUDA_ROOT env car
+

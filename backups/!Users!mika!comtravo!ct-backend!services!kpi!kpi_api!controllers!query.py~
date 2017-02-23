@@ -1,0 +1,38 @@
+import pandas as pd
+import logging
+from ..app import targets
+
+logger = logging.getLogger(__name__)
+
+
+def query(requestBody):
+    logger.debug(requestBody)
+
+    range = requestBody['range']
+    freq = requestBody['interval']
+    if freq[-1] == 'm':
+        if int(freq[:-1]) < 24 * 60 * 60:
+            freq = '1D'
+        else:
+            freq = freq[:-1] + 'Min'
+    elif freq[-1] == 'h':
+        if int(freq[:-1]) < 24:
+            freq = '1d'
+    elif freq[-1] == 'y':
+        freq = freq[:-1] + 'A'
+    query_parameters = {
+        'from_': pd.to_datetime(range['from']).round('5Min'),
+        'to_': pd.to_datetime(range['to']).round('5Min'),
+        'freq': freq}
+    res = []
+    for target_element in requestBody['targets']:
+        target_name = target_element['target']
+        if '?' in target_name:
+            target_name, parameters = target_name.split('?')
+            parameters = [p.split('=') for p in parameters.split('&')]
+            parameters = {p[0]: p[1] for p in parameters}
+            query_parameters.update(parameters)
+        target = [t for t in targets if t.search() == target_name][0]
+        res.append({'target': target_name,
+                    'datapoints': target.query(**query_parameters)})
+    return res, 200

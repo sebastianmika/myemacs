@@ -1,0 +1,30 @@
+T1	Attributes 214 214	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 224 234	Guten Tag,
+T3	Person 818 833	Claudia Helming
+#2	AnnotatorNotes T3	{"crm_ids": ["56b9044a0dde60010094f32d"]}
+T4	Person 853 865	Michael Pütz
+#3	AnnotatorNotes T4	{"crm_ids": ["56d4d16a231e530100f215ed"]}
+T5	Person 639 651	Ilka Kienitz
+#4	AnnotatorNotes T5	{"crm_ids": ["56d4d1e25fcdce010017aa3d"]}
+T6	TimeRange 339 354	11.00-12.00 Uhr
+#5	AnnotatorNotes T6	{"to": {"value": "2016-06-13T12:01:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-06-13T11:00:00.000Z", "grain": "minute"}}
+T7	TimePoint 310 318	21.06.16
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-06-21T00:00:00.000Z", "grain": "day"}
+T8	TimePoint 764 769	08 52
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-06-13T08:52:00.000Z", "grain": "minute"}
+T10	TimePoint 733 737	6 09
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-06-13T18:09:00.000Z", "grain": "minute"}
+T11	Location 270 276	Berlin
+#10	AnnotatorNotes T11	{"geonames_ids": [2950159]}
+T12	Location 296 301	Essen
+#11	AnnotatorNotes T12	{"geonames_ids": [2798615, 2928810]}
+T15	Location 714 720	Berlin
+#14	AnnotatorNotes T15	{"geonames_ids": [2950159]}
+T16	Location 869 883	Charlottenburg
+#15	AnnotatorNotes T16	{"geonames_ids": [2940187]}
+T17	EndOfMsg 600 615;616 637;639 651;653 655;656 668;669 686;688 707;708 720;722 746;747 769;771 799;801 865;866 896;897 919;920 954;955 1001	Vielen Dank und mit freundlichem Gruß Ilka Kienitz -- DaWanda GmbH Marketing & Event Windscheidstraße 18 10627 Berlin Tel: 030 - 6 09 87 30 83 Fax: 030 - 25 76 08 52 ilka.kienitz@dawandamail.com Geschäftsführer: Claudia Helming, Niels Nüssler und Michael Pütz AG Charlottenburg HRB 104695 B http://www.dawanda.com http://www.facebook.com/dawanda.de http://de.dawanda.com/mkt/dawanda-event-portal
+T18	Location 362 497	Karstadt Warenhaus Zentrale,
+Theodor-Althoff-Straße 2, 45133 Essen - Karstadt Warenhaus Zentrale,
+Theodor-Althoff-Straße 2, 45133 Essen
+T19	Location 362 390;391 459;460 497	Karstadt Warenhaus Zentrale, Theodor-Althoff-Straße 2, 45133 Essen - Karstadt Warenhaus Zentrale, Theodor-Althoff-Straße 2, 45133 Essen

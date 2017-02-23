@@ -1,0 +1,29 @@
+T1	Attributes 144 144	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 154 174	Hallo Comtravo-Team,
+T3	Person 190 211	Rafael Schultze-Kraft
+#2	AnnotatorNotes T3	{"crm_ids": ["56d4d262231e530100f21665"]}
+T4	Person 968 989	Rafael Schultze-Kraft
+#3	AnnotatorNotes T4	{"crm_ids": ["56d4d262231e530100f21665"]}
+T6	TimePoint 361 374	24. Juli 2016
+#5	AnnotatorNotes T6	{"type": "value", "value": "2016-07-24T00:00:00.000Z", "grain": "day"}
+T7	TimePoint 320 333	15. Juli 2016
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-07-15T00:00:00.000Z", "grain": "day"}
+T8	Location 305 311	Berlin
+#7	AnnotatorNotes T8	{"geonames_ids": [2950159]}
+T9	Location 312 318	Bilbao
+#8	AnnotatorNotes T9	{"geonames_ids": [3128026]}
+T10	Location 346 352	Bilbao
+#9	AnnotatorNotes T10	{"geonames_ids": [3128026]}
+T11	Location 353 359	Berlin
+#10	AnnotatorNotes T11	{"geonames_ids": [2950159]}
+T12	Location 412 418	Bilbao
+#11	AnnotatorNotes T12	{"geonames_ids": [3128026]}
+T14	EndOfMsg 955 967;968 989	Vielen Dank! Rafael Schultze-Kraft
+T15	CountPersons 282 292	3 Personen
+T5	TimePoint 392 395	15-
+T16	TimePoint 395 408	24. Juli 2016
+Conference Center
+T13	Location 430 445;446 464;465 502	nahe Euskalduna Conference Center, ECC, Abandoibarra Etorbidea 4, Bilbao
+T17	HotelName 733 739	Airbnb
+T18	HotelName 797 803	Airbnb

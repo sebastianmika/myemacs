@@ -1,0 +1,142 @@
+from .. base import Estimator
+from .. utils import StrEncoder
+from itertools import zip_longest
+import regex as re
+import numpy as np
+from sklearn.ensemble import ExtraTreesClassifier
+
+
+class EventEstimator(Estimator):
+    org_words = ["von", "from", "depart", "ab", "Flugverbindung"],
+    dst_words = ["nach", "to", "-", ">", "/"]
+    label_re_dot = re.compile("\.\d+\.")
+    label_re_repl = re.compile('Return|_outbound|_inbound|_outbnd|_inbnd')
+
+    def __init__(self):
+        super(EventEstimator, self).__init__(input_keys=['annotation'],
+                                             output_key='event',
+                                             target_key='y_event')
+        self.model = None
+        self.encoder = None
+
+    def fit(self, target, annotation, **fit_params):
+        if len(target) != len(annotation):
+            raise ValueError('all inputs and target must have same length')
+        # Reset the encoder
+        self.encoder = None
+        X, y = self._prepare_data(target, annotation)
+        self.model = ExtraTreesClassifier(n_estimators=300,
+                                          criterion='gini',
+                                          max_depth=24,
+                                          max_features=8,
+                                          bootstrap=False, n_jobs=1,
+                                          random_state=2016,
+                                          class_weight="balanced")
+        self.model.fit(X, y)
+        return self
+
+    def transform(self, annotation):
+        if not (hasattr(self, 'model') and self.model):
+            raise ValueError('model not initialized; load or fit before calling transform')
+        # This model works token wise, i.e. it does not care about the actual message.
+        # Since prepare data will generate one sample per non O- token, we can
+        # - first apply the model to *all* messages (i.e. prepare data on all messages)
+        # - then construct the result on a 'per-message/per-token' basis afterwards
+        X, _ = self._prepare_data([], annotation)
+        res = [[{'prediction': 'O', 'probability': 1.0} for t in a] for a in annotation]
+        if not X.shape[0]:
+            # No non 'O-' rners or not messages in the first place
+            return res
+        pred_iter = iter(self.model.predict_proba(X))
+        for i_a, a in enumerate(annotation):
+            for i_t, t in enumerate(a):
+                if self._process_token(t):
+                    r = res[i_a][i_t]
+                    pred = next(pred_iter)
+                    argmax_pred = np.argmax(pred, -1)
+                    r['prediction'] = self.model.classes_[argmax_pred]
+                    r['probability'] = pred[argmax_pred]
+        return res
+
+    @classmethod
+    def clean_label(cls, label):
+        if label:
+            return cls.label_re_repl.sub('', cls.label_re_dot.sub('.', label))
+        else:
+            return None
+
+    def _process_token(self, token, label=None):
+        '''Decide whether a token should be processed:
+
+        1. In the application phase the encoder is frozen, the rner is
+        not 'O-' and has been seen in the training phase.
+
+        2. In the training phase the encode is *not* frozen, the rner
+        is not 'O-' and there is a label.
+        '''
+        return ((self.encoder.frozen and  # application phase
+                 token['rner'] != 'O-' and
+                 self.encoder(token["rner"]) != 0) or
+                (not self.encoder.frozen and  # training phase
+                 token["rner"] != "O-" and label)) 
+
+    def _prepare_data(self, labels, annotations):
+        X = []
+        y = []
+
+        if not self.encoder:
+            self.encoder = StrEncoder('rners')
+
+        def has_flight_label(token, labels):
+            # Return label iff the token overlaps with the label else None
+            if not labels:
+                return None
+            for l in labels:
+                if (token['where'] == l['where'] and
+                   token['start'] <= l['start'] + l['length'] and
+                   token['start'] + token['length'] >= l['start']):
+                    return l['label']
+
+        for annotation, label in zip_longest(annotations, labels):
+            time_cnt = 0
+            loc_cnt = 0
+            total_cnt = 0
+            for token in annotation:
+                if token["rner"] != "O-":
+                    total_cnt += 1
+                if "Time" in token["rner"]:
+                    time_cnt += 1
+                if "Location" in token["rner"]:
+                    loc_cnt += 1
+            last_rner = ['B', 'O', 'O', 'O', 'O']
+            true_last_rner = "B"
+            last_word = ""
+            cnt = 0
+            dist_last = 0
+            for i, token in enumerate(annotation):
+                lab = has_flight_label(token, label)
+                if self._process_token(token, lab):
+                    X.append([dist_last,
+                              self.encoder(token["rner"])] +
+                             [self.encoder(l) for l in last_rner] +
+                             [self.encoder(true_last_rner), i,
+                              len(token["text"]), len(annotation),
+                              time_cnt, loc_cnt, total_cnt,
+                              1 if last_word in self.org_words else 0,
+                              1 if last_word in self.dst_words else 0,
+                              self.encoder(token['rner'] if len(X) > 0 and cnt < 1 else 'O'),
+                              self.encoder(token['rner'] if len(X) > 1 and cnt < 2 else 'O')])
+                    y.append(self.clean_label(lab))
+                    # Update
+                    dist_last = 0
+                    # Shift last_rner
+                    last_rner = [token["rner"]] + last_rner[:-1]
+                    cnt += 1
+                dist_last += 1
+                last_word = token["text"].lower()
+                true_last_rner = token["rner"]
+
+        # Make sure that the encoder is frozen in the next call
+        self.encoder.freeze()
+        X = np.array(X).reshape((len(X), 18))
+        return X, y

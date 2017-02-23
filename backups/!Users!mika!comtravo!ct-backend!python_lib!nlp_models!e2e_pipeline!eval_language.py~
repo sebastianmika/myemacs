@@ -1,0 +1,20 @@
+from email_tagger import detect_language
+import numpy as np
+import pandas as pd
+import sklearn.metrics as metrics
+
+
+def eval_language(raw_data, min_support=0.01):
+    pred_lang = np.array([detect_language(c['msg']) for c in raw_data])
+    true_lang = np.array([c['ann']['language'] for c in raw_data])
+    print(metrics.classification_report(true_lang, pred_lang))
+    s = pd.Series(true_lang).value_counts()
+    s = s[s > len(true_lang) * min_support].index
+    precision = {}
+    recall = {}
+    f1 = {}
+    for l in s:
+        precision[l] = metrics.precision_score(true_lang == l, pred_lang == l)
+        recall[l] = metrics.recall_score(true_lang == l, pred_lang == l)
+        f1[l] = metrics.f1_score(true_lang == l, pred_lang == l)
+    return precision, recall, f1, pred_lang

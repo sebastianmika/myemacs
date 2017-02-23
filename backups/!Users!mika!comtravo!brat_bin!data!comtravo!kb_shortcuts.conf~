@@ -1,0 +1,7 @@
+G	GarbageThread
+B	BookingThread
+O	OtherThread
+F	SimpleBookingJustFlight
+S	SimpleBookingOther
+C	ComplexBooking
+T	Traveller

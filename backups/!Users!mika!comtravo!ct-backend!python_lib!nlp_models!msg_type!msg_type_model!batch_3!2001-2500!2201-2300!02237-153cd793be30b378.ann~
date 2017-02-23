@@ -1,0 +1,35 @@
+T1	Attributes 224 224	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 234 244	Guten Tag,
+T3	Person 434 447	Michael Stiel
+#2	AnnotatorNotes T3	{"crm_ids": ["56e6b3a00e120101007ca9ff"]}
+T4	Person 469 482	Michael Stiel
+#3	AnnotatorNotes T4	{"crm_ids": ["56e6b3a00e120101007ca9ff"]}
+T5	Person 580 584	Bild
+#4	AnnotatorNotes T5	{"crm_ids": ["56b90405eb2c4601003a9a54"]}
+T6	Person 707 719	Carsten Bild
+#5	AnnotatorNotes T6	{"crm_ids": ["56b90405eb2c4601003a9a54"]}
+T7	TimePoint 388 406	01.04. gegen 18Uhr
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-04-01T18:00:00.000Z", "grain": "hour"}
+T8	TimePoint 348 365	01.04. gegen 8Uhr
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-04-01T08:00:00.000Z", "grain": "hour"}
+T10	Location 296 307	Berlin Hbf.
+#9	AnnotatorNotes T10	{"geonames_ids": [2950159]}
+T11	Location 313 325	Hamburg
+Hbf.
+#10	AnnotatorNotes T11	{"geonames_ids": [2911298]}
+T12	Location 367 376	Berlin Hb
+#11	AnnotatorNotes T12	{"geonames_ids": [2950159]}
+T13	Location 408 419	Hamburg Hbf
+#12	AnnotatorNotes T13	{"geonames_ids": [2911298]}
+T14	Location 506 512	Mobile
+#13	AnnotatorNotes T14	{"geonames_ids": [4076598]}
+T15	Location 636 642	Berlin
+#14	AnnotatorNotes T15	{"geonames_ids": [2950159]}
+T17	Location 29 35	Berlin
+#16	AnnotatorNotes T17	{"geonames_ids": [2950159]}
+T18	Location 38 45	Hamburg
+#17	AnnotatorNotes T18	{"geonames_ids": [2911298]}
+T19	EndOfMsg 421 433;434 447;449 451;452 467;468 483;484 504;506 532;533 563;565 587;588 652;653 719;721 787;788 859;860 930;931 1002;1003 1078;1079 1134;1136 1203;1204 1279;1280 1355;1356 1422;1423 1495;1496 1516;1517 1518	Vielen Dank, Michael Stiel -- *_____________* *Michael Stiel* Business Development Mobile: +49 160  96 800123 Mail: michael.stiel @move24.de [image: Inline-Bild 1] Move24 Group GmbH | Chausseestraße 86 | D-10115 Berlin | Germany Managing Directors / Geschäftsführer: Marcel Rangnow, Carsten Bild VERTRAULICHKEITSHINWEIS: Diese Nachricht ist vertraulich. Sie darf ausschließlich durch den vorgesehenen Empfänger und Adressaten gelesen, kopiert oder genutzt werden. Sollten Sie diese Nachricht versehentlich erhalten haben, bitten wir, den Absender (durch Antwort-E-Mail) hiervon unverzüglich zu informieren und die Nachricht zu löschen. Jede Nutzung oder Weitergabe des Inhalts dieser Nachricht ist unzulässig. CONFIDENTIALITY NOTICE: This message (including any attachments) is confidential and may be privileged. It may be read, copied and used only by the intended recipient. If you have received it in error please contact the sender (by return e-mail) immediately and delete this message. Any unauthorized use or dissemination of this message in whole or in part is strictly prohibited. ᐧ
+T9	CountPersons 281 291	2 Personen
+T16	Location 313 320;321 325	Hamburg Hbf.

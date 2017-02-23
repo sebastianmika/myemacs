@@ -1,0 +1,181 @@
+#
+# Read locally stored mails, parse them and store on a per message
+# basis for the first annotation excercise
+#
+from brat_io import ann2brat
+from time import sleep
+from datetime import datetime
+import pandas as pd
+import os
+import json
+import requests
+
+
+def get_tickets(targ_dir):
+    try:
+        with open('{}/tickets.json'.format(targ_dir), 'r') as f:
+            tickets = json.load(f)
+            return tickets
+    except Exception as e:
+        print('Tickets not found - refetching {}'.format(e))
+
+    zen_user = os.environ['ZEN_USER']
+    zen_pw = os.environ['ZEN_PW']
+
+    zen_url = "https://comtravo.zendesk.com/api/v2/tickets"
+    headers = {
+        'content-type': "application/json",
+        'accept-encoding': "gzip",
+        'cache-control': "no-cache"
+        }
+
+    tickets = []
+    response = requests.request("GET", zen_url, headers=headers, auth=(zen_user, zen_pw))
+    if response.status_code != 200:
+        raise Exception("Failed with {}".format(response.status_code))
+    res = response.json()
+    total_cnt = res['count']
+    print("Getting {} tickets".format(total_cnt))
+    tickets += res['tickets']
+    while res['next_page']:
+        response = requests.request("GET", res['next_page'], headers=headers,
+                                    auth=(zen_user, zen_pw))
+        res = response.json()
+        if response.status_code != 200:
+            raise Exception("Failed with {}".format(response.status_code))
+        tickets += res['tickets']
+        print("Got {} sofar".format(len(tickets)))
+    with open('{}/tickets.json'.format(targ_dir), 'w') as f:
+        json.dump(tickets, f)
+    return tickets
+
+
+def ticket2msg(t):
+    if t['via']['channel'] != 'email':
+        return None
+    if t['via']['source']['from']['address'].endswith('comtravo.com'):
+        return None
+    msg = {
+        'body': t['description'],
+        'subject': t['subject'],
+        'date': int(pd.to_datetime(t['created_at']).value/1e9),
+        'from': {'email': t['via']['source']['from']['address'],
+                 'name': t['via']['source']['from']['name']},
+        'to': [{'email': t['via']['source']['to']['address'],
+                'name': t['via']['source']['to']['name']}],
+        # CC is iff in 'collaborator_ids' and would need to be
+        # resolved against users endpoint in ZD
+        'cc': [],
+        'zendesk_ticket_id': t['id']
+    }
+    return msg
+
+
+def annotate_msg(msg):
+    url = "https://nlp-api.comtravo.com/v1/annotate/verbose"
+    payload = json.dumps(msg)
+    headers = {
+        'authorization': ("JWT eyJhbGciOiJSUzI1NiIsImtpZCI6Im50bzVvUSJ9"
+                          ".eyJpc3MiOiJodHRwczovL2lkZW50aXR5dG9vbGtpdC5"
+                          "nb29nbGUuY29tLyIsImF1ZCI6IjcyMDM3NzI5NDU5NS1"
+                          "1MGpjN2lyNmJmZDR0MHNiMjdvNDIwNG12Z3ZybTQwNi5"
+                          "hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImlhdCI"
+                          "6MTQ3ODI1NDk3MiwiZXhwIjoxNDc5NDY0NTcyLCJ1c2V"
+                          "yX2lkIjoiMDc3ODk0NDYwMDIwODgzODg4MDAyNTJEN0E"
+                          "5NzAzQjEyNjYzRjAyNUJDOEUiLCJlbWFpbCI6InNlYmF"
+                          "zdGlhbi5taWthQGNvbXRyYXZvLmNvbSIsInByb3ZpZGV"
+                          "yX2lkIjoiZ29vZ2xlLmNvbSIsInNpZ25faW5fcHJvdml"
+                          "kZXIiOiJnb29nbGUuY29tIiwidmVyaWZpZWQiOnRydWU"
+                          "sInBob3RvX3VybCI6Imh0dHBzOi8vbGgzLmdvb2dsZXV"
+                          "zZXJjb250ZW50LmNvbS8tcmN6ME5wSnYtSTgvQUFBQUF"
+                          "BQUFBQUkvQUFBQUFBQUFBQW8vM3J3WDBQQmk1Q28vczk"
+                          "2LWMvcGhvdG8uanBnIn0.BtrRBQ6rl_dGaPuYpoNrqUj"
+                          "laXCuWdu7PRgr-GT3wbvnEKO9Sj432N3SPDuxomNqsEg"
+                          "FAAXifW-oee308AvakX2S6PUzPazizWUq5_4F7wRS6WB"
+                          "_fEV1krQBYfogF60eAyIjED8XWDNrDpHXOBwq8n1Pe4D"
+                          "URcLftRpmWkuwaOhZZqghXrncCdOoKlxl3ezbdjOg-Js"
+                          "DXwZ7CCiQfmi6U_71ZTAincNFtWMQH5QW3oitetTb82h"
+                          "OQ3nPZqlpoJyYp3g4d3CQuq0FTk0g1pquWaaSveQ5Uq4"
+                          "baOFLoUOkQbxapzdRLO1VuJcyT3yjFFMuy1aVMFTZoT7"
+                          "cyQxNlY-wBA"),
+        'content-type': "application/json",
+        'accept-encoding': "gzip"
+    }
+    trial = 0
+    while trial < 10:
+        # Try multiple times iff there are network issues
+        try:
+            response = requests.request("POST", url, data=payload, headers=headers)
+            if response.status_code != 200:
+                return None
+            else:
+                return response.json()
+        except:
+            print('Warning - annotate failed, retrying')
+            sleep(5)
+            trial += 1
+    return None
+
+
+def write_header(msg, f):
+    # fixture on CR LF not required for newly parsed on subject/fixed in email_parser
+    head = 'SUBJECT: {}\n'.format(msg['subject'].replace('\r\n', '  ').
+                                  replace('\r', ' ').replace('\n', ' '))
+    head += 'DATE: {}\n'.format(datetime.utcfromtimestamp(msg['date']))
+    head += 'FROM: {} - {}\n'.format(msg['from']['name'], msg['from']['email'])
+    for t in msg['to']:
+        head += 'TO: {} - {}\n'.format(t['name'], t['email'])
+    for c in msg['cc']:
+        head += 'CC: {} - {}\n'.format(c['name'], c['email'])
+    head += '------ End of header -------\n'
+    f.write(head)
+    return len(head)
+
+
+if __name__ == '__main__':
+    date_str = datetime.now().strftime('%Y-%m-%d')
+    targ_dir = '../../../ct-nlp-data/brat@{}'.format(date_str)
+    if not os.path.exists(targ_dir):
+        os.makedirs(targ_dir)
+
+    print('Getting tickets...')
+    tickets = get_tickets(targ_dir)
+    print('..got {} tickets'.format(len(tickets)))
+
+    cnt = 0
+    batch_start = 1
+    batch_size = 250
+    msg_fails = 0
+    ann_fails = 0
+    for tid, ticket in enumerate(tickets):
+        if tid % 1 == 0:
+            print('Processed {:.1%} ({:4d}/{:4d}) - success {:4d} - fails msg/ann: {:4d}/{:4d}'.format(
+                tid/len(tickets), tid, len(tickets), cnt, msg_fails, ann_fails),
+                  end='\r')
+        msg = ticket2msg(ticket)
+        if not msg:
+            msg_fails += 1
+            continue
+        annotation = annotate_msg(msg)
+        if not annotation or 'annotations' not in annotation:
+            ann_fails += 1
+            continue
+
+        cnt += 1
+        if cnt % batch_size == 0:
+            batch_start += batch_size
+        ddir = "{}/{:04d}-{:04d}".format(targ_dir, batch_start, batch_start + batch_size - 1)
+        if not os.path.exists(ddir):
+            os.makedirs(ddir)
+
+        file_stem = '{:05d}-{:05d}'.format(cnt, ticket['id'])
+        with open(os.path.join(ddir, file_stem + '.json'), 'w',
+                  encoding='utf-8') as fid:
+            json.dump(msg, fid)
+        with open(os.path.join(ddir, file_stem + '.txt'), 'w',
+                  encoding='utf-8') as fid:
+            write_header(msg, fid)
+            # No tabs in text
+            fid.write(msg['body'].replace('\t', ' '))
+
+        ann2brat(msg, annotation, os.path.join(ddir, file_stem))

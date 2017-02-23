@@ -1,0 +1,28 @@
+#!make
+DOCKER_IMAGE_NAME:=ct-kpi
+DOCKER_TEST_RUNNER_CONTAINER:=kpi
+WORK_DIR:=$(CURDIR)
+ROOT_DIR:=$(WORK_DIR)/../..
+include $(CURDIR)/../Makefile.default
+
+start-local-env: _start-local-env
+stop-local-env: _stop-local-env
+test-docker:
+	@docker run --rm=true $(DOCKER_IMAGE_NAME) make test
+lint-docker:
+	@echo 'No lint'
+build: _build
+test:
+	@tox
+develop: _develop
+ssh: _ssh
+local:
+	@sh -c "DEBUG=1 \
+	        FLASK_DEBUG=1 \
+	        JWT_S2S_AUDIENCE=s2s.comtravo.com \
+		JWT_S2S_ISSUER=s2s.comtravo.com \
+		JWT_S2S=secret \
+		. .tox/py35/bin/activate \
+		&& python kpi_api 8080"
+
+.PHONY: test

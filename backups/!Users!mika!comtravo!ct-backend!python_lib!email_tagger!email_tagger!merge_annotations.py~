@@ -1,0 +1,115 @@
+def merge_annotations(txt, T, A):
+    txt is the text on which T and A have been computed
+
+    """Given a tokenization of a text as a list of sentences with
+    {'start': i, 'end': j, 'tokens': T} and t in T with e.g.
+
+    {'after': '',
+    'start': 185,
+    'length': 5
+    'text': 'Meier',
+    'ner': 'PERSON',
+    'ner_iob': 'B'
+    'pos': 'NN',
+    'shape': 'Xxxxx',
+    ...probably other properties
+    }
+    and annotations over the same text as a list of elements a in A with e.g.
+
+    {'attributes': {},
+    'id': '0827e175-719b-496a-b90a-3e776defa9af',
+    'spans': [{'end': 217, 'start': 194},
+    {'end': 232, 'start': 219},
+    {'end': 248, 'start': 234},
+    {'end': 265, 'start': 250},
+    {'end': 286, 'start': 266},
+    {'end': 303, 'start': 287},
+    {'end': 311, 'start': 304},
+    {'end': 338, 'start': 313},
+    {'end': 362, 'start': 339},
+    {'end': 379, 'start': 364},
+    {'end': 396, 'start': 380},
+    {'end': 443, 'start': 398},
+    {'end': 498, 'start': 444},
+    {'end': 788, 'start': 499}],
+    'text': 'Mit ...',
+    'type': 'EndOfMsg',
+    'where': 'body'}
+
+    find a joint representations for those.
+
+    Tokens t are "clean" and do not span common separators
+    (e.g. spaces). Token NER properties can, however, span multiple
+    tokens as inicated by the ner_iob notation.
+
+    Annotations can span longer text passages. Whilst a span might
+    coincide with a token, it can also be e.g. complete line in the
+    source text.
+    """
+
+    def merge_in_annotation(token, annotation):
+        token.update({'type': None, 'type_iob': None, 'id': None, 'attributes': None})
+        if annotation:
+            token['type'] = annotation['type']
+            token['type_iob'] = annotation['type_iob']
+            token['id'] = annotation['id']
+            token['attributes'] = annotation.get('attributes', None)
+
+    if len(A) == 0:
+        # ToDo: adopt to out format
+        return T
+    if len(T) == 0:
+        # ToDo: adopt to out format
+        return A
+    # Tokens need to start at first char
+    assert T[0]['tokens'][0]['start'] == 0
+    # Break annotations into separate tokens
+    A = sorted(sum([ann2tok(txt, a) for a in A], []), key=lambda t: t['start'])
+    # Check that annotations tokens do start or end on whitespace characters
+    rr = re.compile('^\s.*\s?$|^\s?.*\s$')
+    assert not any([a for a in A if rr.match(a['text'])])
+    A_iter = iter(A)
+    cur_a = next(A_iter)
+    new_tokens = []
+    for t_sent in T:
+        new_sent = []
+        for token in t_sent['tokens']:
+            if not cur_a or cur_a['start'] > token['start'] + token['length']:
+                # Before next annotation
+                merge_in_annotations(token, None)
+                new_sent.append(token)
+            elif cur_a['start'] == token['start'] and cur_a['length'] == token['length']:
+                # token span == annotation
+                merge_in_annotations(token, cur_a)
+                new_sent.append(token)
+                cur_a = next(A_iter, None)
+            elif cur_a['start'] == token['start'] and cur_a['length'] < token['length']:
+                # token and annotation start at same position, but token needs to be split
+                pass
+            elif cur_a['start'] == token['start'] and cur_a['length'] > token['length']:
+                # token and annotation start at same position, but annotation needs to be split
+                pass
+            elif cur_a['start'] <= token['start'] + token['length']:
+                # 
+        new_tokens.append(new_sent)
+
+
+def ann2tok(txt, ann):
+    iob = 'B'
+    tokens = []
+    start = 0
+    for span in sorted(ann['spans'], key=lambda s: s['start']):
+        length = span['end'] - span['start']
+        tokens.append({
+            'start': span['start'],
+            'length': length,
+            'type': ann['type'],
+            'type_iob': iob,
+            'attributes': ann['attributes'],
+            'id': ann['id'],
+            'text': txt[span['start']:span['end']],
+            'where': ann['where']
+        })
+        iob = 'I'
+        start += length
+    return tokens

@@ -1,0 +1,38 @@
+T1	Attributes 201 201	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking|negotiation|rebooking|cancellation|other"}
+T2	Person 16 31	Benjamin Sacher
+#2	AnnotatorNotes T2	{"crm_ids": ["56d4d22e0156a40100498673"]}
+T3	Person 932 946	Markus Gawenda
+#3	AnnotatorNotes T3	{"crm_ids": ["56dffab1d4fbdc0100a4ba67"]}
+T4	Person 554 572	Christina Pisarski
+#4	AnnotatorNotes T4	{"crm_ids": ["56b903efeb2c4601003a9a3c", "56b9044f0dde60010094f334"]}
+T5	TimePoint 418 427	15.6.2016
+#5	AnnotatorNotes T5	{"type": "value", "value": "2016-06-15T00:00:00.000Z", "grain": "day"}
+T6	TimePoint 258 266	8.6.2016
+#6	AnnotatorNotes T6	{"type": "value", "value": "2016-06-08T00:00:00.000Z", "grain": "day"}
+T7	TimePoint 405 410	14.6.
+#7	AnnotatorNotes T7	{"type": "value", "value": "2016-06-14T00:00:00.000Z", "grain": "day"}
+T8	TimePoint 809 813	2015
+#8	AnnotatorNotes T8	{"type": "value", "value": "2016-04-28T20:15:00.000Z", "grain": "minute"}
+T9	TimePoint 748 752	2015
+#9	AnnotatorNotes T9	{"type": "value", "value": "2016-04-28T20:15:00.000Z", "grain": "minute"}
+T10	TimePoint 619 623	2151
+#10	AnnotatorNotes T10	{"type": "value", "value": "2016-04-28T21:51:00.000Z", "grain": "minute"}
+T11	TimePoint 594 598	2151
+#11	AnnotatorNotes T11	{"type": "value", "value": "2016-04-28T21:51:00.000Z", "grain": "minute"}
+T12	TimePoint 246 250	7.6.
+#12	AnnotatorNotes T12	{"type": "value", "value": "2016-06-07T00:00:00.000Z", "grain": "day"}
+T16	Location 869 876	Krefeld
+#16	AnnotatorNotes T16	{"geonames_ids": [2884509]}
+T17	Location 902 909	Krefeld
+#17	AnnotatorNotes T17	{"geonames_ids": [2884509]}
+T18	EndOfMsg 547 552;554 572;573 584;585 588;590 608;610 613;615 634;636 640;642 670;672 675;677 691;693 757;759 818;820 844;845 862;863 876;878 946	Danke Christina Pisarski Back office Tel +49 2151 479 444 0 Fax +49 2151 479 448 55 Mail chrstina.pisarski@shoch3.com Web www.shoch3.com [http://www.shoch3.com/images/mailsignature/Sonic_Logo_2015.png] [http://www.shoch3.com/images/mailsignature/SONIC_2015.png] Sonic Sales Support GmbH Bischofstraße 120 47809 Krefeld HRB 13734 - Amtsgericht Krefeld   |  Geschäftsführer: Markus Gawenda
+T13	Location 284 362	in der Nähe von:
+
+Akademie Berlin-Schmöckwitz
+Wernsdorfer Str. 43
+12527 Berlin
+T19	CountRooms 268 283	01 Einzelzimmer
+T14	Location 284 300;302 329;330 349;350 362	in der Nähe von: Akademie Berlin-Schmöckwitz Wernsdorfer Str. 43 12527 Berlin
+T15	Location 444 459;461 494;495 530;531 545	in der Nähe von Telefónica Germany GmbH & Co. OHG Südwestpark 37 - 41 | Fashion Forum 90449 Nürnberg
+T20	CountRooms 428 443	01 Einzelzimmer

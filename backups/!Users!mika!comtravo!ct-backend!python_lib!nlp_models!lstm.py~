@@ -1,0 +1,8 @@
+from keras.layers import Embedding
+from keras.models import Sequential
+
+layer = Embedding(10, 2)
+model = Sequential()
+model.add(layer)
+
+model.compile()

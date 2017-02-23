@@ -1,0 +1,44 @@
+from brat_io import bratify_ann
+import regex as re
+from . base_tagger import BaseTagger, TagStatus
+from . helpers import _get_longest_match
+
+
+class LuggageTagger(BaseTagger):
+    luggage_with = ["(mit|[1-9])? Gepäck", "(with (a)?|[1-9])? luggage",
+                    "((mit|[1-9]|einem)?|[1-9])? Gepäckstück(e|en)?",
+                    "(mit ([1-9]|einem|einen|ein)?|[1-9])? Koffer(n)?", "suitcase",
+                    "nicht ohne Gepäck"]
+    luggage_without = ["(ohne|kein) Gepäck", "(without|no|0) luggage",
+                       "(ohne|kein|0) Gepäckstück(e|en)?", "(ohne|kein) Koffer(n)?",
+                       "(without|no) suitcase", "nicht mit Gepäck"]
+
+    def luggage_to_id(luggage):
+        return {l: i for i, l in enumerate(luggage)}
+
+    def build_re_luggage(luggage):
+        luggage = sorted(luggage, key=lambda x: -len(x))
+        r_names = r'|'.join([a.replace(' ', '\s*') for a in luggage])
+        r_names = r'(?P<luggage>(?i)' + r_names + r')'
+        r_names = (r'(?<=\s|\p{{P}}|\||^){names}(?=\s|\p{{P}}|\||$)').format(
+            names=r_names)
+        return re.compile(r_names, re.VERSION1 | re.MULTILINE)
+
+    luggage2id = luggage_to_id(luggage_with)
+    re_luggage_with = build_re_luggage(list(luggage2id.keys()))
+
+    luggage2id = luggage_to_id(luggage_without)
+    re_luggage_without = build_re_luggage(list(luggage2id.keys()))
+
+    def tag(self, msg, result):
+        matches = []
+        for m in LuggageTagger.re_luggage_with.finditer(msg['body']):
+            a = bratify_ann(msg, 'Luggage', m.start(), m.end(),
+                            where='body', attributes={'with_luggage': True})
+            matches.append(a)
+        for m in LuggageTagger.re_luggage_without.finditer(msg['body']):
+            a = bratify_ann(msg, 'Luggage', m.start(), m.end(),
+                            where='body', attributes={'with_luggage': False})
+            matches.append(a)
+        result['annotations'] += _get_longest_match(matches)
+        return TagStatus.success

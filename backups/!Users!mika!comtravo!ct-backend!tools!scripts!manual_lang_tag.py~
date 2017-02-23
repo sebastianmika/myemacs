@@ -1,0 +1,56 @@
+import os
+from glob import glob
+from getch import getch
+import json
+
+
+files = glob('all_msg/*.json')
+
+
+langs = {
+    'd': 'de',
+    'e': 'en',
+    'o': 'other'
+}
+
+types = {
+    'b': 'booking',
+    'c': 'cancellation',
+    'r': 'rebooking',
+    'n': 'negotiation',
+    'o': 'other',
+    't': 'trash'
+}
+
+
+cnt = 0
+for f in files:
+    cnt += 1
+    msg = json.load(open(f, 'r'))
+    annfile = f.replace('.json', '.ann')
+    if os.path.exists(annfile):
+        ann = json.load(open(annfile, 'r'))
+    else:
+        ann = {}
+    print('message {}/{} '.format(cnt, len(files)) + ''.join('='*80))
+    print('SUBJECT: {}'.format(msg['subject']))
+    print('BODY:\n{}'.format(msg['body'][:1000].replace('\n', ' ')))
+    while 1:
+        while 1:
+            print('Language [deo]: ', end="", flush=True)
+            lang = getch()
+            if lang in langs:
+                break
+        # while 1:
+        #     print('\nMsg Type: [bcrnot]: ', end="", flush=True)
+        #     type = getch()
+        #     if type in types:
+        #         break
+        # print('\n\nLabelling as {}/{} ok? [y/n]: '.format(langs[lang], types[type]), end="", flush=True)
+        print('\n\nLabelling as {} ok? [y/n]: '.format(langs[lang]), end="", flush=True)
+        if getch() == 'y':
+            print('\n')
+            break
+    ann['language'] = langs[lang]
+    with open(annfile, 'w') as fid:
+        json.dump(ann, fid)    

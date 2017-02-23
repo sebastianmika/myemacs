@@ -1,0 +1,396 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.2"
+  title: NLP API
+  description: Provides an API to parse information from a message
+
+basePath: /v1
+schemes:
+  - http
+
+paths:
+  /annotate:
+    post:
+      description: get annotations for an email message
+      operationId: annotate
+      x-swagger-router-controller: nlp_api.controllers.annotate
+      operationId: post_annotate
+      parameters:
+        - name: requestBody
+          in: body
+          description: message to annotate
+          schema:
+            $ref: '#/definitions/emailMessage'
+      tags:
+        - NLP
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/annotationResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/GeneralError'
+  /annotate/verbose:
+    post:
+      description: get annotations for an email message
+      operationId: annotate_verbose
+      x-swagger-router-controller: nlp_api.controllers.annotate
+      operationId: post_annotate_verbose
+      parameters:
+        - name: requestBody
+          in: body
+          description: message to annotate
+          schema:
+            $ref: '#/definitions/emailMessage'
+      tags:
+        - NLP
+      responses:
+        '200':
+          description: Ok
+          schema:
+            $ref: '#/definitions/verboseAnnotationResponse'
+        '401':
+          $ref: '#/responses/Unauthorized'
+        default:
+          $ref: '#/responses/GeneralError'
+
+responses:
+  Unauthorized:
+    description: Unauthorized operation
+    schema:
+      $ref: '#/definitions/errorModel'
+  GeneralError:
+    description: Something went wrong
+    schema:
+      $ref: '#/definitions/errorModel'
+
+definitions:
+
+  errorModel:
+    type: object
+    required:
+      - status
+      - title
+      - detail
+    properties:
+      status:
+        type: integer
+        format: int32
+      title:
+        type: string
+      detail:
+        type: string
+
+  emailMessage:
+    type: object
+    description: e-mail message to annotate
+    additionalProperties: true
+    required:
+      - body
+      - subject
+      - date
+      - from
+      - to
+      - cc
+    properties:
+      body:
+        description: the message body
+        type: string
+      subject:
+        description: the message subject
+        type: string
+      to:
+        description: list of message recipients
+        type: array
+        items:
+          $ref: '#/definitions/emailAddress'
+        minLength: 1
+      cc:
+        description: list of cced message recipients
+        type: array
+        items:
+          $ref: '#/definitions/emailAddress'
+        minLength: 0   
+      from:
+        $ref: '#/definitions/emailAddress'
+      date:
+        description: >
+          time of message receipt in miliseconds
+          since the UTC epoch (cf. GMail API)
+        type: integer
+        minimum: 0
+
+  emailAddress:
+    type: object
+    required:
+      - email
+    properties:
+      email:
+        type: string
+        format: email
+        description: the email address
+      name:
+        type: string
+        description: a string with an optional human readable name
+
+  annotationResponse:
+    type: object
+    description: annotations for this message for 3rd party consumers
+    required:
+      - language
+      - source
+      - log
+    properties:
+      language:
+        type: string
+        description: two letter language code or 'unknown'
+      source:
+        type: string
+        description: >
+          channel the message was (most likely) received on;
+          currently only messages on the 'email' channel are
+          fully processed
+        enum: ['email', 'sms']
+      skipped:
+        description: >
+          if set, the message was not annotated because
+          it is out of scope
+        type: string
+      log:
+        description: >
+          log trail of the various sub-routines;
+          if any has a status that is not success,
+          the result should not be trusted unless one
+          knows what one is doing
+        type: array
+        items: 
+          $ref: '#/definitions/tagLog'
+      p_booking:
+        description: probability that the message is actually a booking
+        type: number
+        minimum: 0.0
+        maximum: 1.0
+      companies:
+        description: array of companies that are relevant for this message
+        type: array
+        items:
+          $ref: '#/definition/companyAnnotation'
+      persons:
+        description: array of persons that are mentioned in this message
+        type: array
+        items:
+          $ref: '#/definitions/personAnnotation'
+
+  companyAnnotation:
+    description: A company id from the CRM and its likelihood to be relevant for the message
+    type: object
+    required:
+      - id
+      - likelihood
+    properties:
+      id:
+        type: string
+        description: company id
+      likelihood:
+        description: likelihood of this company being relevant for the message
+        $ref: '#/definitions/probability'
+
+  personAnnotation:
+    description: A person id from the CRM, its likelihood to be relevant for the message, and its roles
+    type: object
+    required:
+      - id
+      - likelihood
+      - roles
+    properties:
+      id:
+        type: string
+        description: person id
+      likelihood:
+        description: likelihood of this person being relevant for the message
+        $ref: '#/definitions/probability'
+      roles:
+        description: array of roles the person has in the message
+        type: array
+        items:
+          $ref: '#/definitions/personRequestRoles'
+
+  personRequestRoles:
+    type: string
+    description: potential roles of a person in a message
+    enum: ['booker', 'traveler']
+
+  verboseAnnotationResponse:
+    type: object
+    description: annotations for this message in broad detail for debugging and development purposes
+    required:
+      - language
+      - source
+      - annotations
+      - crm
+      - log
+    properties:
+      language:
+        type: string
+        description: two letter language code or 'unknown'
+      source:
+        type: string
+        description: channel the message was (most likely) received on; currently only messages on the 'email' channel are fully processed
+        enum: ['email', 'sms']
+      annotations:
+        description: list of annotations in the message text and subject
+        type: array
+        items:
+          $ref: '#/definitions/textAnnotation'
+      skipped:
+        description: if set, the message was not annotated because it is out of scope
+        type: string
+      crm:
+        description: dict with all crm related data for this message
+        $ref: '#/definitions/crmData'
+      log:
+        description: log trail of the various sub-routines; if any has a status that is not success, the result should not be trusted unless one knows what one is doing
+        type: array
+        items: 
+          $ref: '#/definitions/tagLog'
+      p_booking:
+        description: probability that the message is actually a booking
+        type: number
+        minimum: 0.0
+        maximum: 1.0
+
+  tagLog:
+    description: log entry for one tagging operation
+    type: object
+    properties:
+      step:
+        description: annotation/tagger
+        type: string
+      status:
+        description: status of step
+        type: string
+        enum: ['success', 'server_error', 'client_error']
+      time:
+        description: time in miliseconds the step tool
+        type: number
+
+  probability:
+    description: a probability (i.e. [0 1] floating point value)
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+
+  textAnnotation:
+    type: object
+    description: an annotation in some text
+    required:
+      - id
+      - spans
+      - text
+      - where
+      - type
+      - attributes
+    properties:
+      id:
+        description: a unique id for this annotation
+        type: string
+        format: uuid
+      spans:
+        description: array of text spans for this annotation
+        type: array
+        items:
+          $ref: '#/definitions/span'
+      text:
+        description: the tagged bit of text, newlines replaced by space, tabs by space
+        type: string
+      where:
+        description: part of the message this tag refers to
+        type: string
+        enum: ['body', 'subject']
+      type:
+        description: what has been annotated
+        type: string
+        enum: ['TimePoint', 'TimeRange', 'Person', 'Location', 'Greeting', 'EndOfMsg', 'Reply', 'FlightNumber']
+      attributes:
+        $ref: '#/definitions/textAnnotationAttribute'
+
+  textAnnotationAttribute:
+    type: object
+    description: specific meta data of a text annotation
+    properties:
+      crm_ids:
+        description: list of ids of persons in the crm (only for type=Person)
+        type: array
+        items:
+          description: id of a person in the crm
+          type: string
+      airline:
+        type: string
+        minLength: 2
+        maxLength: 2
+      flightNumber:
+        type: string
+        minLength: 3
+      locationType:
+        description: what kind of location is this?
+        type: string
+        enum: ['airport', 'city', 'hotel', 'other']
+      geonames_ids:
+        description: the id of this location in geonames (if any)
+        type: array
+        items:
+          type: integer
+      iata_code:
+        description: the iata code
+        type: string
+        minLength: 3
+        maxLength: 3
+      value:
+        description: a time value
+        type: string
+        format: date-time
+      grain:
+        $ref: '#/definitions/timeGrain'
+      from:
+        description: start of a time range
+        type: object
+        properties:
+          value:
+            description: a time value
+            type: string
+            format: date-time
+          grain:
+            $ref: '#/definitions/timeGrain'
+      to:
+        description: end of a time range
+        type: object
+        properties:
+          value:
+            description: a time value
+            type: string
+            format: date-time
+          grain:
+            $ref: '#/definitions/timeGrain'
+
+  timeGrain:
+    type: string
+    enum: ['year', 'month', 'week', 'day', 'hour', 'minute', 'second']
+
+  span:
+    type: object
+    required:
+      - start
+      - end
+    properties:
+      start:
+        description: start of text span
+        type: integer
+      end:
+        description: end of text span
+        type: integer
+
+  crmData:
+    type: object

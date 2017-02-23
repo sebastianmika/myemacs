@@ -1,0 +1,13 @@
+T1	Attributes 0 0	
+#1	AnnotatorNotes T1	{"language": "de", "source": "email"}
+T2	Greeting 0 17	Hi Comtravo-Team,
+T3	EndOfMsg 242 264;267 279	Vielen Dank im Voraus! Louisa Wörle
+T4	Location 79 86	Teheran
+T5	Location 92 101	Frankfurt
+T6	Location 102 106	Köln
+T7	TimeSpan 139 160	am 9.10.15 Vormittags
+T8	TimePoint 192 203	am 11.10.15
+T9	Location 223 230	Teheran
+T10	Person 122 131	Passagier
+T11	ReturnFlight 118 238;19 116	Der Passagier möchte am 9.10.15 Vormittags in Deutschland landen und wird am 11.10.15 wieder zurück nach Teheran fliegen könnt ihr mir bitte Vorschläge für den günstigsten Flug von Teheran nach Frankfurt/Köln schicken?
+E1	ReturnFlight:T11 org:T4 dst:T5 dst2:T6 who:T11 arv_inbound:T7 dpt_outbound:T8 org2:T9

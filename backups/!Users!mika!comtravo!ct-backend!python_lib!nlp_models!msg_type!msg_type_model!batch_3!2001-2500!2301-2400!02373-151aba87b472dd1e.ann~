@@ -1,0 +1,43 @@
+T1	Attributes 217 217	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "negotiation"}
+T2	Greeting 227 233	Hallo,
+T3	TimeRange 1338 1351	Freitag Abend
+#2	AnnotatorNotes T3	{"to": {"value": "2015-12-19T00:00:00.000Z", "grain": "hour"}, "type": "interval", "from": {"value": "2015-12-18T18:00:00.000Z", "grain": "hour"}}
+T4	TimeRange 1168 1181	05.11 - 11.11
+#3	AnnotatorNotes T4	{"to": {"value": "2015-12-17T11:12:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2015-12-17T05:11:00.000Z", "grain": "minute"}}
+T5	TimeRange 967 980	05.11 - 11.11
+#4	AnnotatorNotes T5	{"to": {"value": "2015-12-17T11:12:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2015-12-17T05:11:00.000Z", "grain": "minute"}}
+T6	TimeRange 600 613	05.11 - 11.11
+#5	AnnotatorNotes T6	{"to": {"value": "2015-12-17T11:12:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2015-12-17T05:11:00.000Z", "grain": "minute"}}
+T7	TimePoint 921 926	01:00
+#6	AnnotatorNotes T7	{"type": "value", "value": "2015-12-17T01:00:00.000Z", "grain": "minute"}
+T8	TimePoint 666 670	0100
+#7	AnnotatorNotes T8	{"type": "value", "value": "2015-12-17T01:00:00.000Z", "grain": "minute"}
+T9	TimeRange 45 58	05.11 - 11.11
+#8	AnnotatorNotes T9	{"to": {"value": "2015-12-17T11:12:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2015-12-17T05:11:00.000Z", "grain": "minute"}}
+T11	Location 379 398;399 411	Schlesische Str. 26 10997 Berlin
+#10	AnnotatorNotes T11	{"geonames_ids": [2950159]}
+T12	Location 640 643	Mon
+#11	AnnotatorNotes T12	{"geonames_ids": [1262824]}
+T13	Location 775 783	Richmond
+#12	AnnotatorNotes T13	{"geonames_ids": [962330, 2151649, 4263681, 4305974, 5387428, 6122085]}
+T14	Location 894 898	Date
+#13	AnnotatorNotes T14	{"geonames_ids": [2130421]}
+T15	Location 1455 1461	Berlin
+#14	AnnotatorNotes T15	{"geonames_ids": [2950159]}
+T16	Location 1552 1558	Berlin
+#15	AnnotatorNotes T16	{"geonames_ids": [2950159]}
+T17	Location 1579 1585	Berlin
+#16	AnnotatorNotes T17	{"geonames_ids": [2950159]}
+T18	Location 1760 1768	Richmond
+#17	AnnotatorNotes T18	{"geonames_ids": [962330, 2151649, 4263681, 4305974, 5387428, 6122085]}
+T19	Location 1814 1820	Berlin
+#18	AnnotatorNotes T19	{"geonames_ids": [2950159]}
+T20	Location 1864 1870	Berlin
+#19	AnnotatorNotes T20	{"geonames_ids": [2950159]}
+T21	Location 1898 1904	Berlin
+#20	AnnotatorNotes T21	{"geonames_ids": [2950159]}
+T22	Location 1905 1919	Charlottenburg
+#21	AnnotatorNotes T22	{"geonames_ids": [2940187]}
+T23	EndOfMsg 463 495;496 513;515 558;559 631;632 670;671 691;692 714;716 759;760 774;775 797;798 813;814 830;832 871;872 893;894 926;927 998;999 1019;1021 1024;1026 1073;1074 1099;1100 1132;1133 1199;1200 1227;1229 1246;1248 1322;1324 1351;1352 1360;1362 1379;1381 1428;1429 1448;1449 1461;1462 1480;1481 1506;1507 1538;1540 1601;1602 1633;1635 1637;1638 1649;1651 1669;1671 1673;1675 1701;1703 1724;1726 1739;1741 1758;1760 1787;1788 1807;1808 1820;1822 1840;1841 1870;1872 1919	Vielen Dank und herzliche Grüße, Annick Wiedenmann -------- Weitergeleitete Nachricht -------- Betreff:  Fwd: Buchungsbestätigung Hotel 05.11 - 11.11 - The Weinmeister Datum:  Mon, 2 Nov 2015 13:51:06 +0100 Von:  Frederik Fleck An:  Annick Wiedenmann ........................................... Frederik Fleck Richmond View Ventures +1 415 658 5979 +49 173 397 9964 ---------- Forwarded message ---------- From: *Moritz Hohl* > Date: 2015-11-02 13:40 GMT+01:00 Subject: Fwd: Buchungsbestätigung Hotel 05.11 - 11.11 - The Weinmeister To: Frederik Fleck > FYI ---------- Weitergeleitete Nachricht ---------- Von: *Comtravo Buchung* > Datum: 30. Oktober 2015 um 17:38 Betreff: Buchungsbestätigung Hotel 05.11 - 11.11 - The Weinmeister An: moritz@mobilemonkeys.vc Lieber Herr Hohl, anbei noch die Buchungsbestätigung auf Englisch für die zwei USA Reisende. Einen schönen Freitag Abend Sophia & Ihr Comtravo Team MTR Travel Technologies UG (haftungsbeschränkt) Köpenicker Str. 126 10179 Berlin Tel.: 030 30874080 Internet: www.comtravo.de Buchungen: buchung@comtravo.com Amtsgericht Berlin, HRB 12538  - Sitz: Berlin, Deutschland  - Geschäftsführer: Michael Riegel -- Moritz Hohl +49 (0)170/9686701 -- Dipl-Jur Annick Wiedenmann --PA Frederik Fleck-- pa.ff@vpaw.de +49 179 207 88 40 Richmond View Ventures GmbH Schlesische Str. 26 10997 Berlin GF: Frederik Fleck Sitz des Unternehmens: Berlin HRB: 108249B, Amtsgericht Berlin-Charlottenburg
+

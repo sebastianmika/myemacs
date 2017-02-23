@@ -1,0 +1,47 @@
+T1	Attributes 170 170	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking
+T2	Greeting 180 183	Hi,
+T3	Person 329 346	Silvia Gripshöver
+#2	AnnotatorNotes T3	{"crm_ids": ["56d55f80456a860100dcc424", "56d55fe1456a860100dcc426"]}
+T4	Person 764 780	Alexander Böcker
+#3	AnnotatorNotes T4	{"crm_ids": ["56d4d1a15fcdce010017aa22"]}
+T7	TimeRange 274 280	abends
+#6	AnnotatorNotes T7	{"to": {"value": "2016-01-08T00:00:00.000Z", "grain": "hour"}, "type": "interval", "from": {"value": "2016-01-07T18:00:00.000Z", "grain": "hour"}}
+T10	TimePoint 901 905	005.
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-02-05T00:00:00.000Z", "grain": "day"}
+T11	TimePoint 625 629	004.
+#10	AnnotatorNotes T11	{"type": "value", "value": "2016-02-04T00:00:00.000Z", "grain": "day"}
+T12	TimePoint 588 592	003.
+#11	AnnotatorNotes T12	{"type": "value", "value": "2016-02-03T00:00:00.000Z", "grain": "day"}
+T13	TimePoint 552 556	002.
+#12	AnnotatorNotes T13	{"type": "value", "value": "2016-02-02T00:00:00.000Z", "grain": "day"}
+T14	TimePoint 514 518	001.
+#13	AnnotatorNotes T14	{"type": "value", "value": "2016-02-01T00:00:00.000Z", "grain": "day"}
+T15	TimePoint 908 911	@01
+#14	AnnotatorNotes T15	{"type": "value", "value": "2016-01-07T13:00:00.000Z", "grain": "hour"}
+T16	TimePoint 632 635	@01
+#15	AnnotatorNotes T16	{"type": "value", "value": "2016-01-07T13:00:00.000Z", "grain": "hour"}
+T17	TimePoint 595 598	@01
+#16	AnnotatorNotes T17	{"type": "value", "value": "2016-01-07T13:00:00.000Z", "grain": "hour"}
+T18	TimePoint 559 562	@01
+#17	AnnotatorNotes T18	{"type": "value", "value": "2016-01-07T13:00:00.000Z", "grain": "hour"}
+T19	TimePoint 521 524	@01
+#18	AnnotatorNotes T19	{"type": "value", "value": "2016-01-07T13:00:00.000Z", "grain": "hour"}
+T20	Location 224 230	Zürich
+#19	AnnotatorNotes T20	{"geonames_ids": [2657896]}
+T21	Location 316 320	Best
+#20	AnnotatorNotes T21	{"geonames_ids": [2759040]}
+T22	Location 391 396	Werne
+#21	AnnotatorNotes T22	{"geonames_ids": [2810833]}
+T23	Location 696 704	Dortmund
+#22	AnnotatorNotes T23	{"geonames_ids": [2935517]}
+T24	Location 17 23	Zürich
+#23	AnnotatorNotes T24	{"geonames_ids": [2657896]}
+T25	EndOfMsg 290 328;329 346;347 358;360 369;370 382;383 396;398 424;425 449;451 480;481 502;504 540;542 614;615 651;653 742;743 869;871 889;891 927	Mit freundlichen Grüßen / Best regards Silvia Gripshöver Sekretariat Böcker AG Lippestr. 69 D-59368 Werne Tel .    +49 2389-7989-761 Fax    +49 2389-7989-164 gripshoever@boecker-group.com www.boecker-group.com [cid:image001.jpg@01D1492C.46945550] [cid:image002.png@01D1492C.46945550][cid:image003.jpg@01D1492C.46945550] [cid:image004.jpg@01D1492C.46945550] Böcker AG * eingetragen im Registergericht Dortmund HRB 19554 * Steuer-Nr. 5333/5954/0581 Vorstand: Dipl.-Kfm. Alexander Böcker - Vorstandsvorsitzender * Aufsichtsrat: Dr. Christoph Stiens - Aufsichtsratsvorsitzender Aktuelle Aktionen: [cid:image005.jpg@01D1492C.46945550]
+T5	TimePoint 249 257	am 13.1.
+T8	TimeRange 258 265	morgens
+R1	about Arg1:T5 Arg2:T8	
+R2	about Arg1:T5 Arg2:T7	
+T9	ReturnFlight 211 218	Angebot
+E1	ReturnFlight:T9 dst:T20 cnt:T6 dpt_outbound:T5 dpt_inbound:T5
+T6	CountPersons 235 248	zwei Personen

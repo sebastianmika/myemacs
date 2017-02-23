@@ -1,0 +1,60 @@
+import os
+import json
+import regex as re
+from brat_io import bratify_ann
+from . base_tagger import BaseTagger, TagStatus
+from . helpers import _merge_double_matches
+
+
+class IATATagger(BaseTagger):
+    
+    # class static
+    iata = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                       'data/iata_airports.json'), 'r'))
+
+    def tag(self, msg, result):
+        """Tag all appearances of iata codes as Location"""
+
+        # First, match all capital three letter words that are separated
+        # by the preceeding and following text in some way
+        #
+        # 'from TXL '/'von TXL'/'nach TXL'/'to TXL'
+        dir_clause = (r'(?i)(?:from|to|von|nach|über|'
+                      'over|in|via|through|direkt|direct|-+>|<-+|=>|<=)(?-i)')
+        matches = []
+        r1a = (r'(?<=\s|\p{{P}}|^){dir_clause}:?\s+'
+               '(?P<iata_location>[A-Z]{{3}})(?=\s|\p{{P}}|$)').format(
+                   dir_clause=dir_clause)
+        # 'TXL from'/'TXL von'/'TXL nach'/'TXL to'
+        r1b = (r'(?<=\s|\p{{P}}|^)(?P<iata_location>[A-Z]{{3}})\s+'
+               '{dir_clause}(?=\s|\p{{P}}|$)').format(
+                   dir_clause=dir_clause)
+        # ' TXL-LHR '/'TXL -  LHR.'/'TXL LHR'
+        r2a = r'(?<=\s|\p{P}|^)(?P<iata_location>[A-Z]{3})(?:\s*-)'
+        r2b = r'(?:-\s*)(?P<iata_location>[A-Z]{3})(?=\s|\p{P}|$)'
+        # '(TXL)'/'[TXL]'
+        r3 = r'[\(\[]\s*(?P<iata_location>[A-Z]{3})\s*[\]\)]'
+        # ' TXL LHR '
+        r4a = r'(?<=\s|\p{P}|^)(?P<iata_location>[A-Z]{3})(?=\s+(?:[A-Z]{3})(?=\s|\p{P}|$))'
+        r4b = r'(?<=(?<=\s|\p{P}|^)(?:[A-Z]{3})\s+)(?P<iata_location>[A-Z]{3})(?=\s|\p{P}|$)'
+        for rr in [r1a, r1b, r2a, r2b, r3, r4a, r4b]:
+            for m in re.finditer(rr, msg['body'], re.VERSION1 | re.MULTILINE):
+                code = m.group('iata_location').upper()
+                if code not in IATATagger.iata.keys():
+                    continue
+                a = bratify_ann(msg, 'Location', m.start('iata_location'), m.end('iata_location'),
+                                attributes={'iata_code': code}, where='body')
+                matches.append(a)
+            for m in re.finditer(rr, msg['subject'], re.VERSION1 | re.MULTILINE):
+                code = m.group('iata_location').upper()
+                if code not in IATATagger.iata.keys():
+                    continue
+                a = bratify_ann(msg, 'Location', m.start('iata_location'), m.end('iata_location'),
+                                attributes={'iata_code': code}, where='subject')
+                matches.append(a)
+                # Known issues:
+                # UST-IDNr.
+                # Nähe von RDS Main Hall
+                # ^HIN AIR BERLIN
+        result['annotations'] += _merge_double_matches(matches)
+        return TagStatus.success

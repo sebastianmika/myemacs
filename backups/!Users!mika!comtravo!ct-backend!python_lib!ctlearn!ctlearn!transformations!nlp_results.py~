@@ -1,0 +1,18 @@
+from .. base import Transformer
+
+
+class ResultTransformer(Transformer):
+    def __init__(self):
+        super(ResultTransformer, self).__init__(input_keys=['event', 'language',
+                                                            'is_booking', 'content'],
+                                                output_key='res')
+
+    def transform(self, *args):
+        res = [None] * len(args[0])
+        for idx, (event, language, is_booking, content, ) in enumerate(zip(*args)):
+            res[idx] = {'events': event,
+                        'language': language,
+                        'is_booking': is_booking,
+                        'content': content}
+        return res
+    

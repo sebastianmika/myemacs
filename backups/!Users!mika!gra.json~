@@ -1,0 +1,92 @@
+{
+  "title": "Panel Title",
+  "error": false,
+  "span": 6,
+  "editable": true,
+  "type": "table",
+  "isNew": true,
+  "id": 5,
+  "targets": [
+    {
+      "metrics": [
+        {
+          "type": "cardinality",
+          "id": "1",
+          "field": "booker_id",
+          "settings": {},
+          "meta": {}
+        },
+        {
+          "type": "cardinality",
+          "field": "booking_item.traveler_id",
+          "id": "3",
+          "settings": {},
+          "meta": {}
+        }
+      ],
+      "dsType": "elasticsearch",
+      "bucketAggs": [
+        {
+          "type": "terms",
+          "id": "2",
+          "settings": {
+            "order": "asc",
+            "size": "0",
+            "orderBy": "_term"
+          },
+          "field": "company_name.raw"
+        }
+      ],
+      "timeField": "booking_item.meta_data.created_at",
+      "refId": "A",
+      "query": "booking_item.status:processed",
+      "alias": "Bookers"
+    }
+  ],
+  "styles": [
+    {
+      "type": "date",
+      "pattern": "Time",
+      "dateFormat": "YYYY-MM-DD HH:mm:ss"
+    },
+    {
+      "unit": "short",
+      "type": "number",
+      "decimals": 0,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "colorMode": null,
+      "pattern": "/.*/",
+      "thresholds": []
+    }
+  ],
+  "transform": "json",
+  "pageSize": null,
+  "showHeader": true,
+  "columns": [
+    {
+      "text": "company_name.raw",
+      "value": 2
+    },
+    {
+      "text": "Bookers",
+      "value": 1
+    },
+    {
+      "text": "Travelers",
+      "value": 3
+    }
+  ],
+  "scroll": true,
+  "fontSize": "100%",
+  "sort": {
+    "col": 0,
+    "desc": true
+  },
+  "timeFrom": "100y",
+  "timeShift": null,
+  "links": []
+}

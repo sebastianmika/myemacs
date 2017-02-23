@@ -1,0 +1,40 @@
+T1	Attributes 200 200	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 210 226	Hallo Zusammen ,
+T3	Person 333 350	Dominic Brennecke
+#2	AnnotatorNotes T3	{"crm_ids": ["56d4d27e5fcdce010017aa98"]}
+T4	Person 765 779	Markus Gawenda
+#3	AnnotatorNotes T4	{"crm_ids": ["56dffab1d4fbdc0100a4ba67"]}
+T5	Person 387 405	Christina Pisarski
+#4	AnnotatorNotes T5	{"crm_ids": ["56b903efeb2c4601003a9a3c", "56b9044f0dde60010094f334"]}
+T6	TimePoint 0 295	SUBJECT: Zimmeranfrage Hamburg
+DATE: 2016-04-14 11:53:04
+FROM: Christina Pisarski - christina.pisarski@shoch3.com
+TO: Comtravo Buchung (buchung@comtravo.com) - buchung@comtravo.com
+------ End of header -------
+Hallo Zusammen ,
+
+wir benötigen 1 Einzelzimmer Nähe Flughafen Hamburg,
+Anreise am Son
+#5	AnnotatorNotes T6	{"type": "value", "value": "2016-04-17T00:00:00.000Z", "grain": "day"}
+T7	TimePoint 319 325	19.04.
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-04-19T00:00:00.000Z", "grain": "day"}
+T9	TimePoint 642 646	2015
+#8	AnnotatorNotes T9	{"type": "value", "value": "2016-04-14T20:15:00.000Z", "grain": "minute"}
+T10	TimePoint 581 585	2015
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-04-14T20:15:00.000Z", "grain": "minute"}
+T11	TimePoint 452 456	2151
+#10	AnnotatorNotes T11	{"type": "value", "value": "2016-04-14T21:51:00.000Z", "grain": "minute"}
+T12	TimePoint 427 431	2151
+#11	AnnotatorNotes T12	{"type": "value", "value": "2016-04-14T21:51:00.000Z", "grain": "minute"}
+T13	Location 257 279	Nähe Flughafen Hamburg
+#12	AnnotatorNotes T13	{"geonames_ids": [2911298]}
+T14	Location 702 709	Krefeld
+#13	AnnotatorNotes T14	{"geonames_ids": [2884509]}
+T15	Location 735 742	Krefeld
+#14	AnnotatorNotes T15	{"geonames_ids": [2884509]}
+T16	Location 23 30	Hamburg
+#15	AnnotatorNotes T16	{"geonames_ids": [2911298]}
+T17	EndOfMsg 383 386;387 405;406 417;418 421;423 441;443 446;448 467;469 473;475 503;505 508;510 524;526 590;592 651;653 677;678 695;696 709;711 779	Mfg Christina Pisarski Back office Tel +49 2151 479 444 0 Fax +49 2151 479 448 55 Mail chrstina.pisarski@shoch3.com Web www.shoch3.com [http://www.shoch3.com/images/mailsignature/Sonic_Logo_2015.png] [http://www.shoch3.com/images/mailsignature/SONIC_2015.png] Sonic Sales Support GmbH Bischofstraße 120 47809 Krefeld HRB 13734 - Amtsgericht Krefeld   |  Geschäftsführer: Markus Gawenda
+T18	CountRooms 242 256	1 Einzelzimmer
+T8	TimePoint 292 309	Sonntag den 17.04

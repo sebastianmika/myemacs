@@ -1,0 +1,4 @@
+(
+ "LH1234"
+ (fn [token context] (and (= :flight-number (:dim token)) (= {:code "LH" :number "1234"} (:value token))))
+)

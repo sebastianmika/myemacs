@@ -1,0 +1,122 @@
+from glob import glob
+import os
+from datetime import datetime
+from hashlib import md5
+from email_tagger.get_companies import get_companies
+from email_tagger.get_persons import get_persons
+from email_tagger.tag_persons import tag_persons
+from email_tagger.tag_iata import tag_iata
+from email_tagger.tag_flight_numbers import tag_flight_numbers
+from email_tagger.tag_time import tag_time
+from email_tagger.tag_cities import tag_cities
+from email_tagger.brat import brat2ann, ann2brat
+from email_tagger.helpers import _query_duckling
+import json
+
+import logging
+logging.basicConfig(level=logging.INFO)
+
+path = '/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/corpus'
+
+
+def retag_persons():
+    person_tags = {}
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r'))
+        persons = get_persons(*get_companies(msg))
+        person_tags[msg['message_id']] = persons
+        ann, _ = brat2ann(file.replace('.json', ''))
+        ps = tag_persons(msg)
+        # Delete all old 'Person' tags
+        ann['tags'] = [a for a in ann['tags'] if a['type'] != 'Person']
+        ann['tags'] += ps
+        ann2brat(ann, file.replace('.json', ''))
+    json.dump(person_tags,
+              open('/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/corpus_person_tags.json', 'w'), indent=4)
+
+
+def retag_iata():
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r'))
+        ann, _ = brat2ann(file.replace('.json', ''))
+        iata = tag_iata(msg)
+        # Delete all old 'Person' tags
+        ann['tags'] = [a for a in ann['tags'] if (a['type'] != 'Location' or 'iata_code' not in a['attributes'])]
+        ann['tags'] += iata
+        ann2brat(ann, file.replace('.json', ''))    
+
+
+def retag_flight_numbers():
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r'))
+        ann, _ = brat2ann(file.replace('.json', ''))
+        fns = tag_flight_numbers(msg)
+        # Delete all old 'Person' tags
+        ann['tags'] = [a for a in ann['tags'] if (a['type'] != 'FlightNumber' or 'airline_code' not in a['attributes'])]
+        ann['tags'] += fns
+        ann2brat(ann, file.replace('.json', ''))
+
+
+def retag_cities():
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r'))
+        ann, _ = brat2ann(file.replace('.json', ''))
+        cts = tag_cities(msg)
+        # Delete all old 'Person' tags
+        ann['tags'] = [a for a in ann['tags'] if (a['type'] != 'Location' or 'geonames_ids' not in a['attributes'])]
+        ann['tags'] += cts
+        ann2brat(ann, file.replace('.json', ''))
+
+
+def retag_time():
+
+    def _hash_query(q):
+        return md5((q['text'] + str(q['date']) + q['lang']).encode('utf-8')).hexdigest()
+
+    time_tags = {}
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r'))
+        ann, _ = brat2ann(file.replace('.json', ''))
+        lang = ann['tags'][0]['attributes']['language']
+        q = {'text': msg['body'],
+             'lang': lang,
+             'date': msg['date']}
+        times = _query_duckling(q)
+        time_tags[_hash_query(q)] = times
+        q = {'text': msg['subject'],
+             'lang': lang,
+             'date': msg['date']}
+        times = _query_duckling(q)
+        time_tags[_hash_query(q)] = times
+        ts = tag_time(msg, lang)
+        # Delete all old 'TimePoint' and 'TimeRange' tags
+        ann['tags'] = [a for a in ann['tags'] if (a['type'] != 'TimePoint' and a['type'] != 'TimeRange')]
+        ann['tags'] += ts
+        ann2brat(ann, file.replace('.json', ''))
+    json.dump(time_tags,
+              open('/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/corpus_time_tags.json', 'w'), indent=4)
+
+
+def write_header(msg, f):
+    # fixture on CR LF not required for newly parsed on subject/fixed in email_parser
+    head =  'SUBJECT: {}\n'.format(msg['subject'].replace('\r\n', '\n').replace('\r', '\n').replace('\n', ' '))
+    head += 'DATE: {}\n'.format(datetime.utcfromtimestamp(msg['date']/1e3))
+    head += 'FROM: {} - {}\n'.format(msg['from']['name'], msg['from']['email'])
+    for t in msg['to']:
+        head += 'TO: {} - {}\n'.format(t['name'], t['email'])
+    for c in msg['cc']:
+        head += 'CC: {} - {}\n'.format(c['name'], c['email'])
+    head += '------ End of header -------\n'
+    f.write(head)
+    return len(head)
+
+
+def addin_header():
+    for file in glob(os.path.join(path, '*.json')):
+        msg = json.load(open(file, 'r', encoding='utf-8'))
+        ann, _ = brat2ann(file.replace('.json', ''))
+        with open(file.replace('.json', '.txt'), 'w', encoding='utf-8') as f:
+            write_header(msg, f)
+            f.write(msg['body'].replace('\t', ' '))
+        ann2brat(ann, file.replace('.json', ''))
+

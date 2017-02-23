@@ -1,0 +1,18 @@
+from .. base import Transformer
+from .. base import SerializableMixin
+from .. utils import _del_reply
+
+
+class SourceTransformer(Transformer, SerializableMixin):
+    def __init__(self):
+        super(SourceTransformer, self).__init__(input_keys=['msg'],
+                                                output_key='source')
+
+    def transform(self, *args):
+        res = ['email'] * len(args[0])
+        for idx, (msg,) in enumerate(zip(*args)):
+            subject = _del_reply(msg['subject'])
+            if (subject.startswith("New message from customer ") or
+               subject.startswith("Received SMS from ")):
+                res[idx] = "sms"
+        return res

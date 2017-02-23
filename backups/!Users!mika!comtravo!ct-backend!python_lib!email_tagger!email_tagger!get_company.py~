@@ -1,0 +1,50 @@
+def get_companies(msg):
+    query = """{
+   "query": {
+       "bool": {
+           "should": [
+               {
+                    "bool": {
+                        "should": [
+                            {"terms": {"booker.email": ["marion.escude", "movago.de"]}},
+                            {"terms": {"booker.email": ["sarah.leichtweis", "pikon.com"]}}
+                        ]
+                    }
+                },
+                {
+                    "bool": {
+                        "should": [
+                            {"terms": {"booker.email": ["marion.escude", "movago.de"]}},
+                            {"terms": {"booker.email": ["sarah.leichtweis", "pikon.com"]}}
+                       ]
+                    }
+                }
+            ]
+        }
+   },
+    "size": 0,
+    "aggs": {
+        "number_companies": {
+            "cardinality": {
+                "field": "company_id"
+            }
+        },
+        "unique_companies": {
+            "terms": {
+                "field": "company_id"
+            }
+        }
+    }
+}"""
+    # Get unique email adresses in from, to and cc which are not related to comtravo
+    emails = {e: 1 for e in [msg['from']['email']] +\
+              [c['email'] for c in msg['cc'] if 'comtravo.' not in c['email']] +\
+              [t['email'] for t in msg['to'] if 'comtravo.' not in t['email']]}.keys()
+    [{'bool': {
+        'should': [
+            {'terms': {'booker.email': e.split('@')}}
+            for e in emails
+        ]
+    }
+    }]
+    

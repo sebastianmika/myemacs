@@ -1,0 +1,58 @@
+(ns nlp-tools-server.handler-test
+  (:require [clojure.test :refer :all]
+            [ring.mock.request :as mock]
+            [nlp-tools-server.handler :refer :all]
+            [clojure.data.json :as json]))
+
+(deftest test-app
+  (init)
+
+  (testing "main route"
+    (let [response (app (mock/request :get "/"))]
+      (is (= (:status response) 200))
+      (is (= (:body response) "nlp tools server - post to /duckling or /corenlp"))))
+
+  (testing "not-found route"
+    (let [response (app (mock/request :get "/invalid"))]
+      (is (= (:status response) 404))))
+
+  (testing "no json payload"
+    (let [response (app (mock/request :post "/duckling" "this is no json"))]
+      (is (= (:status response) 400))))
+
+  (testing "no json payload"
+    (let [response (app (mock/request :post "/corenlp" "this is no json"))]
+      (is (= (:status response) 400))))
+
+  (testing "no text field in json"
+    (let [response (app (mock/request :post "/duckling" (json/write-str {:notext "no text field"})))]
+      (is (= (:status response) 400))))
+
+  (testing "unknown language"
+    (let [response (app (mock/request :post "/duckling" (json/write-str {:text "Born on the 4th of July" :lang "this is not a lang"})))]
+      (is (= (:status response) 400))))
+
+  (testing "a reply for en"
+    (let [response (app  (mock/content-type (mock/body (mock/request :post "/duckling") 
+                                       (json/write-str {:text "Born on the 4th of July" :date 1466496440316})) "application/json" ))]
+      (is (= (:status response) 200))))
+
+  (testing "a reply for de"
+    (let [response (app  (mock/content-type (mock/body (mock/request :post "/duckling") 
+                                       (json/write-str {:text "Born on the 4th of July" :lang "de" :date 1466496440316})) "application/json" ))]
+      (is (= (:status response) 200))))
+
+  (testing "re-pos one line"
+    (is (= (re-pos #"\n" "just one line") [{:start 0 :end 13 :text "just one line"}])))
+
+  (testing "re-pos two lines"
+    (is (= (re-pos #"\n" "line1\nline2") [
+                                          {:start 0 :end 6 :text "line1\n"}
+                                          {:start 6 :end 11 :text "line2"}])))
+
+  (testing "re-pos two lines eol"
+    (is (= (re-pos #"\n" "line1\nline2\n") [
+                                          {:start 0 :end 6 :text "line1\n"}
+                                          {:start 6 :end 12 :text "line2\n"}])))
+)
+

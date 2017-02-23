@@ -1,0 +1,7 @@
+from email_tagger.merge_annotations import merge
+from unittest import TestCase
+
+
+class MergeAnnotationsTest(TestCase):
+    def test_merge():
+        pass

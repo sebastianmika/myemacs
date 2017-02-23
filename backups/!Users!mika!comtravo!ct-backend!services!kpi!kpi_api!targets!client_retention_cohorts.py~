@@ -1,0 +1,94 @@
+from collections import Counter
+import pandas as pd
+from . es_target import ESTarget
+
+
+class ClientRetentionProxy(ESTarget):
+    def __init__(self, exclude_company_ids):
+        super(ClientRetentionProxy, self).__init__('/booking_items/_search')
+        self.exclude_company_ids = exclude_company_ids
+
+    def search(self):
+        return "Client Retention Proxy"
+
+    def uncached_query(self, from_, to_, freq, hlen=90, alen=30):
+        # Extend request range to include at least hlen + alen days
+        eff_from = from_ - pd.Timedelta(days=hlen+alen)
+        query = {
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"range": {
+                            "booking_item.meta_data.created_at": {
+                                "gte": '{}'.format(eff_from.strftime("%Y-%m-%dT%H:%M:%SZ")),
+                                "lt": '{}'.format(to_.strftime("%Y-%m-%dT%H:%M:%SZ"))}}}
+                    ]
+                }
+            },
+            "size": 0,
+            "aggs": {
+                "date": {
+                    "date_histogram": {
+                        "field": "booking_item.meta_data.created_at",
+                        "interval": "1d",
+                        "min_doc_count": 0,
+                        "extended_bounds": {
+                            "min": '{}'.format(eff_from.strftime("%Y-%m-%dT%H:%M:%SZ")),
+                            "max": '{}'.format(to_.strftime("%Y-%m-%dT%H:%M:%SZ"))
+                        }
+                    },
+                    "aggs": {
+                        "company_ids": {
+                            "terms": {"field": "company_id", "size": 0},
+                            "aggs": {
+                                "n_bookings": {"cardinality": {"field": "booking_id"}}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        es_res = self._query_es(query)
+
+        # Want to know the percentage of companies active in the past alen=14
+        # days, that are returning customers. To be returning, they must have
+        # been active at all before the start of the interval (i.e. exclude
+        # new customers) and been active in the past hlen=90 days.
+        #
+        # 100% = all companies seen in the past hlen=90 days
+        # How many of these companies have been seen in the past alen=14 days?
+        # 90 day history window
+        wlen = hlen + alen
+        history = [[]] * wlen
+        hidx = 0
+        res = []
+        ret_start = int(from_.value/1e6)
+        company_counter = Counter()
+        for r in es_res['aggregations']['date']['buckets']:
+            company_ids_at_date = {c['key']: c['n_bookings']['value']
+                                   for c in r['company_ids']['buckets']
+                                   if c['key'] not in self.exclude_company_ids}
+            company_counter.update(company_ids_at_date)
+            companies_not_ready = [c for c, cnt in company_counter.items() if cnt < 10]
+            history[hidx] = list(company_ids_at_date.keys())
+            # Get companies active in the past alen days (including today at hidx)
+            pivot = max(0, hidx-alen+1)
+            past_alen = set().union(*history[pivot:hidx+1],
+                                    *history[wlen-(alen-pivot-hidx)+1:])\
+                             .difference(companies_not_ready)
+            # Get companies active in the past hlen days *before* alen days
+            past_hlen = set().union(*history[:pivot],
+                                    *history[hidx+1:hidx+hlen+1])\
+                             .difference(companies_not_ready)
+            # Only include data in requested result range
+            if r['key'] >= ret_start:
+                if past_hlen:
+                    res.append([len(past_hlen.intersection(past_alen))/len(past_hlen), r['key']])
+                else:
+                    res.append([None, r['key']])
+            hidx = (hidx + 1) % wlen
+            # miss = past_hlen.difference(past_alen)
+            # hit = past_hlen.intersection(past_alen)
+            # n = len(past_hlen)
+
+        return res

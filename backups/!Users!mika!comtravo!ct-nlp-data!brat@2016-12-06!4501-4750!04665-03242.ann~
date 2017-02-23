@@ -1,0 +1,21 @@
+T1	EndOfMsg 1738 1740;1741 1753;1754 1776;1777 1797;1798 1842;1843 1862;1863 1918;1919 1972;1973 2008;2010 2047	-- Jan Białecki Operations Coordinator Nosto Solutions GmbH http://www.nosto.com (http://www.nosto.com/) (+49) 1578 7677 169 Nosto Solutions GmbH | Schützenstrasse 6 | 10117 Berlin Managing Directors: Matti Rönkkö, Julius Friedlaender Local court: Berlin-Charlottenburg, Commercial register number : 152111 B
+T2	Person 215 223	Vaaranen
+T3	Location 250 254	Date
+T4	Person 335 340;341 347	Kevin Paiser
+T5	Person 422 430;431 438;439 447	Carolina Johanna Vaaranen
+T6	Location 465 471	Berlin
+T7	Location 472 478	London
+T8	Location 479 485	Berlin
+T9	Location 488 494	Berlin
+T10	Location 497 503	London
+T11	Location 506 512	Berlin
+T12	TimePoint 729 731;732 733;733 735	at 6am
+T13	TimeRange 849 856;857 858;858 860;861 864;865 866;866 868;868 869	between 9am and 7pm.
+T14	Location 886 892	London
+T15	TimeRange 984 990;991 996	within 20min
+T16	Person 1083 1091	Vaaranen
+T17	Location 1480 1486	Berlin
+T18	Person 1508 1512;1513 1521	Juha Valvanne
+T19	Person 1523 1528;1529 1535	Matti Rönkkö
+T20	Location 1551 1557	Berlin
+T21	Location 1558 1572	Charlottenburg

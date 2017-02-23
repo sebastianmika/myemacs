@@ -1,0 +1,32 @@
+T1	Attributes 144 144	
+#1	AnnotatorNotes T1	{"source": "email", "language": "en", "request_type": other"}
+T2	Person 263 277	Philipp Becker
+#2	AnnotatorNotes T2	{"crm_ids": ["56b9045e0dde60010094f345"]}
+T3	Person 1324 1327	Thi
+#3	AnnotatorNotes T3	{"crm_ids": ["5751a6df18016c0100b2e7dd"]}
+T4	Person 1142 1159	Christian Gärtner
+#4	AnnotatorNotes T4	{"crm_ids": ["56b9041f0dde60010094f2f5"]}
+T5	Person 200 214	Christian Ries
+#5	AnnotatorNotes T5	{"crm_ids": ["56e2cde2d4fbdc0100a4ba6e"]}
+T6	Person 299 313	Christian Ries
+#6	AnnotatorNotes T6	{"crm_ids": ["56e2cde2d4fbdc0100a4ba6e"]}
+T7	Person 1123 1140	Thomas W. Griesel
+#7	AnnotatorNotes T7	{"crm_ids": ["56b90404eb2c4601003a9a53"]}
+T8	Person 1088 1098;1099 1106	Dominik S. Richter
+#8	AnnotatorNotes T8	{"crm_ids": ["56b903e2eb2c4601003a9a2e"]}
+T9	TimePoint 1546 1557	immediately
+#9	AnnotatorNotes T9	{"type": "value", "value": "2016-04-15T14:21:12.000Z", "grain": "second"}
+T10	TimePoint 942 945	Now
+#10	AnnotatorNotes T10	{"type": "value", "value": "2016-04-15T14:21:12.000Z", "grain": "second"}
+T11	TimePoint 1407 1410	may
+#11	AnnotatorNotes T11	{"type": "value", "value": "2016-05-01T00:00:00.000Z", "grain": "month"}
+T12	TimePoint 1385 1388	may
+#12	AnnotatorNotes T12	{"type": "value", "value": "2016-05-01T00:00:00.000Z", "grain": "month"}
+T13	Location 215 219	Date
+#13	AnnotatorNotes T13	{"geonames_ids": [2130421]}
+T14	Location 430 436	Berlin
+#14	AnnotatorNotes T14	{"geonames_ids": [2950159]}
+T15	Location 1044 1050	Berlin
+#15	AnnotatorNotes T15	{"geonames_ids": [2950159]}
+T16	Location 1243 1257	Charlottenburg
+#16	AnnotatorNotes T16	{"geonames_ids": [2940187]}

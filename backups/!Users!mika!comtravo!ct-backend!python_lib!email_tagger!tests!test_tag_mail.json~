@@ -1,0 +1,336 @@
+{
+  "res_longest_match": {
+    "label": null,
+    "analyzed": {
+      "body": {
+        "text": "Hi Comtravo-Team,\n\nk\u00f6nnt ihr mir f\u00fcr Peter Montag einen Flug buchen\n\nVielen Dank im Voraus! \n\nLouisa W\u00f6rle",
+        "end": 69,
+        "start": 17
+      },
+      "subject": {
+        "text": "Flight Suggestion IdeaLab! ",
+        "end": 27,
+        "start": 0
+      }
+    },
+    "source": "email",
+    "crm": {
+      "companies": null,
+      "users": {
+        "2": {
+          "msg_roles": [
+            "body"
+          ],
+          "gender": "m",
+          "last_name": "Montag",
+          "first_name": "Peter"
+        },
+        "1": {
+          "msg_roles": [],
+          "gender": "f",
+          "last_name": "W\u00f6rle",
+          "first_name": "Louisa"
+        }
+      }
+    },
+    "log": [
+      {
+        "time": 9.727001190185547,
+        "status": "success",
+        "step": "language"
+      },
+      {
+        "time": 0.025033950805664062,
+        "status": "success",
+        "step": "label"
+      },
+      {
+        "time": 0.011920928955078125,
+        "status": "success",
+        "step": "source"
+      },
+      {
+        "time": 0.09107589721679688,
+        "status": "success",
+        "step": "greeting"
+      },
+      {
+        "time": 0.35691261291503906,
+        "status": "success",
+        "step": "endofmsg"
+      },
+      {
+        "time": 0.0209808349609375,
+        "status": "success",
+        "step": "replies"
+      },
+      {
+        "time": 3.0829906463623047,
+        "status": "success",
+        "step": "crm_persons"
+      },
+      {
+        "time": 0.1239776611328125,
+        "status": "success",
+        "step": "iata"
+      },
+      {
+        "time": 0.4699230194091797,
+        "status": "success",
+        "step": "flight_numbers"
+      },
+      {
+        "time": 0.9520053863525391,
+        "status": "success",
+        "step": "tag_time"
+      },
+      {
+        "time": 13.154983520507812,
+        "status": "success",
+        "step": "cities"
+      },
+      {
+        "time": 2.5131702423095703,
+        "status": "success",
+        "step": "isbooking"
+      }
+    ],
+    "p_booking": 0.9999911626437932,
+    "annotations": [
+      {
+        "id": null,
+        "where": "subject",
+        "text": "Flight",
+        "attributes": null,
+        "tag": "B-NE",
+        "after": " ",
+        "start": 0,
+        "sentence": 0,
+        "shape": "Xxxxx",
+        "pos": "B-PROPN",
+        "length": 6,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "subject",
+        "text": "Suggestion",
+        "attributes": null,
+        "tag": "B-NN",
+        "after": " ",
+        "start": 7,
+        "sentence": 0,
+        "shape": "Xxxxx",
+        "pos": "B-NOUN",
+        "length": 10,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "subject",
+        "text": "IdeaLab",
+        "attributes": null,
+        "tag": "B-NE",
+        "after": "",
+        "start": 18,
+        "sentence": 0,
+        "shape": "XxxxXxx",
+        "pos": "B-PROPN",
+        "length": 7,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "subject",
+        "text": "!",
+        "attributes": null,
+        "tag": "B-$.",
+        "after": " ",
+        "start": 25,
+        "sentence": 0,
+        "shape": "!",
+        "pos": "B-PUNCT",
+        "length": 1,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "\n\n",
+        "attributes": null,
+        "tag": "B-SP",
+        "after": "",
+        "start": 0,
+        "sentence": 0,
+        "shape": "\n\n",
+        "pos": "B-SPACE",
+        "length": 2,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "k\u00f6nnt",
+        "attributes": null,
+        "tag": "B-VVFIN",
+        "after": " ",
+        "start": 2,
+        "sentence": 0,
+        "shape": "xxxx",
+        "pos": "B-VERB",
+        "length": 5,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "ihr",
+        "attributes": null,
+        "tag": "B-PPER",
+        "after": " ",
+        "start": 8,
+        "sentence": 0,
+        "shape": "xxx",
+        "pos": "B-PRON",
+        "length": 3,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "mir",
+        "attributes": null,
+        "tag": "B-PPER",
+        "after": " ",
+        "start": 12,
+        "sentence": 0,
+        "shape": "xxx",
+        "pos": "B-PRON",
+        "length": 3,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "f\u00fcr",
+        "attributes": null,
+        "tag": "B-APPR",
+        "after": " ",
+        "start": 16,
+        "sentence": 0,
+        "shape": "xxx",
+        "pos": "B-ADP",
+        "length": 3,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": "33396a56-ab8f-4243-b95a-f6c597541622",
+        "where": "body",
+        "text": "Peter",
+        "attributes": {
+          "crm_ids": [
+            2
+          ]
+        },
+        "tag": "B-NE",
+        "after": " ",
+        "start": 20,
+        "sentence": 0,
+        "shape": "Xxxxx",
+        "pos": "B-PROPN",
+        "length": 5,
+        "ner": "B-PERSON",
+        "rner": "B-Person"
+      },
+      {
+        "id": "33396a56-ab8f-4243-b95a-f6c597541622",
+        "where": "body",
+        "text": "Montag",
+        "attributes": {
+          "crm_ids": [
+            2
+          ]
+        },
+        "tag": "B-NE",
+        "after": " ",
+        "start": 26,
+        "sentence": 0,
+        "shape": "Xxxxx",
+        "pos": "B-PROPN",
+        "length": 6,
+        "ner": "I-PERSON",
+        "rner": "I-Person"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "einen",
+        "attributes": null,
+        "tag": "B-ART",
+        "after": " ",
+        "start": 33,
+        "sentence": 1,
+        "shape": "xxxx",
+        "pos": "B-DET",
+        "length": 5,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "Flug",
+        "attributes": null,
+        "tag": "B-NN",
+        "after": " ",
+        "start": 39,
+        "sentence": 1,
+        "shape": "Xxxx",
+        "pos": "B-NOUN",
+        "length": 4,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "buchen",
+        "attributes": null,
+        "tag": "B-VVFIN",
+        "after": "",
+        "start": 44,
+        "sentence": 1,
+        "shape": "xxxx",
+        "pos": "B-VERB",
+        "length": 6,
+        "ner": "O-",
+        "rner": "O-"
+      },
+      {
+        "id": null,
+        "where": "body",
+        "text": "\n\n",
+        "attributes": null,
+        "tag": "B-SP",
+        "after": "",
+        "start": 50,
+        "sentence": 1,
+        "shape": "\n\n",
+        "pos": "B-SPACE",
+        "length": 2,
+        "ner": "O-",
+        "rner": "O-"
+      }
+    ],
+    "language": "de"
+  }
+}

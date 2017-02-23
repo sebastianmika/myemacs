@@ -1,0 +1,4 @@
+setenv SIMBAINI /Users/mika/.mapr.drillodbc.ini
+setenv ODBCSYSINI /Users/mika/.odbcinst.ini
+setenv ODBCINI /Users/mika/.odbc.ini
+setenv DYLD_LIBRARY_PATH /usr/local/iODBC/lib:/opt/mapr/drillodbc/lib/universal

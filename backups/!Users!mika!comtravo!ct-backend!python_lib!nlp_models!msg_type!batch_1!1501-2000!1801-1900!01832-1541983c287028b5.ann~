@@ -1,0 +1,28 @@
+T1	Attributes 172 172	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking}
+T2	Greeting 182 189	Hallo ,
+T3	Person 280 293	Leni Hartmann
+#2	AnnotatorNotes T3	{"crm_ids": ["56b904690dde60010094f34f", "574448ea18016c0100b2e7c9"]}
+T4	Person 649 663	Markus Gawenda
+#3	AnnotatorNotes T4	{"crm_ids": ["56dffab1d4fbdc0100a4ba67"]}
+T5	Person 18 35	anthony partridge
+#4	AnnotatorNotes T5	{"crm_ids": ["56d4d20f5fcdce010017aa59"]}
+T7	TimePoint 526 530	2015
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-04-15T20:15:00.000Z", "grain": "minute"}
+T8	TimePoint 465 469	2015
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-04-15T20:15:00.000Z", "grain": "minute"}
+T9	TimePoint 340 344	2151
+#8	AnnotatorNotes T9	{"type": "value", "value": "2016-04-15T21:51:00.000Z", "grain": "minute"}
+T10	TimePoint 315 319	2151
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-04-15T21:51:00.000Z", "grain": "minute"}
+T11	Location 586 593	Krefeld
+#10	AnnotatorNotes T11	{"geonames_ids": [2884509]}
+T12	Location 619 626	Krefeld
+#11	AnnotatorNotes T12	{"geonames_ids": [2884509]}
+T13	EndOfMsg 276 278;280 293;294 305;306 309;311 329;331 334;336 355;357 361;363 387;389 392;394 408;410 474;476 535;537 561;562 579;580 593;595 663	lg Leni Hartmann Back Office Tel +49 2151 479 444 0 Fax +49 2151 479 448 55 Mail leni.hartmann@shoch3.com Web www.shoch3.com [http://www.shoch3.com/images/mailsignature/Sonic_Logo_2015.png] [http://www.shoch3.com/images/mailsignature/SONIC_2015.png] Sonic Sales Support GmbH Bischofstraße 120 47809 Krefeld HRB 13734 - Amtsgericht Krefeld   |  Geschäftsführer: Markus Gawenda
+T14	Person 221 228	anthony
+T6	TimePoint 232 242	18.04.2016
+T15	TimeRange 246 249	spä
+R1	inbetween Arg1:T6 Arg2:T15	
+T16	Flight 208 216	heimflug
+E1	Flight:T16 who:T5 dpt:T6

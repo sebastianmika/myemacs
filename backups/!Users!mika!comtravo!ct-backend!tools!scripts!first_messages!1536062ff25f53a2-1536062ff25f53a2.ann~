@@ -1,0 +1,17 @@
+T1	Attributes 169 169	
+#1	AnnotatorNotes T1	{"language": "de", "source": "email"}
+T2	Greeting 169 179	Hi Sophie,
+T3	Person 303 309	Daniel
+#2	AnnotatorNotes T3	{"crm_ids": ["078d0dc2-7eae-49bd-94a1-3b01f2161c8f"]}
+T4	Person 419 425	Daniel
+#3	AnnotatorNotes T4	{"crm_ids": ["078d0dc2-7eae-49bd-94a1-3b01f2161c8f"]}
+T5	Person 499 505	Daniel
+#4	AnnotatorNotes T5	{"crm_ids": ["078d0dc2-7eae-49bd-94a1-3b01f2161c8f"]}
+T6	Location 480 483	TXL
+#5	AnnotatorNotes T6	{"iata_code": "TXL"}
+T7	Location 228 231	TXL
+#6	AnnotatorNotes T7	{"iata_code": "TXL"}
+T8	Location 298 301	IBZ
+#7	AnnotatorNotes T8	{"iata_code": "IBZ"}
+T9	EndOfMsg 556 577;578 581	danke und viele Grüße Ala
+T10	TimePoint 428 436;437 444	mittags  25.Juli

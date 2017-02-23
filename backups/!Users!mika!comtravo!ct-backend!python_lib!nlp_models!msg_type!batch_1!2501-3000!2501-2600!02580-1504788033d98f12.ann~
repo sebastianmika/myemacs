@@ -1,0 +1,50 @@
+T1	Attributes 166 166	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": ""other"}
+T2	Greeting 176 186	Guten Tag,
+T3	Person 619 630	Anke Lisken
+#2	AnnotatorNotes T3	{"crm_ids": ["56b903d0eb2c4601003a9a1a"]}
+T4	Person 671 682	Anke Lisken
+#3	AnnotatorNotes T4	{"crm_ids": ["56b903d0eb2c4601003a9a1a"]}
+T5	Person 1341 1347	Lisken
+#4	AnnotatorNotes T5	{"crm_ids": ["56b903d0eb2c4601003a9a1a"]}
+T6	Person 1349 1353	Anke
+#5	AnnotatorNotes T6	{"crm_ids": ["56b903d0eb2c4601003a9a1a"]}
+T7	Person 1418 1429	Frau Lisken
+#6	AnnotatorNotes T7	{"crm_ids": ["56b903d0eb2c4601003a9a1a"]}
+T8	Person 1368 1376	Meinecke
+#7	AnnotatorNotes T8	{"crm_ids": ["56d4d11f5fcdce010017a9e4"]}
+T9	Person 1180 1189	Ralf Schu
+#8	AnnotatorNotes T9	{"crm_ids": ["56d4d136231e530100f215cf"]}
+T10	Person 1363 1367	Schu
+#9	AnnotatorNotes T10	{"crm_ids": ["56d4d136231e530100f215cf"]}
+T11	Location 1390 1393	BRE
+#10	AnnotatorNotes T11	{"iata_code": "BRE"}
+T12	Location 1394 1397	STR
+#11	AnnotatorNotes T12	{"iata_code": "STR"}
+T13	TimeRange 840 849	138 - 120
+#12	AnnotatorNotes T13	{"to": {"value": "2015-10-09T01:21:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2015-10-09T01:38:00.000Z", "grain": "minute"}}
+T15	Location 657 661	Best
+#14	AnnotatorNotes T15	{"geonames_ids": [2759040]}
+T16	Location 751 756	Varel
+#15	AnnotatorNotes T16	{"geonames_ids": [2817873]}
+T17	Location 812 817	Varel
+#16	AnnotatorNotes T17	{"geonames_ids": [2817873]}
+T18	Location 932 937	Varel
+#17	AnnotatorNotes T18	{"geonames_ids": [2817873]}
+T19	Location 957 962	Varel
+#18	AnnotatorNotes T19	{"geonames_ids": [2817873]}
+T20	Location 977 986	Oldenburg
+#19	AnnotatorNotes T20	{"geonames_ids": [2857458]}
+T21	Location 1075 1080	Varel
+#20	AnnotatorNotes T21	{"geonames_ids": [2817873]}
+T22	Location 1091 1096	Varel
+#21	AnnotatorNotes T22	{"geonames_ids": [2817873]}
+T23	Location 1111 1120	Oldenburg
+#22	AnnotatorNotes T23	{"geonames_ids": [2857458]}
+T24	Location 1852 1858	Berlin
+#23	AnnotatorNotes T24	{"geonames_ids": [2950159]}
+T25	Location 1949 1955	Berlin
+#24	AnnotatorNotes T25	{"geonames_ids": [2950159]}
+T26	Location 1977 1983	Berlin
+#25	AnnotatorNotes T26	{"geonames_ids": [2950159]}
+T27	EndOfMsg 613 618;619 630;631 669;671 682;683 697;699 724;726 756;757 784;786 805;806 817;818 849;850 883;884 905;907 951;952 997;998 1020;1022 1050;1051 1085;1086 1131;1132 1189;1190 1236;1238 1289;1290 1336;1337 1353;1354 1406;1408 1430;1432 1474;1476 1666;1668 1738;1740 1757;1759 1776;1778 1825;1826 1845;1846 1858;1859 1877;1878 1903;1904 1935;1937 2032	Gruß, Anke Lisken Mit freundlichen Grüßen / Best regards Anke Lisken Verkauf Papier ••••••••••••••••••••••••• Papier- und Kartonfabrik Varel The heart of your packaging Dangaster Straße 38 26316 Varel Telefon :  +49 (4451) 138 - 120 Telefax :  +49 (4451) 13825 - 120 http://www.pkvarel.de Papier- und Kartonfabrik Varel GmbH & Co. KG Sitz Varel • Amtsgericht Oldenburg HRA 130424 USt-IdNr.: DE117898636 Pers. haftende Gesellschaft: Papier- u. Kartonfabrik Varel GmbH Sitz Varel • Amtsgericht Oldenburg HRB 130780 Geschäftsführer: Ulrich Lange, Klaus Schnitger, Ralf Schu Mitglied der Geschäftsleitung: Dettmar Fischer Von: Comtravo Buchung [mailto:buchung@comtravo.com] Gesendet: Donnerstag, 17. September 2015 13:56 An: Lisken, Anke Betreff: Schu/Meinecke - 06.10.15 - BRE-STR - E9U9YW Guten Tag Frau Lisken, vielen Dank für Ihre Buchung mit Comtravo. Im Anhang finden Sie Ihre Buchungsbestätigung und einen Kalendereintrag für Ihren Hin- und Rückflug. Sie erhalten außerdem 24 Stunden vor dem jeweiligen Abflug eine Check-In Erinnerungsmail. Bei weiteren Fragen und Anliegen kontaktieren Sie uns jederzeit gerne. Mit besten Grüßen Ihr Comtravo Team MTR Travel Technologies UG (haftungsbeschränkt) Köpenicker Str. 126 10179 Berlin Tel.: 030 30874080 Internet: www.comtravo.de Buchungen: buchung@comtravo.com Amtsgericht Berlin, HRB 12538  -  Sitz: Berlin, Deutschland  -  Geschäftsführer: Michael Riegel

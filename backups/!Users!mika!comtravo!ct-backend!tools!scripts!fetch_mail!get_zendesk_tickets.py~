@@ -1,0 +1,17 @@
+import os
+import requests
+
+
+zen_user = os.environ['ZEN_USER']
+zen_pw = os.environ['ZEN_PW']
+
+url = "https://comtravo.zendesk.com/api/v2/tickets"
+
+headers = {
+    'content-type': "application/json",
+    'accept-encoding': "gzip",
+    'cache-control': "no-cache"
+    }
+
+tickets = []
+response = requests.request("GET", url, headers=headers, auth=(zen_user, zen_pw))

@@ -1,0 +1,64 @@
+from .es_target import ESTarget
+
+
+class Bookings(ESTarget):
+    def __init__(self):
+        super(Bookings, self).__init__('/booking_items/_search')
+
+    def search(self):
+        return "Bookings"
+
+    def uncached_query(self, from_, to_, freq):
+        term1 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "processed"}},
+                {"bool": {
+                    "should": [
+                        {"term": {"booking_item.canceled": False}},
+                        {"term": {"booking_item.rebooked": False}}]
+                }},
+            ]
+            }}
+        term2 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "fuckup"}},
+                {"term": {"booking_item.canceled": False}},
+                {"term": {"booking_item.rebooked": True}}
+            ]
+            }}
+        term3 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "fuckup"}},
+                {"term": {"booking_item.canceled": True}},
+                {"term": {"booking_item.rebooked": False}},
+                {"exists": {"field": "booking_item.canceled_at"}}
+            ]
+            }}
+        query = {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"range": {
+                            "booking_item.meta_data.created_at": {
+                                "gte": '{}'.format(from_.strftime("%Y-%m-%dT%H:%M:%SZ")),
+                                "lt": '{}'.format(to_.strftime("%Y-%m-%dT%H:%M:%SZ"))}}},
+                        {"missing": {"field": "booking_item.refund_for"}},
+                        {"missing": {"field": "booking_item.rebooked_from"}},
+                        {"missing": {"field": "parent_status"}},
+                        {"bool": {"should": [term1, term2, term3]}}
+                    ]
+                }
+            },
+            "aggs": {
+                "item_over_time": {
+                    "date_histogram": {
+                        "field": "booking_item.meta_data.created_at",
+                        "interval": "{}".format(freq)
+                    }
+                }
+            }
+        }
+        es_res = self._query_es(query)
+        return [[r['doc_count'], r['key']]
+                for r in es_res['aggregations']['item_over_time']['buckets']]

@@ -1,0 +1,22 @@
+from .es_target import ESTarget
+from . import targets
+
+
+class AllAgentActions(ESTarget):
+    def __init__(self, agg_targets):
+        super(AllAgentActions, self).__init__('/booking_items/_search')
+        self.agg_targets = agg_targets
+
+    def search(self):
+        return "All Agent Actions"
+
+    def uncached_query(self, from_, to_, freq, rolling_mean=None):
+        sum_all = {}
+        for target_name in self.agg_targets:
+            target_res = targets[target_name].query(from_=from_, to_=to_, freq=freq)
+            for val, date in target_res:
+                if date not in sum_all:
+                    sum_all[date] = 0
+                sum_all[date] += val
+        # Return ordered by date
+        return [[sum_all[date], date] for date in sorted(sum_all)]

@@ -1,0 +1,24 @@
+x="""Attributes      bgColor:#DF0101
+Greeting        bgColor:#FF4000
+EndOfMsg        bgColor:#FF8000
+Entity          bgColor:#40FF00
+HotelName       bgColor:#00FF80
+CarRentalName   bgColor:#00FFBF
+OtherEntity     bgColor:#00FFDF
+CountRooms      bgColor:#0080FF
+Option          bgColor:#0040FF
+Breakfast       bgColor:#4000FF
+Seat            bgColor:#8000FF
+PriceLimit      bgColor:#FF00FF
+LoyaltyCard     bgColor:#FF0080
+Meal            bgColor:#FF0040
+CarOption       bgColor:#FA5882
+OtherOption     bgColor:#848484
+Flight          bgColor:#8A0808
+ReturnFlight    bgColor:#8A4b08
+Hotel           bgColor:#688A08
+RentalCar       bgColor:#088A85
+Train           bgColor:#084B8AA
+Transfer        bgColor:#8A0886"""
+
+x = [a.strip() for a in x.split('\n')]

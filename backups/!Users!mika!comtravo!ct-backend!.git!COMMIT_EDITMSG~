@@ -1,0 +1,23 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch feature/it-936-eval-distributed
+# Your branch is up-to-date with 'origin/feature/it-936-eval-distributed'.
+#
+# Changes to be committed:
+#	modified:   python_lib/ctlearn/ctlearn/estimators/__init__.py
+#	modified:   python_lib/ctlearn/ctlearn/estimators/confidence.py
+#	new file:   python_lib/ctlearn/ctlearn/estimators/label.py
+#	modified:   python_lib/ctlearn/ctlearn/pipelines/nlp.py
+#	modified:   python_lib/ctlearn/ctlearn/transformations/merge.py
+#	modified:   python_lib/ctlearn/ctlearn/transformations/nlp_results.py
+#	modified:   python_lib/ctlearn/ctlearn/utils/__init__.py
+#	new file:   python_lib/ctlearn/ctlearn/utils/str_encoder.py
+#	new file:   python_lib/ctlearn/tests/test_str_encoder.py
+#	modified:   python_lib/requirements.txt
+#
+# Untracked files:
+#	python_lib/ctlearn/pipe_fit_dsk.png
+#	python_lib/ctlearn/test_ctlearn.py
+#	python_lib/ctlearn/test_msg.json
+#

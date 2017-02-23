@@ -1,0 +1,7 @@
+import pandas as pd
+
+def ticket2msg(t):
+    msg['body'] = t['description']
+    msg['subject'] = t['subject']
+    msg['date'] = int(pd.to_datetime(t['created_at']))
+    return msg

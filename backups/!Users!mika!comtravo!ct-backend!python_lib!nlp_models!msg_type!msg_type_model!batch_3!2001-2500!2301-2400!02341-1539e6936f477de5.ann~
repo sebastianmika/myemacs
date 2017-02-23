@@ -1,0 +1,164 @@
+T1	Attributes 227 227	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 237 252	Hallo zusammen,
+T3	Person 1260 1267	Michael
+#2	AnnotatorNotes T3	{"crm_ids": ["56fd3ff42c9e490100f8dc20", "576d71abf9de77010057b285"]}
+T4	Person 499 514	Sonja Manninger
+#3	AnnotatorNotes T4	{"crm_ids": ["56d54d1bb0cee501003eea72", "56ddb598dbe4db0100e23ddb", "56fa32b59a59130100b3eaca", "574ef08cb81a840100fc2a35"]}
+T5	Person 1099 1108	Manninger
+#4	AnnotatorNotes T5	{"crm_ids": ["56d54d1bb0cee501003eea72", "56ddb598dbe4db0100e23ddb", "56fa32b59a59130100b3eaca", "574ef08cb81a840100fc2a35"]}
+T6	Person 1110 1115	Sonja
+#5	AnnotatorNotes T6	{"crm_ids": ["56d54d1bb0cee501003eea72", "56ddb598dbe4db0100e23ddb", "56fa32b59a59130100b3eaca", "574ef08cb81a840100fc2a35"]}
+T7	Person 1461 1475	Frau Manninger
+#6	AnnotatorNotes T7	{"crm_ids": ["56d54d1bb0cee501003eea72", "56ddb598dbe4db0100e23ddb", "56fa32b59a59130100b3eaca", "574ef08cb81a840100fc2a35"]}
+T8	Person 1037 1043	Lettau
+#7	AnnotatorNotes T8	{"crm_ids": ["56d4d28b5fcdce010017aa9f", "56fe7b597d958701002a6c2f", "574eef628bd5d20100e5ac9e"]}
+T9	Person 1045 1054	Christian
+#8	AnnotatorNotes T9	{"crm_ids": ["56d4d28b5fcdce010017aa9f", "56fe7b597d958701002a6c2f", "574eef628bd5d20100e5ac9e"]}
+T10	Person 1642 1658	Christian Lettau
+#9	AnnotatorNotes T10	{"crm_ids": ["56d4d28b5fcdce010017aa9f", "56fe7b597d958701002a6c2f", "574eef628bd5d20100e5ac9e"]}
+T11	Person 2131 2137	Lettau
+#10	AnnotatorNotes T11	{"crm_ids": ["56d4d28b5fcdce010017aa9f", "56fe7b597d958701002a6c2f", "574eef628bd5d20100e5ac9e"]}
+T12	Person 2139 2148	Christian
+#11	AnnotatorNotes T12	{"crm_ids": ["56d4d28b5fcdce010017aa9f", "56fe7b597d958701002a6c2f", "574eef628bd5d20100e5ac9e"]}
+T13	Person 917 931	Rainer Vollmer
+#12	AnnotatorNotes T13	{"crm_ids": ["56d71bf9456a860100dcc42f", "575955ac18016c0100b2e7f1"]}
+T14	Person 275 296	Herrn Martin Dietsche
+#13	AnnotatorNotes T14	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T15	Person 1233 1241	Dietsche
+#14	AnnotatorNotes T15	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T16	Person 1243 1249	Martin
+#15	AnnotatorNotes T16	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T17	Person 1360 1374	Herrn Dietsche
+#16	AnnotatorNotes T17	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T18	Person 1394 1408	Herrn Dietsche
+#17	AnnotatorNotes T18	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T19	Person 1478 1491	Herr Dietsche
+#18	AnnotatorNotes T19	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T20	Person 2110 2118	Dietsche
+#19	AnnotatorNotes T20	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T21	Person 2120 2126	Martin
+#20	AnnotatorNotes T21	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T22	Person 2185 2199	Herrn Dietsche
+#21	AnnotatorNotes T22	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T23	Person 2215 2228	Herr Dietsche
+#22	AnnotatorNotes T23	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T24	Person 3365 3379	Herrn Dietsche
+#23	AnnotatorNotes T24	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T25	Person 3726 3747	Herrn Martin Dietsche
+#24	AnnotatorNotes T25	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T26	Person 4291 4311	Herr Martin Dietsche
+#25	AnnotatorNotes T26	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T27	Person 26 40	Herrn Dietsche
+#26	AnnotatorNotes T27	{"crm_ids": ["56f1494451d4de0100d3780f"]}
+T28	Person 1283 1289	Markus
+#27	AnnotatorNotes T28	{"crm_ids": ["56d4d2915fcdce010017aaa3"]}
+T29	Location 3224 3227	AKD
+#28	AnnotatorNotes T29	{"iata_code": "AKD"}
+T30	Location 4468 4471	ESF
+#29	AnnotatorNotes T30	{"iata_code": "ESF"}
+T31	Location 4684 4687	ESF
+#30	AnnotatorNotes T31	{"iata_code": "ESF"}
+T32	Location 5021 5024	AGB
+#31	AnnotatorNotes T32	{"iata_code": "AGB"}
+T33	TimeRange 3941 4016	vom 07.04.2016 bis 08.04.2016                   von 09:00 bis ca. 17:00 Uhr
+#32	AnnotatorNotes T33	{"to": {"value": "2016-04-08T17:01:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-04-07T00:00:00.000Z", "grain": "minute"}}
+T34	TimePoint 1520 1536	08.04.2016 ein H
+#33	AnnotatorNotes T34	{"type": "value", "value": "2016-04-08T01:00:00.000Z", "grain": "hour"}
+T35	TimePoint 316 326	08.04.2016
+#34	AnnotatorNotes T35	{"type": "value", "value": "2016-04-08T01:00:00.000Z", "grain": "hour"}
+T36	TimePoint 1505 1515	07.04.2016
+#35	AnnotatorNotes T36	{"type": "value", "value": "2016-04-07T00:00:00.000Z", "grain": "day"}
+T37	TimePoint 1428 1438	08.04.2016
+#36	AnnotatorNotes T37	{"type": "value", "value": "2016-04-08T00:00:00.000Z", "grain": "day"}
+T38	TimePoint 1413 1423	07.04.2016
+#37	AnnotatorNotes T38	{"type": "value", "value": "2016-04-07T00:00:00.000Z", "grain": "day"}
+T39	TimeRange 4556 4565	bis zu 50
+#38	AnnotatorNotes T39	{"to": {"value": "1950-01-01T00:00:00.000Z", "grain": "year"}, "type": "interval"}
+T40	TimePoint 3914 3921	16-0010
+#39	AnnotatorNotes T40	{"type": "value", "value": "2016-03-22T16:10:00.000Z", "grain": "minute"}
+T41	TimePoint 301 307	07.04.
+#40	AnnotatorNotes T41	{"type": "value", "value": "2016-04-07T00:00:00.000Z", "grain": "day"}
+T43	TimePoint 4782 4786	0621
+#42	AnnotatorNotes T43	{"type": "value", "value": "2016-03-23T06:21:00.000Z", "grain": "minute"}
+T44	TimePoint 4757 4761	0711
+#43	AnnotatorNotes T44	{"type": "value", "value": "2016-03-23T07:11:00.000Z", "grain": "minute"}
+T45	TimePoint 4698 4702	2015
+#44	AnnotatorNotes T45	{"type": "value", "value": "2016-03-22T20:15:00.000Z", "grain": "minute"}
+T46	TimePoint 4490 4494	2016
+#45	AnnotatorNotes T46	{"type": "value", "value": "2016-03-22T20:16:00.000Z", "grain": "minute"}
+T47	TimePoint 3495 3499	0711
+#46	AnnotatorNotes T47	{"type": "value", "value": "2016-03-23T07:11:00.000Z", "grain": "minute"}
+T48	TimePoint 3480 3484	0711
+#47	AnnotatorNotes T48	{"type": "value", "value": "2016-03-23T07:11:00.000Z", "grain": "minute"}
+T49	TimePoint 60 70	08.04.2016
+#48	AnnotatorNotes T49	{"type": "value", "value": "2016-04-08T00:00:00.000Z", "grain": "day"}
+T50	TimePoint 45 55	07.04.2016
+#49	AnnotatorNotes T50	{"type": "value", "value": "2016-04-07T00:00:00.000Z", "grain": "day"}
+T54	Location 735 745	Düsseldorf
+#53	AnnotatorNotes T54	{"geonames_ids": [2934246]}
+T55	Location 775 785	Düsseldorf
+#54	AnnotatorNotes T55	{"geonames_ids": [2934246]}
+T56	Location 955 963	Dortmund
+#55	AnnotatorNotes T56	{"geonames_ids": [2935517]}
+T57	Location 993 1001	Dortmund
+#56	AnnotatorNotes T57	{"geonames_ids": [2935517]}
+T58	Location 1243 1249	Martin
+#57	AnnotatorNotes T58	{"geonames_ids": [3058780]}
+T59	Location 1442 1453	Filderstadt
+#58	AnnotatorNotes T59	{"geonames_ids": [3336891]}
+T60	Location 1550 1561	Filderstadt
+#59	AnnotatorNotes T60	{"geonames_ids": [3336891]}
+T61	Location 1875 1885	Düsseldorf
+#60	AnnotatorNotes T61	{"geonames_ids": [2934246]}
+T62	Location 1965 1975	Düsseldorf
+#61	AnnotatorNotes T62	{"geonames_ids": [2934246]}
+T63	Location 2005 2015	Düsseldorf
+#62	AnnotatorNotes T63	{"geonames_ids": [2934246]}
+T64	Location 2120 2126	Martin
+#63	AnnotatorNotes T64	{"geonames_ids": [3058780]}
+T65	Location 3054 3062	Dortmund
+#64	AnnotatorNotes T65	{"geonames_ids": [2935517]}
+T66	Location 3142 3150	Dortmund
+#65	AnnotatorNotes T66	{"geonames_ids": [2935517]}
+T67	Location 3180 3188	Dortmund
+#66	AnnotatorNotes T67	{"geonames_ids": [2935517]}
+T68	Location 3228 3237	Stuttgart
+#67	AnnotatorNotes T68	{"geonames_ids": [2825297]}
+T69	Location 3732 3738	Martin
+#68	AnnotatorNotes T69	{"geonames_ids": [3058780]}
+T70	Location 4063 4072	Stuttgart
+#69	AnnotatorNotes T70	{"geonames_ids": [2825297]}
+T71	Location 4104 4115	Filderstadt
+#70	AnnotatorNotes T71	{"geonames_ids": [3336891]}
+T72	Location 4296 4302	Martin
+#71	AnnotatorNotes T72	{"geonames_ids": [3058780]}
+T73	Location 4655 4660	Baden
+#72	AnnotatorNotes T73	{"geonames_ids": [2661646, 2782067]}
+T74	Location 4746 4755	Stuttgart
+#73	AnnotatorNotes T74	{"geonames_ids": [2825297]}
+T75	Location 4772 4780	Mannheim
+#74	AnnotatorNotes T75	{"geonames_ids": [2873891]}
+T76	Location 4797 4805	Freiburg
+#75	AnnotatorNotes T76	{"geonames_ids": [2660718, 2925177]}
+T77	Location 4851 4856	Baden
+#76	AnnotatorNotes T77	{"geonames_ids": [2661646, 2782067]}
+T78	Location 5186 5195	Stuttgart
+#77	AnnotatorNotes T78	{"geonames_ids": [2825297]}
+T79	Location 5226 5237	Filderstadt
+#78	AnnotatorNotes T79	{"geonames_ids": [3336891]}
+T80	Location 5454 5461	München
+#79	AnnotatorNotes T80	{"geonames_ids": [2867714]}
+T81	Location 5483 5489	Munich
+#80	AnnotatorNotes T81	{"geonames_ids": [2867714]}
+T82	Location 5502 5509	München
+#81	AnnotatorNotes T82	{"geonames_ids": [2867714]}
+T83	Location 5527 5533	Munich
+#82	AnnotatorNotes T83	{"geonames_ids": [2867714]}
+T84	Location 74 85	Filderstadt
+#83	AnnotatorNotes T84	{"geonames_ids": [3336891]}
+T85	EndOfMsg 474 497;499 514;515 558;560 592;593 623;624 655;656 690;692 695;696 720;721 745;746 766;767 785;787 797;799 931;932 963;964 1001;1002 1030;1032 1054;1055 1094;1095 1115;1116 1323;1324 1453;1455 1476;1478 1562;1564 1616;1618 1641;1642 1658;1660 1678;1679 1730;1731 1756;1758 1790;1791 1828;1830 1833;1834 1845;1846 1866;1867 1885;1887 1897;1899 1941;1942 1975;1976 2015;2016 2044;2046 2065;2066 2105;2106 2126;2127 2148;2149 2199;2201 2229;2231 2315;2317 2463;2465 2693;2695 2742;2744 2767;2768 2781;2782 2852;2853 2872;2874 2904;2905 2935;2936 2963;2964 2994;2996 2999;3000 3020;3021 3030;3031 3045;3046 3062;3064 3074;3076 3118;3119 3150;3151 3188;3189 3217;3219 3273;3274 3313;3314 3332;3333 3379;3381 3400;3402 3421;3423 3444;3446 3459;3461 3466;3468 3473;3475 3478;3480 3493;3495 3508;3510 3520;3522 3523;3525 3540;3542 3570;3572 3635;3637 3665;3667 3802;3804 3818;3820 3904;3905 3922;3924 3939;3941 4016;4018 4036;4038 4059;4060 4072;4073 4115;4117 4262;4264 4466;4468 4494;4495 4567;4568 4585;4586 4632;4633 4703;4704 4745;4746 4820;4822 4869;4871 4902;4903 4954;4955 5011;5012 5050;5052 5090;5091 5130;5132 5146;5148 5169;5170 5195;5196 5219;5220 5237;5238 5245;5247 5272;5273 5301;5302 5335;5336 5368;5369 5408;5409 5433;5434 5446;5448 5489;5490 5544;5545 5579;5580 5659;5660 5751;5753 6119;6120 6465;6467 6535	Mit freundlichen Grüßen Sonja Manninger ------------------------------------------- Tel:          +49 211 3 86 0-212 Fax:        +49 211 3 86 0-220 Mobil:      +49 176 30 09 40 11 Mail:       sonja.manninger@rgm.de RGM Facility Management GmbH Niederlassung Düsseldorf Wanheimer Straße  47 D-40472 Düsseldorf www.rgm.de Geschäftsführer: RA Fritz-Klaus Lange (Vors.), Dipl.-Kfm. Georg Düssel, Ralf Jira, Dipl.-Kfm. Nils Lueken, Dipl.-Ing. Rainer Vollmer Sitz der Gesellschaft: Dortmund Registergericht: Amtsgericht Dortmund Handelsregister-Nr.: B 20594 Von: Lettau, Christian Gesendet: Dienstag, 22. März 2016 11:38 An: Manninger, Sonja Cc: Muc, Ginter; Gessler, Manfred; Stempel, Bodo; Krause, Björn; Sandfuchs, Holger; Borucki, Angelo; Illig, Heintje; Dietsche, Martin; Schmidt, Michael; Klinkhammels, Markus; Duffert, Juergen; Riebel, Gregor Betreff: WG: ANMELDEBESTÄTIGUNG für Herrn Dietsche - Hotelbuchung für Herrn Dietsche vom 07.04.2016 zum 08.04.2016 in Filderstadt Hallo Frau Manninger, Herr Dietsche benötigt vom 07.04.2016 zum 08.04.2016 ein Hotelzimmer in Filderstadt. Für Rückfragen stehen wir Ihnen gerne zur Verfügung. Mit freundlichen Grüßen Christian Lettau Immobilienfachwirt --------------------------------------------------- Technischer Objektmanager Mobil:       + 49  173 38 38 904 Mail:         christian.lettau@rgm.de RGM Retail GmbH Wanheimer Strasse 47 D-40472 Düsseldorf www.rgm.de Geschäftsführer: Frank König Andre Kempken Sitz der Gesellschaft: Düsseldorf Registergericht: Amtsgericht Düsseldorf Handelsregister-Nr.: B 66587 Von: Janowczyk, Eva Gesendet: Dienstag, 22. März 2016 10:30 An: Dietsche, Martin Cc: Lettau, Christian Betreff: WG: ANMELDEBESTÄTIGUNG für Herrn Dietsche Sehr geehrter Herr Dietsche, beigefügt finden Sie die verbindliche Anmeldebestätigung mit allen relevanten Daten. Um einen reibungslosen Ablauf gewährleisten zu können möchten wir Sie bitten, pünktlich zum Schulungsbeginn am Veranstaltungsort anwesend zu sein. Falls Sie die Schulung trotz verbindlicher Anmeldung absagen müssen, geben Sie uns bitte rechtzeitig Bescheid. Bitte beachten Sie, dass nur eine rechtzeitige Abmeldung es ermöglicht, anfallende Stornierungsgebühren zu vermeiden. Bei Fragen stehe ich Ihnen gerne zur Verfügung. Mit freundlichen Grüßen Eva Janowczyk ---------------------------------------------------------------------- Personalentwicklung Tel:      +49 231 98 70 87-455 Fax:     +49 231 98 70 87-7455 Mobil:   +49 172 6 91 65 54 Mail:     eva.janowczyk@rgm.de RGM Shared Services GmbH Hansahaus Hansastraße 95 D-44137 Dortmund www.rgm.de Geschäftsführer: Georg Düssel, Nils Lueken Sitz der Gesellschaft: Dortmund Registergericht: Amtsgericht Dortmund Handelsregister-Nr.: B 25366 Von: AKD.Stuttgart [mailto:akd.stuttgart@tuev-sued.de] Gesendet: Dienstag, 22. März 2016 10:13 An: Janowczyk, Eva Betreff: ANMELDEBESTÄTIGUNG für Herrn Dietsche Ihre Bestellung/vom Unsere Zeichen/Name Tel.-Durchwahl/E-Mail Fax-Durchwahl Datum Seite pha 0711 7005-227 0711 7005-215 22.03.2016 1 Peter Hackbarth peter.hackbarth@tuev-sued.de ANMELDEBESTÄTIGUNG - Ihre Buchung bei der TÜV SÜD Akademie GmbH Sehr geehrte Frau Janowczyk, gerne bestätigen wir Ihnen Ihre verbindliche Anmeldung für Herrn Martin Dietsche vom 21.03.2016 für die Teilnahme an der Veranstaltung: Veranstaltung: Befähigte Person für Brandschutztüren und -tore sowie Fachkraft für Feststellanlagen (4112037-16-0010) Termin/Uhrzeit: vom 07.04.2016 bis 08.04.2016                   von 09:00 bis ca. 17:00 Uhr Veranstaltungsort: TÜV SÜD Akademie GmbH TC Stuttgart Gottlieb-Daimler-Str. 7, 70794 Filderstadt Spätestens eine Woche vor Kursbeginn erhalten Sie eine Erinnerung mit weiteren Informationen zu der Veranstaltung bzw. zu eventuellen Änderungen. Bitte beachten Sie: Sollte Herr Martin Dietsche die Veranstaltung nicht besuchen können, ist eine schriftliche Abmeldung erforderlich. (Stornofristen siehe unter www.tuev-sued.de/pub/akd/common/AGB.pdf) ESF-Fachkursförderung 2016 Für zahlreiche Fachkurse können Fördergelder in Höhe von 30% bis zu 50 % beantragt werden. Informationen finden Sie unter folgendem Link: Achtung: Zuschüsse in Baden-Württemberg beachten - ESF Fachkurse 2015! oder rufen Sie uns im Training Center an! Stuttgart: 0711 7005-249; Mannheim: 0621 395-617;  Freiburg: 0761 15079-14 [Europäischer Sozialfonds in Baden-Württemberg] Weitere wichtige Informationen: -        Anreiseinformationen und Hotelempfehlungen -        Hotelbuchung (zu möglichen TÜV SÜD-Konditionen) -        AGB der TÜV SÜD Akademie GmbH Mit freundlichen Grüßen / Kind regards Ihr Service Center Kundenadministration im Auftrag der TÜV SÜD Akademie GmbH Training Center Stuttgart Gottlieb-Daimler-Str. 7 70794 Filderstadt Germany Phone:   +49 711 7005-201 Fax:        +49 711 7005-215 mailto:akd.stuttgart@tuev-sued.de http://www.tuev-sued.de/akademie Geschäftsführung / Board of Management: Dipl.-Psych. Jürgen Merz Jörg Schemat Sitz: München / Registered Office: Munich Amtsgericht München / Trade Register Munich HRB 78 528 USt-IdNr. / VAT ID No. DE162464530 Informationen gemäß § 2 Abs. 1 DL-InfoV unter http://www.tuev-sued.de/impressum Information pursuant to Section 2(1) DL-InfoV (Germany) at http://www.tuev-sued.com/imprint Diese Nachricht und/oder Anhänge sind vertraulich und können der Geheimhaltungspflicht unterliegen. Wenn Sie nicht der vorgesehene Adressat sind, weisen wir Sie hiermit darauf hin, dass jegliche Nutzung, Weiterleitung und Kopien unzulässig sind. Benachrichtigen Sie uns bitte unverzüglich per E-Mail und löschen Sie diese Nachricht und/oder Anhänge aus Ihrem System. This mail and/or attachments are confidential and may also be legally privileged. If you are not the intended recipient, you are hereby notified, that any review, dissemination, distribution or copying of this email and/or attachments is strictly prohibited. Please notify us immediately by email and delete this message and all its attachments. P Bitte denken Sie an die Umwelt, bevor Sie diese E-Mail ausdrucken.
+T51	Location 381 458	TÜV SÜD Akademie GmbH
+TC Stuttgart
+Gottlieb-Daimler-Str. 7, 70794 Filderstadt
+T52	Location 381 402;403 415;416 458	TÜV SÜD Akademie GmbH TC Stuttgart Gottlieb-Daimler-Str. 7, 70794 Filderstadt

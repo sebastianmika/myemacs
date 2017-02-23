@@ -1,0 +1,4 @@
+from . import _glob1
+
+def x():
+    print(_glob1)

@@ -1,0 +1,13 @@
+FROM python:3
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY services/nlp /usr/src/app/services/nlp
+
+WORKDIR /usr/src/app/services/nlp
+
+RUN pip install tox
+
+ENV DEBUG True
+
+CMD "nlp_api"

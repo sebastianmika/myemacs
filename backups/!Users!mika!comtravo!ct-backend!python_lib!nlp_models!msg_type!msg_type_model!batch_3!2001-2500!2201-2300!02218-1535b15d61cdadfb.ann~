@@ -1,0 +1,32 @@
+T1	Attributes 183 183	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Greeting 193 203	Guten Tag,
+T3	Person 237 248	Jens Nündel
+#2	AnnotatorNotes T3	{"crm_ids": ["56e00bedd4fbdc0100a4ba68"]}
+T4	Person 419 435	Nadine Zdanowicz
+#3	AnnotatorNotes T4	{"crm_ids": ["56b904530dde60010094f338"]}
+T5	Person 827 836	Uwe Grahl
+#4	AnnotatorNotes T5	{"crm_ids": ["56e80a750e120101007caa0a"]}
+T6	Person 838 848	Jörg Soyka
+#5	AnnotatorNotes T6	{"crm_ids": ["56d4d1a15fcdce010017aa21"]}
+T7	TimePoint 274 281	27.4.16
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-04-27T00:00:00.000Z", "grain": "day"}
+T8	TimePoint 727 733	August
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-08-01T00:00:00.000Z", "grain": "month"}
+T9	TimePoint 260 265	26.4.
+#8	AnnotatorNotes T9	{"type": "value", "value": "2016-04-26T00:00:00.000Z", "grain": "day"}
+T10	TimePoint 783 787	1954
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-03-09T19:54:00.000Z", "grain": "minute"}
+T11	TimePoint 1026 1028	so
+#10	AnnotatorNotes T11	{"type": "value", "value": "2016-03-13T00:00:00.000Z", "grain": "day"}
+33175 Bad Lippspringe
+T14	Location 530 536	Berlin
+#13	AnnotatorNotes T14	{"geonames_ids": [2950159]}
+T15	Location 687 701	Charlottenburg
+#14	AnnotatorNotes T15	{"geonames_ids": [2940187]}
+T16	Location 761 775	Charlottenburg
+#15	AnnotatorNotes T16	{"geonames_ids": [2940187]}
+T17	EndOfMsg 396 417;419 435;436 467;469 506;507 536;538 561;562 585;586 617;618 646;647 666;668 683;684 711;712 726;727 757;758 787;788 809;810 848;850 1264	Mit freundlichem Gruß Nadine Zdanowicz Sekretärin der Geschäftsleitung Bergmann & Franz Nachf. GmbH & Co. KG Lützowstraße 74, 10785 Berlin Fon: +49 (30) 2608-1001 Fax: +49 (30) 2608-1111 E-Mail: n.zdanowicz@bfgruppe.de http://www.bergmann-franz.de http://www.b-e-z.de Handelsregister AG Charlottenburg HRA 12241 Komplementärin August Wollschläger & Co. GmbH AG Charlottenburg 93 HRB 1954 Ust.-ID: DE 136661512 Geschäftsführer: Uwe Grahl, Jörg Soyka Der Inhalt dieser E-Mail ist ausschließlich für den bezeichneten Adressaten bestimmt. Wenn Sie nicht der vorgesehene Adressat dieser E-Mail oder dessen Vertreter sein sollten, so beachten Sie bitte, dass jede Form der Kenntnisnahme, Veröffentlichung, Vervielfältigung oder Weitergabe des Inhalts dieser E-Mail unzulässig ist. Wir bitten Sie, sich in diesem Fall mit dem Absender der E-Mail in Verbindung zu setzen.
+T18	HotelName 302 324	Best Western Park Hote
+33175 Bad Lippspringe
+T12	Location 326 348;349 370	Peter-Hartmann-Allee 4 33175 Bad Lippspringe

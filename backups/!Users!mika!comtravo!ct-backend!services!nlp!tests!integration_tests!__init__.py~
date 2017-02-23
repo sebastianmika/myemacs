@@ -1,0 +1,8 @@
+def setUpModule():
+    # Setup fixtures in elasticsearch/bi
+    pass
+
+
+def tearDownModule():
+    # Reset elasticsearch/bi
+    

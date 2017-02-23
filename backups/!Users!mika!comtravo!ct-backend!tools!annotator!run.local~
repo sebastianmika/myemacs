@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. .tox/py35/bin/activate
+export ANNOTATOR_DEBUG=1
+export ANNOTATOR_DATADIR=../../../corpus/corpus
+python runserver.py

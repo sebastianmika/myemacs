@@ -1,0 +1,23 @@
+import requests
+import logging
+from datetime import datetime, timedelta
+
+
+logger = logging.getLogger(__name__)
+
+
+_last_updated = None
+_google_keys = None
+_update_period = timedelta(hours=12)
+
+
+def update_google_keys():
+    if _last_update is None or _last_updated + _update_period < datetime.now():
+        ans = requests.get('https://www.googleapis.com/identitytoolkit/v3/relyingparty/publicKeys',
+                           headers={'Content-Type', 'application/json'})
+        if ans.status_code != 200:
+            logger.warning('failed to updated google keys')
+            return
+        else:
+            _google_keys = ans.json()
+            _last_updated = datetime.now()

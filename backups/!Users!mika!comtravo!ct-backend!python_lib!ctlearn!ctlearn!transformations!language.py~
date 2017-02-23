@@ -1,0 +1,23 @@
+from .. base import Transformer
+from .. base import SerializableMixin
+from langdetect import detect
+from langdetect.lang_detect_exception import LangDetectException
+
+
+class LanguageTransformer(Transformer, SerializableMixin):
+    def __init__(self):
+        super(LanguageTransformer, self).__init__(input_keys=['msg'],
+                                                  output_key='language')
+
+    def transform(self, *args):
+        res = ['unknown'] * len(args[0])
+        for idx, (msg,) in enumerate(zip(*args)):
+            txt = msg['subject'] + ' ' + msg['body']
+            if len(txt) > 30:
+                try:
+                    res[idx] = detect(txt)
+                except LangDetectException as e:
+                    # This happens e.g. when data contains only numbers
+                    # logger.exception()
+                    pass
+        return res

@@ -1,0 +1,5 @@
+;; -*- coding: utf-8-unix -*-
+;; Automatically written history of CIDER REPL session
+;; Edit at your own risk
+
+("(:c #{:a :b})" "(:a #{:a :b})" "(* 1/5 2)" "()" "1/5*2" "1/5" "(or false :bla)" "(do (println \"bla\") (println \"blub\") (println \"x\") 0)" "(do (println \"bla\") (println \"blub\") (println \"x\") (0))" "1" "0C" "q" "(test 1)" "(test)" "(-main)" "(-test)" "[-test]" "(+ 1 2 3)")

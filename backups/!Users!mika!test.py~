@@ -1,0 +1,43 @@
+supported_keys = [
+    'asctime',
+    'created',
+    'filename',
+    'funcName',
+    'levelname',
+    'levelno',
+    'lineno',
+    'module',
+    'msecs',
+    'message',
+    'name',
+    'pathname',
+    'process',
+    'processName',
+    'relativeCreated',
+    'thread',
+    'threadName'
+]
+
+log_format = lambda x: ['%({0:s})'.format(i) for i in x]
+
+     
+logger = logging.getLogger()
+
+logHandler = logging.StreamHandler()
+custom_format = ' '.join(log_format(supported_keys))
+formatter = jsonlogger.JsonFormatter(custom_format)
+logHandler.setFormatter(formatter)
+logger.addHandler(logHandler)
+
+
+logger.info('Hallo Welt', extra={'bla': 1})
+
+def testfun():
+    logger.warning('Here is the warning')
+
+def testfune():
+    try:
+        1/0
+    except:
+        logger.exception('Here be the exception')
+

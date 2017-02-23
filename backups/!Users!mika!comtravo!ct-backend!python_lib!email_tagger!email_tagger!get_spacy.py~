@@ -1,0 +1,26 @@
+from . helpers import tag_wrapper, TagStatus, _query_corenlp
+
+
+@tag_wrapper("get_corenlp")
+def get_corenlp(msg, result, end_main_body):
+    result['corenlp'] = {
+        'subject': {},
+        'body': {}
+    }
+    res_subj = _query_corenlp({'text': msg['subject'], 'lang': result['language']})
+    if res_subj['status'] == 900 or res_subj['status'] == 500:
+        return TagStatus.server_error
+    elif res_subj['status'] != 200:
+        return TagStatus.client_error
+
+    res_body = _query_corenlp({'text': msg['body'][:end_main_body],
+                               'lang': result['language']})
+    if res_body['status'] == 900 or res_body['status'] == 500:
+        return TagStatus.server_error
+    elif res_body['status'] != 200:
+        return TagStatus.client_error
+
+    result['corenlp']['subject'] = res_subj['result']
+    result['corenlp']['body'] = res_body['result']
+
+    return TagStatus.success

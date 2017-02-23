@@ -1,0 +1,97 @@
+import logging
+from . base_tagger import TagStatus
+from . language_tagger import LanguageTagger
+from . type_tagger import TypeTagger
+from . source_tagger import SourceTagger
+from . greeting_tagger import GreetingTagger
+from . eom_tagger import EOMTagger
+from . reply_tagger import ReplyTagger
+from . truncate_tagger import TruncateTagger
+from . spacy_tagger import SpacyTagger
+from . crm_company_tagger import CRMCompanyTagger
+from . crm_person_tagger import CRMPersonTagger
+from . person_tagger import PersonTagger
+from . iata_tagger import IATATagger
+from . fn_tagger import FlightNumberTagger
+from . time_tagger import TimeTagger
+from . geonames_tagger import GeoNamesTagger
+from . isbooking_tagger import IsBookingTagger
+from . merge_annotations import MergeAnnotationsTagger
+
+
+logger = logging.getLogger(__name__)
+
+language_tagger = LanguageTagger()
+source_tagger = SourceTagger()
+type_tagger = TypeTagger()
+greeting_tagger = GreetingTagger()
+eom_tagger = EOMTagger()
+reply_tagger = ReplyTagger()
+crm_company_tagger = CRMCompanyTagger()
+crm_person_tagger = CRMPersonTagger()
+person_tagger = PersonTagger()
+iata_tagger = IATATagger()
+fn_tagger = FlightNumberTagger()
+time_tagger = TimeTagger()
+geonames_tagger = GeoNamesTagger()
+isbooking_tagger = IsBookingTagger()
+merge_tagger = MergeAnnotationsTagger()
+
+
+def tag_mail(msg, only_main_body=True):
+    # we start with nothing and will see what we get :-)
+    result = {'annotations': []}
+    # This could go up with only_main_body = True, one test in
+    # test_tag_mail needs to be fixed though (as it is based on
+    # only_main_body=False)
+    truncate_tagger = TruncateTagger(only_main_body)
+    # did not find a way to mock this in tests if imported above
+    spacy_tagger = SpacyTagger()
+
+    # General message attributes
+    if language_tagger(msg, result) != TagStatus.success:
+        return {}
+    if result['language'] not in ['de', 'en']:
+        logger.info('language detected {} which is not supported'.format(result['language']))
+        return {}
+    type_tagger(msg, result)
+    source_tagger(msg, result)
+
+    # Greeting part
+    greeting_tagger(msg, result)
+    # End of message part (i.e. anything and including the signoff phrase)
+    eom_tagger(msg, result)
+    # Replies in the message
+    reply_tagger(msg, result)
+
+    # Shrink message for further processing if only the main part
+    # between Greeting and EndOfMsg/Reply should be tagged
+    #
+    # -> needs greeting, reply and eom, modifies msg!!!
+    truncate_tagger(msg, result)
+
+    # Get spacy annotations
+    spacy_tagger(msg, result)
+    # get companies and users from crm based on emails in msg
+    crm_company_tagger(msg, result)
+    crm_person_tagger(msg, result)  # depends on crm_company_tagger to be successful
+    # Find persons from CRM in message
+    person_tagger(msg, result)  # depends on crm_person_tagger to be successful
+    # iata codes
+    iata_tagger(msg, result)
+    # flight numbers
+    fn_tagger(msg, result)
+    # time expressions / duckling
+    time_tagger(msg, result)
+    # cities (15.000 largest geonames)
+    geonames_tagger(msg, result)
+
+    # remove overlapping annotations for the same part of text
+    merge_tagger(None, result)
+
+    # Get prob. that this is a booking
+    isbooking_tagger(msg, result)
+
+    if not result['annotations']:
+        result.pop('annotations')
+    return result

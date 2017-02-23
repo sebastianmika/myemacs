@@ -1,0 +1,53 @@
+T1	Attributes 198 198	
+#1	AnnotatorNotes T1	{"language": "en", "source": "email", "request_type": "booking"}
+T2	Greeting 208 218	Dear team,
+T3	Person 256 270	Ilia Tretiakov
+#2	AnnotatorNotes T3	{"crm_ids": ["56e920db176c4c01007eee10"]}
+T4	Person 34 43	Tretiakov
+#3	AnnotatorNotes T4	{"crm_ids": ["56e920db176c4c01007eee10"]}
+T5	Person 546 565	Tatyana Novopashina
+#4	AnnotatorNotes T5	{"crm_ids": ["56e7ceeb0e120101007caa07"]}
+T6	FlightNumber 316 323	SU 1852
+#5	AnnotatorNotes T6	{"flight_number": "1852", "airline_code": "SU"}
+T7	FlightNumber 378 384	J2 854
+#6	AnnotatorNotes T7	{"flight_number": "854", "airline_code": "J2"}
+T8	TimePoint 284 292	18.04.16
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-04-13T18:04:16.000Z", "grain": "second"}
+T11	TimePoint 324 328	0010
+#10	AnnotatorNotes T11	{"type": "value", "value": "2016-04-13T22:00:00.000Z", "grain": "hour"}
+T12	Location 300 306	Moscow
+#11	AnnotatorNotes T12	{"geonames_ids": [524901, 5601538]}
+T13	Location 307 311	Baku
+#12	AnnotatorNotes T13	{"geonames_ids": [587084]}
+T14	Location 362 366	Baku
+#13	AnnotatorNotes T14	{"geonames_ids": [587084]}
+T15	Location 367 373	Moscow
+#14	AnnotatorNotes T15	{"geonames_ids": [524901, 5601538]}
+T16	Location 696 702	Moscow
+#15	AnnotatorNotes T16	{"geonames_ids": [524901, 5601538]}
+T17	EndOfMsg 491 512;513 545;546 565;566 601;602 644;645 658;659 688;689 702;703 721;723 747;748 771;773 805;806 830	Thank you in advance! ________________________________ Tatyana Novopashina Assistant to administrative manager [cid:DBAB7B51-CFF7-4ACC-86AD-DF63352F9262] Bryanston CIS 10 Palikha Str., Building 5C3 127055 Moscow Russian Federation Tel.: +7 (495) 789 23 50 Mob.: +7 905  744 18 74 tatyana.novopashina@bryanston.ch http://www.bryanston.ch/
+T18	TimePoint 391 395	2110
+T19	TimePoint 346 354	29.04.16
+T20	CategoryOrClass 0 420	SUBJECT: Booking flight request / Tretiakov
+DATE: 2016-04-13 12:38:25
+FROM: Tatyana Novopashina | Bryanston - tatyana.novopashina@bryanston.ch
+TO: Comtravo - buchung@comtravo.com
+------ End of header -------
+Dear team,
+Please send me non-binding offer for Ilia Tretiakov as follows:
+
+18.04.16        Moscow Baku     SU 1852 0010-0410       SVO F
+29.04.16        Baku Moscow     J2 854  1900-2110       DME
+
+Economy class
+T9	ReturnFlight 246 251	offer
+E1	ReturnFlight:T9 who:T3 org:T12 dst:T13 fn_outbnd:T6 fn_inbnd:T7 with:T20 dpt_outbound:T11 arv_outbound:T10 dpt_inbound:T21 arv_inbound:T18 with2:T24
+R1	about Arg1:T8 Arg2:T11	
+R2	about Arg1:T19 Arg2:T18	
+T10	TimePoint 329 333	0410
+T21	TimePoint 386 390	1900
+T22	Location 340 343	SVO
+T23	Location 402 405	DME
+R3	about Arg1:T8 Arg2:T10	
+R4	about Arg1:T19 Arg2:T21	
+T24	CategoryOrClass 407 420	Economy class

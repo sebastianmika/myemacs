@@ -1,0 +1,5 @@
+[options]	 
+Tokens		 tokenizer:ptblike
+Sentences	 splitter:regex
+Validation	 validate:none
+Annotation-log	 logfile:<NONE>

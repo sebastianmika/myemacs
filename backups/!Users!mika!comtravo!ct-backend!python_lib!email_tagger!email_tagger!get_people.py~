@@ -1,0 +1,16 @@
+def get_people(company_ids):
+    """Given a list of company_id's, query elasticsearch for all booker
+    and traveler that match documents for this company and return a unique
+    list of matches. The returned records are normalized to have the same
+    format which is:
+
+    {
+      'type': 'booker|taveler|both',
+      'first_name': 'Hans',
+      'middle_name': 'M.'|None,
+      'last_name': 'Mustermann',
+      'id': 'id of person',
+    }
+    """
+    
+    pass

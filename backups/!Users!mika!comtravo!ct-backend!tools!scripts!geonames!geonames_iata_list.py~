@@ -1,0 +1,97 @@
+import csv
+from math import log10
+import sys
+import pickle
+
+
+csv.field_size_limit(sys.maxsize)
+names = [
+    'geoname_id',  # integer id of record in geonames database
+    'name',  # name of geographical point (utf8) varchar(200)
+    'ascii_name',  # name of geographical point in plain ascii
+                   # characters, varchar(200)
+    'alternate_names',  # alternatenames, comma separated, ascii names
+                        # automatically transliterated, convenience
+                        # attribute from alternatename table,
+                        # varchar(10000)
+    'latitude',  # latitude in decimal degrees (wgs84)
+    'longitude',  # longitude in decimal degrees (wgs84)
+    'feature_class',  # see http://www.geonames.org/export/codes.html,
+                      # char(1)
+    'feature_code',  # see http://www.geonames.org/export/codes.html,
+                     # varchar(10)
+    'country_code',  # ISO-3166 2-letter country code, 2 characters
+    'cc2',  # alternate country codes, comma separated, ISO-3166
+            # 2-letter country code, 200 characters
+    'admin1_code',  # fipscode (subject to change to iso code), see
+                    # exceptions below, see file admin1Codes.txt for
+                    # display names of this code; varchar(20)
+    'admin2_code',  # code for the second administrative division, a
+                    # county in the US, see file admin2Codes.txt;
+                    # varchar(80)
+    'admin3_code',  # code for third level administrative division,
+                    # varchar(20)
+    'admin4_code',  # code for fourth level administrative division,
+                    # varchar(20)
+    'population',  # bigint (8 byte int)
+    'elevation',  # in meters, integer
+    'dem',  # digital elevation model, srtm3 or gtopo30, average
+            # elevation of 3''x3'' (ca 90mx90m) or 30''x30'' (ca
+            # 900mx900m) area in meters, integer. srtm processed by
+            # cgiar/ciat.
+    'timezone',  # the timezone id (see file timeZone.txt) varchar(40)
+    'modification_date'   # date of last modification in yyyy-MM-dd format
+]
+
+#
+# Preload alternate names and get iata codes
+#
+print("Preloading alternate names...")
+iata_codes_per_geoname_id = {}
+alternate_names = {}
+with open('../../../../geonames/alternateNames.txt', 'r', newline='') as f:
+    for row in csv.reader(f, delimiter='\t'):
+        gid = int(row[1])
+        if row[2] == 'iata' and row[7] == '':
+            # iata not historic
+            if gid not in iata_codes_per_geoname_id:
+                iata_codes_per_geoname_id[gid] = set()
+            iata_codes_per_geoname_id[gid].add(row[3])
+        elif ((row[2] == 'de' or row[2] == 'en') and
+              (row[7] == '')):
+            # only preferred + short in en and de and not historical ones
+            if gid not in alternate_names:
+                alternate_names[gid] = set()
+            alternate_names[gid].add(row[3])
+
+#
+# Get data to build up parent relation
+#
+cnt = 0
+ids_with_iata = []
+with open('../../../../geonames/allCountries.txt', 'r', newline='', encoding='utf-8') as f:
+    for row in csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE):
+        cnt += 1
+        if cnt % 10000 == 0:
+            print("at {} / {}".format(cnt, len(ids_with_iata)))
+        rr = dict(zip(names, row))
+        iata_code = iata_codes_per_geoname_id.get(int(rr['geoname_id']), None)
+        if not iata_code:
+            continue
+        rr['iata_codes'] = list(iata_code)
+        rr['geoname_id'] = int(rr['geoname_id'])
+        rr['population'] = max(int(rr['population']), 0)
+        rr['log_population'] = log10(1.0 + int(rr['population'])) + 1.0
+        rr['location'] = {'lat': float(rr['latitude']), 'lon': float(rr['longitude'])}
+        rr.pop('latitude')
+        rr.pop('longitude')
+        if rr['elevation']:
+            rr['elevation'] = int(rr['elevation'])
+        an = alternate_names.get(rr['geoname_id'], None)
+        if an:
+            rr['alternate_names'] = list(an)
+        else:
+            rr['alternate_names'] = []  # rr['alternate_names'].split(',')
+        rr['country_code'] = rr['country_code'].lower()
+        rr['cc2'] = [cc.lower() for cc in rr['cc2']]
+        ids_with_iata.append(rr)

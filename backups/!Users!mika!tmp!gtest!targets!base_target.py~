@@ -1,0 +1,100 @@
+import os
+import requests
+from cachetools.func import ttl_cache
+import pandas as pd
+
+
+class BaseTarget:
+    def search(self):
+        return "Constant"
+    
+    @ttl_cache(maxsize=32, ttl=60)
+    def query(self, from_, to_, freq):
+        ts = pd.date_range(from_, to_, freq)
+        return [(1, t) for t in ts]
+
+
+class ESTarget(BaseTarget):
+    def __init__(self, endpoint):
+        self.bi_uri = os.environ.get('COMTRAVO_BI_URI', 'http://bi')
+        self.endpoint = endpoint
+        self.bi_user = os.environ.get('COMTRAVO_BI_USER')
+        self.bi_password = os.environ.get('COMTRAVO_BI_PASSWORD')
+
+    def _query_es(self, query):
+        r = requests.post(self.bi_uri + self.endpoint,
+                          headers={'Accept': 'application/json',
+                                   'Content-Type': 'application/json',
+                                   'Accept-Encoding': 'gzip, deflate'},
+                          auth=(self.bi_user, self.bi_password),
+                          data=pd.json.dumps(query),
+                          verify=False)  # Self signed cert...
+        if r.status_code != 200:
+            raise Exception('querying elasticsearch on {} failed: {}\n{}'.format(
+                self.bi_uri,
+                r.status_code,
+                query))
+        # Get results
+        return r.json()
+
+
+class Bookings(ESTarget):
+    def __init__(self):
+        super(Bookings, self).__init__('/booking_items/_search')
+
+    def search(self):
+        return "Bookings"
+
+    def query(self, from_, to_, freq):
+        term1 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "processed"}},
+                {"bool": {
+                    "must_not": [
+                        {"term": {"booking_item.canceled": True}},
+                        {"term": {"booking_item.rebooked": True}}]
+                }},
+            ]
+            }}
+        term2 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "fuckup"}},
+                {"term": {"booking_item.canceled": False}},
+                {"term": {"booking_item.rebooked": True}}
+            ]
+            }}
+        term3 = {
+            "bool": {"filter": [
+                {"term": {"booking_item.status": "fuckup"}},
+                {"term": {"booking_item.canceled": True}},
+                {"term": {"booking_item.rebooked": False}},
+                {"exists": {"field": "booking_item.canceled_at"}}
+            ]
+            }}                
+        query = {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"range": {
+                            "booking_item.meta_data.created_at": {
+                                "gte": '{}'.format(from_.strftime("%Y-%m-%dT%H:%M:%SZ")),
+                                "lt": '{}'.format(to_.strftime("%Y-%m-%dT%H:%M:%SZ"))}}},
+                        {"missing": {"field": "booking_item.refund_for"}},
+                        {"missing": {"field": "booking_item.rebooked_from"}},
+                        {"missing": {"field": "parent_status"}},
+                        {"bool": {"should": [term1, term2, term3]}}
+                    ]
+                }
+            },
+            "aggs" : {
+                "item_over_time" : {
+                    "date_histogram" : {
+                        "field" : "booking_item.meta_data.created_at",
+                        "interval" : "{}".format(freq)
+                    }
+                }
+            }
+        }
+        print(pd.json.dumps(query))
+        return self._query_es(query)

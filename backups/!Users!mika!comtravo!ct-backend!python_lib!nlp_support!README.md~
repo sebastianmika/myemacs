@@ -1,0 +1,15 @@
+# Tag Email Parts #
+
+Tag parts of an email. Currently that are
+
+* The greeting formula
+
+* The signoff formula
+
+* A stub for tagging persons from the CRM
+
+The signoff includes everything from that point on (the "end of message").
+
+## ToDos ##
+
+- [ ] Also look for reply lines (starting with `>`) and tag them as well, *iff* they are not within an already tagged signoff.

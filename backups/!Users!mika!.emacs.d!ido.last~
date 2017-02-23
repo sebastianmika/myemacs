@@ -1,0 +1,378 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/tests/" . "tests_00_unit/")
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/" . "tests/")
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/recommendation_api/" . "controllers/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/" . "recommendation/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/" . "hotel/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/utils/" . "__pycache__/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/transformations/" . "__pycache__/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/" . "tests/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/" . "estimators/")
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/" . "1001-1050/")
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/" . "annotator_C/")
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/" . "season_2/")
+ ("/Users/mika/comtravo/ct-nlp-data/" . "brat_annotations/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/" . "event_model/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_support/" . "es_client/")
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/" . "tests_00_unit/")
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/kpis/" . "tpt/")
+ ("/Users/mika/comtravo/ct-nlp-data/brat@2016-12-09/" . "0001-0250/")
+ ("/Users/mika/comtravo/duckling/src/duckling/" . "time/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_content/" . "scripts/")
+ ("/Users/mika/comtravo/duckling/resources/languages/fr/" . "corpus/")
+ ("/Users/mika/comtravo/duckling/resources/languages/en/" . "corpus/")
+ ("/Users/mika/comtravo/duckling/resources/languages/" . "de/")
+ ("/Users/mika/comtravo/duckling/resources/" . "languages/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/test/" . "data/")
+ ("/Users/mika/comtravo/ct-backend/infrastructure/es/" . "mappings/")
+ ("/Users/mika/comtravo/ct-backend/infrastructure/" . "services_local/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/brat_io/" . "brat_io/")
+ ("/Users/mika/tmp/partest/" . "mod2/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/event_model/" . "postprocessing/")
+ ("/Users/mika/comtravo/ct-backend/services/search/" . "api/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/" . "test/")
+ ("/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/targets/" . "__pycache__/")
+ ("/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/" . "controllers/")
+ ("/Users/mika/tmp/" . "myp/")
+ ("/Users/mika/comtravo/ct-backend/services/kpi/" . "kpi_api/")
+ ("/Users/mika/comtravo/is13/" . "data/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/" . "models/")
+ ("/Users/mika/comtravo/data/nlp/" . "nlp_data/")
+ ("/Users/mika/comtravo/data/" . "nlp/")
+ ("/Users/mika/comtravo/duckling/resources/languages/de/" . "rules/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_2/0501-1000/" . "0601-0700/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_3/2501-3000/" . "2801-2900/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_3/2001-2500/" . "2401-2500/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_3/" . "2501-3000/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_2/0001-0500/" . "0101-0200/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/batch_2/" . "0501-1000/")
+ ("/Users/mika/comtravo/ct-backend/nodejs_lib/" . "passport_google_identity_toolkit/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/" . "jwt_auth/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/" . "msg_type_model/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_3/2501-3000/" . "2801-2900/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_3/2001-2500/" . "2301-2400/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_3/" . "2501-3000/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_2/0001-0500/" . "0301-0400/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_2/" . "0001-0500/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/" . "nlp_models/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_1/2001-2500/" . "2301-2400/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_1/1501-2000/" . "1801-1900/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/batch_1/" . "2001-2500/")
+ ("/Users/mika/comtravo/ct-backend/services/corenlp/test/" . "corenlp_service/")
+ ("/Users/mika/comtravo/ct-backend/services/corenlp/" . "src/")
+ ("/Users/mika/comtravo/ct-backend/services/corenlp/src/" . "corenlp_service/")
+ ("/Users/mika/comtravo/ct-backend/services/duckling/" . "src/")
+ ("/Users/mika/myproject/" . "resources/")
+ ("/Users/mika/comtravo/ct-backend/services/duckling_swagger/src/" . "nlp_tools_server/")
+ ("/Users/mika/comtravo/ct-backend/services/duckling/src/" . "duckling_service/")
+ ("/Users/mika/comtravo/ct-backend/services/nlp/nlp_api/" . "controllers/")
+ ("/Users/mika/comtravo/ct-backend/services/nlp/" . "nlp_api/")
+ ("/Users/mika/comtravo/ct-backend/services/nlp/python-flask-server/" . "controllers/")
+ ("/Users/mika/comtravo/ct-backend/test/" . "screenshots/")
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/messages/0001-0500/" . "0001-0100/")
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/messages/" . "0001-0500/")
+ ("/Users/mika/comtravo/ct-backend/tools/nlp_tools_server/src/" . "nlp_tools_server/")
+ ("/Users/mika/comtravo/ct-backend/tools/nlp_tools_server/test/" . "nlp_tools_server/")
+ ("/Users/mika/comtravo/ct-backend/tools/nlp_tools_server/" . "src/")
+ ("/Users/mika/comtravo/duckling/src/" . "duckling/")
+ ("/Users/mika/comtravo/duckling/" . "resources/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_parser/" . "email_parser/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/" . "corpus/")
+ ("/Users/mika/comtravo/ct-backend/services/" . "nlp/")
+ ("/Users/mika/comtravo/brat/server/" . "src/")
+ ("/Users/mika/comtravo/brat_bin/data/" . "comtravo/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/email_tagger/" . "brat/")
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/" . "kpis/")
+ ("/Users/mika/comtravo/brat/data/" . "comtravo/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/" . "email_tagger/")
+ ("/Users/mika/comtravo/ct-backend/tools/wit_server/src/" . "wit_server/")
+ ("/Users/mika/comtravo/ct-backend/tools/wit_server/test/" . "wit_server/")
+ ("/Users/mika/comtravo/ct-backend/tools/wit_server/" . "test/")
+ ("/Users/mika/comtravo/wit_tagger/src/" . "wit_tagger/")
+ ("/Users/mika/comtravo/wit_tagger/" . "src/")
+ ("/Users/mika/comtravo/ct-backend/tools/" . "scripts/")
+ ("/Users/mika/comtravo/ct-backend/python_lib/" . "ctlearn/")
+ ("/Users/mika/comtravo/ct-backend/" . "python_lib/")
+ ("/Users/mika/comtravo/" . "ct-backend/")
+ ("/Users/mika/.emacs.d/" . ".python-environments/")
+ ("/Users/mika/" . ".emacs.d/")
+ ("/Users/" . "mika/")
+ ("/" . "Users/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/mika/.emacs.d/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/estimators/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/transformations/"
+ "/Users/mika/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/utils/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/event_model/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/tests/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/"
+ "/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/jwt_auth/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/nlp_api/controllers/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/nlp_api/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/pipelines/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/confidence_model/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/base/"
+ "/Users/mika/comtravo/ct-backend/services/recommendation/tests/tests_00_unit/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/tests/tests_00_unit/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/"
+ "/Users/mika/comtravo/ct-backend/services/recommendation/recommendation_api/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/content_model/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/type_model/"
+ "/Users/mika/comtravo/ct-backend/services/recommendation/recommendation_api/controllers/"
+ "/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/hotel/"
+ "/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/base/"
+ "/Users/mika/comtravo/ct-backend/python_lib/email_tagger/email_tagger/"
+ "/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/tests/tests_01_integration/"
+ "/Users/mika/comtravo/ct-backend/tools/scripts/"
+ "/Users/mika/comtravo/ct-backend/python_lib/"
+ "/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/dasklearn/"
+ "/Users/mika/comtravo/ct-backend/python_lib/brat_io/brat_io/"
+ "/Users/mika/comtravo/ct-backend/tools/scripts/post_process_annotations/"
+ "/Users/mika/comtravo/ct-backend/python_lib/e2e_pipeline/"
+ "/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/"
+ "/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/targets/"
+ "/Users/mika/tmp/ct-backend/python_lib/email_tagger/email_tagger/"
+ "/Users/mika/Downloads/"
+ "/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/1001-1050/"
+ "/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/1051-1100/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/base_model/"
+ "/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/tests/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/tests/integration_tests/"
+ "/Users/mika/comtravo/ct-backend/python_lib/email_tagger/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_support/es_client/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/test/"
+ "/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/event_model/postprocessing/"
+ "/Users/mika/comtravo/ct-backend/python_lib/es_client/es_client/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/tests/unit_tests/"
+ "/Users/mika/comtravo/ct-backend/services/nlp/tests/integration/"
+ "/Users/mika/comtravo/ct-backend/infrastructure/services/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "init.el"
+ "label.py"
+ "type.py"
+ "nlp_results.py"
+ "__init__.py"
+ ".bashrc"
+ "str_encoder.py"
+ "set_cover.py"
+ "event_model_helpers.py"
+ "event_model.py"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/mika/.emacs.d/.python-environments/" (22703 2914 0 0) "default/" "../" "./")
+
+ ("/Users/mika/.emacs.d/" (22703 2914 0 0) "themes/" "README.md" "projectile-bookmarks.eld" "places" "lisp/" "init.el~" "init.el" "ido.last" "games/" "elpa/" "customizations/" "cider-history" "backups/" "auto-save-list/" ".smex-items" ".recentf" ".python-environments/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/" (22702 65125 0 0) "tests/" "test_msg.json" "test_ctlearn.py" "setup.cfg" "pipe_fit_dsk.png" "Makefile" "ctlearn/" "__pycache__/" ".coverage" "../" "./")
+
+ ("/Users/mika/.emacs.d/themes/" (22353 10223 0 0) "zenburn-theme.el" "tomorrow-theme.el" "tomorrow-night-theme.el" "tomorrow-night-eighties-theme.el" "tomorrow-night-bright-theme.el" "tomorrow-night-blue-theme.el" "color-theme-tomorrow.el" "../" "./")
+
+ ("/Users/mika/.emacs.d/lisp/" (22339 407 0 0) "use-package.el" "bind-key.el" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/estimators/" (22702 64665 0 0) "label.py" "isbooking.py" "content.py" "confidence.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/" (22694 55360 0 0) "xxx.json" "workspace/" "tmp/" "test_spark.py" "season_1_data.tar.gz" "scikit_learn_data/" "Qsync/" "py3/" "Public/" "projectconfig.py" "Pictures/" "nltk_data/" "Music/" "Movies/" "Library/" "keras/" "hotel.jon" "git-backup/" "emacs.d" "eclipse/" "Downloads/" "Documents/" "Desktop/" "ct-nlp-data/" "comtravo/" "bin/" "Applications/" "annotation.conf" "__pycache__/" "2017-02-07-retention.json" "2017-02-07-retention-data.json" ".wget-hsts" ".viminfo" ".unitex.cfg" ".Trash/" ".tox/" ".tooling/" ".tonbeller/" ".theano/" ".Table_preferences" ".ssh/" ".sqlline/" ".sqlite_history" ".s3cfg" ".Qsync/" ".qnicon" ".qicon" ".python_history" ".protege/" ".plotly/" ".p2/" ".oracle_jre_usage/" ".npm/" ".matplotlib/" ".m2/" ".lesshst" ".lein/" ".keras/" ".jupyter/" ".jrsksp" ".jrsks" ".jasperserver/" ".ivy2/" ".ipython/" ".ipynb_checkpoints/" ".gramlab" ".gradle/" ".gitconfig" ".git-completion" ".emacs.d/" ".eclipse/" ".DS_Store" ".docker/" ".dask/" ".cups/" ".credentials/" ".condamanager/" ".CFUserTextEncoding" ".cache/" ".byobu/" ".bashrc~" ".bashrc" ".bash_sessions/" ".bash_profile~" ".bash_profile.pysave" ".bash_profile" ".bash_history" ".aws/" ".atom/" ".astropy/" ".ant/" ".anaconda/" "../" "./")
+
+ ("/Users/mika/comtravo/" (22683 12872 0 0) "spark-2.1.0-bin-hadoop2.7/" "spark-2.1.0/" "spark/" "PTEST/" "msg_type_model/" "mleap/" "is13/" "hotel_bayes.py" "duckling/" "ct-nlp-data/" "ct-backend/" "client_secret_mika.json" "brat_bin/" "brat/" "bca.png" "bca.pdf" ".ipynb_checkpoints/" ".DS_Store" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/utils/" (22702 55693 0 0) "str_encoder.py" "set_cover.py" "dask_trace.py" "ann2txt.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/tests/" (22702 55639 0 0) "test_str_encoder.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/transformations/" (22700 22636 0 0) "type.py" "truncate.py" "time.py" "spacy.py" "source.py" "reply.py" "person_prob.py" "person.py" "nlp_results.py" "merge.py" "luggage.py" "location.py" "language.py" "iata.py" "greeting.py" "fn.py" "eom.py" "crm_person.py" "crm_company.py" "company_prob.py" "category_or_class.py" "airline.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/jwt_auth/" (22700 22360 0 0) "verify.py" "get_keys.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/" (22700 20889 0 0) "tests/" "setup.cfg" "Makefile" "jwt_auth/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/nlp_api/controllers/" (22700 22360 0 0) "annotate.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/nlp_api/" (22700 22639 0 0) "README.md" "nlp.yaml" "MANIFEST" "LICENSE" "controllers/" "app.pyc" "app.py" "__pycache__/" "__main__.py" "__init__.pyc" "__init__.py" ".DS_Store" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/e2e_pipeline/" (22700 22636 0 0) "score_annotations.py" "score_annotations.html" "ner_score_annotations.html" "msgtype_booking_th=0.9_st=True.html" "metric_helpers.py" "helpers.py" "evaluation.py" "eval_msgtype_booking.py" "eval_language.py" "eval_detected_ners.py" "eval.py" "end_to_end_eval.py" "docker-compose.yml" "copy_bi.sh" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/event_model/" (22700 22638 0 0) "postprocessing/" "org.geonames.locations_with_iata.json" "models/" "event_model_helpers.py" "event_model_/" "event_model.py" "aws_setup.md" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/confidence_model/" (22700 22636 0 0) "models/" "confidence_model_helpers.py" "confidence_model_/" "confidence_model.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/" (22700 22636 0 0) "type_model/" "event_model/" "content_model/" "confidence_model/" "base_model/" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/" (22700 22639 0 0) "train_model.py" "tests/" "setup.cfg" "nlp_models/" "msg_type/" "msg_content/" "msg_confidence/" "Makefile" "event_model/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/" (22700 22636 0 0) "requirements.txt" "recommendation/" "nlp_support/" "nlp_models/" "Makefile" "jwt_auth/" "email_tagger/" "email_parser/" "e2e_pipeline/" "Dockerfile-spacy" "Dockerfile" "docker-compose.build.yml" "ctlearn/" "brat_io/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/pipelines/" (22700 22636 0 0) "nlp.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/" (22700 22636 0 0) "utils/" "transformations/" "README.md" "pipelines/" "evaluations/" "estimators/" "data/" "dasks/" "base/" "__pycache__/" "__init__.py" ".DS_Store" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/base/" (22700 23643 0 0) "transformer.py" "pipeline.py" "estimator.py" "base.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/tests_00_unit/" (22700 22360 0 0) "test_firehose.py" "test_failure_spacy.json" "test_fails_no_fail.json" "test_fails.py" "test_annotate.py" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/tests/tests_00_unit/" (22700 17667 0 0) "test_rank_hotel.py" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/recommendation_api/" (22700 17667 0 0) "recommendation.yaml" "controllers/" "app.py" "__pycache__/" "__main__.py" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/" (22700 20317 0 0) "tests/" "setup.cfg" "requirements.txt" "recommendation_api/" "Makefile" "Dockerfile" "docker-compose.yml" "docker-compose.develop.yml" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/" (22694 46224 0 0) "tests/" "setup.cfg" "requirements.txt" "nlp_api/" "Makefile" "Dockerfile" "docker-compose.yml" "docker-compose.develop.yml" "__pycache__/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/content_model/" (22698 63524 0 0) "scripts/" "msg_content_model/" "models/" "content_model_helpers.py" "content_model.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/email_tagger/" (22697 36576 0 0) "type_tagger.py" "truncate_tagger.py" "time_tagger.py" "spacy_tagger.py" "source_tagger.py" "set_cover.py" "reply_tagger.py" "prob_tagger.py" "person_tagger.py" "merge_annotations.py" "mail_tagger.py" "luggage_tagger.py" "language_tagger.py" "isbooking_tagger.py" "iata_tagger.py" "helpers.py" "greeting_tagger.py" "geonames_tagger.py" "fn_tagger.py" "event_tagger.py" "eom_tagger.py" "data/" "crm_person_tagger.py" "crm_company_tagger.py" "content_tagger.py" "categoryorclass_tagger.py" "base_tagger.py" "airline_tagger.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/type_model/" (22697 36577 0 0) "vocabulary_signal_words.py" "type_model_helpers.py" "type_model.py" "scripts/" "msg_type_model/" "models/" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/msg_type_model/" (22697 36576 0 0) "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/msg_type/" (22697 36576 0 0) "msg_type_model/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/recommendation_api/controllers/" (22695 6784 0 0) "hotel.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/recommendation/tests/" (22695 5536 0 0) "tests_00_unit/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/hotel/" (22695 5826 0 0) "pastbooking_ranker.py" "distance_ranker.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/" (22695 5825 0 0) "hotel/" "flight/" "base/" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/" (22695 5858 0 0) "tests/" "setup.cfg" "recommendation/" "Makefile" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/" (22695 5536 0 0) "website/" "ticket/" "search/" "recommendation/" "README.md" "payment/" "nlp/" "mock_server_for_none_swagger/" "mock_server/" "Makefile.default" "Makefile" "kpi/" "fake_zendesk/" "fake_aws/" "es_proxy/" "duckling/" "document_storage/" "crm/" "cockpit/" "checkout/" "booking/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/recommendation/recommendation/base/" (22695 5609 0 0) "base_ranker.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/" (22694 49092 0 0) "tests/" "setup.cfg" "README.md" "Makefile" "email_tagger/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/email_tagger/tests/" (22694 46701 0 0) "zz_test_corpus.py" "test_tag_time.py" "test_tag_reply.py" "test_tag_persons.py" "test_tag_mail.py" "test_tag_mail.json" "test_tag_iata.py" "test_tag_greeting.py" "test_tag_flight_numbers.py" "test_tag_endofmessage.py" "test_tag_class.py" "test_simpletags.py" "test_prob_tagger.py" "test_merge_annotations.py" "test_luggage_tagger.py" "test_language.py" "test_helpers.py" "test_get_spacy.py" "test_get_persons.py" "test_get_companies.py" "test_geonames_tagger.py" "test_del_reply.py" "test_airline_tagger.py" "corpus_time_tags.json" "corpus_person_tags.json" "corpus/" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/tests_01_integration/" (22689 56816 0 0) "full_cycle_test.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/" (22671 12070 0 0) "tests_01_integration/" "tests_00_unit/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/" (22693 35794 0 0) "walk_corpus.py" "test_spacy_tok.py" "README.md" "raw2firstann.py" "post_process_annotations/" "nlp_tester/" "kpis/" "geonames/" "filter_threads.py" "fetch_mail/" "booking_items_report.py" "add_airport_property.js" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/transformations/__pycache__/" (22692 49127 0 0) "type.cpython-35.pyc" "truncate.cpython-35.pyc" "time.cpython-35.pyc" "spacy.cpython-35.pyc" "source.cpython-35.pyc" "reply.cpython-35.pyc" "person_prob.cpython-35.pyc" "person.cpython-35.pyc" "luggage.cpython-35.pyc" "location.cpython-35.pyc" "language.cpython-35.pyc" "iata.cpython-35.pyc" "greeting.cpython-35.pyc" "fn.cpython-35.pyc" "eom.cpython-35.pyc" "crm_person.cpython-35.pyc" "crm_company.cpython-35.pyc" "company_prob.cpython-35.pyc" "category_or_class.cpython-35.pyc" "airline.cpython-35.pyc" "__init__.cpython-35.pyc" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/utils/__pycache__/" (22692 33764 0 0) "__init__.cpython-35.pyc" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/infrastructure/" (22572 10539 0 0) "website/" "services_local/" "services/" "README.md" "npm-cache/" "nlp-nginx/" "logging/" "grafana/" "es_proxy/" "es/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/ctlearn/ctlearn/dasklearn/" (22689 47604 0 0) "tests/" "pipeline.py" "grid_search.py" "core.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/brat_io/brat_io/" (22684 24792 0 0) "to_brat.py" "README.md" "message.py" "helpers.py" "from_brat.py" "filelock.py" "common.py" "annotation.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/post_process_annotations/" (22684 25241 0 0) "post_process_annotations.py" "get_data.sh" "event2request.py" "check_time_consistency.py" "check_event_attributes.py" "check_duplicate_entries.py" "annotation_season_2.conf" "annotation_season_1.conf" "annotation_config.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/spark/python/pyspark/ml/" (22675 43968 0 0) "wrapper.py" "util.py" "tuning.py" "tests.py" "regression.py" "recommendation.py" "pipeline.py" "param/" "linalg/" "feature.py" "evaluation.py" "common.py" "clustering.py" "classification.py" "base.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/kpi/" (22671 12070 0 0) "setup.cfg" "requirements.txt" "README.md" "MANIFEST" "Makefile" "kpi_api/" "Experts Performance Dashbard.json" "Dockerfile" "docker-compose.yml" "docker-compose.develop.yml" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/" (22671 12070 0 0) "targets/" "kpi.yaml" "controllers/" "app.py" "__pycache__/" "__main__.py" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/kpi/kpi_api/targets/" (22671 12070 0 0) "refunds.py" "rebookings.py" "offers_created.py" "offer_items_created.py" "es_target.py" "elements.py" "corr_unknowns.py" "corr_refunds.py" "corr_rebookings.py" "corr_cancellations.py" "combined_target.py" "client_retention_proxy.py" "client_retention_cohorts.py" "cancellations.py" "bookings.py" "base_target.py" "active_agents.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/test/" (22675 26282 0 0) "test/" "shared/" "screenshots/" "README.md" "protractor-config-cockpit.js" "protractor-config-checkout.js" "package.json" "Makefile" "helpers/" "fixtures/" "Dockerfile" "docker-compose.yml" "docker-compose.develop.yml" "config.json" "cockpit/" "checkout/" ".eslintrc.json" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/" (22675 26282 0 0) "tools/" "test/" "services/" "README.md" "python_lib/" "nodejs_lib/" "Makefile" "lint/" "lambda/" "infrastructure/" "data/" "cache/" ".travis.yml" ".idea/" ".gitignore" ".git/" ".dockerignore" "../" "./")
+
+ ("/Users/mika/tmp/ct-backend/python_lib/email_tagger/email_tagger/" (22680 24818 0 0) "type_tagger.py" "truncate_tagger.py" "time_tagger.py" "spacy_tagger.py" "source_tagger.py" "set_cover.py" "reply_tagger.py" "prob_tagger.py" "person_tagger.py" "merge_annotations.py" "mail_tagger.py" "luggage_tagger.py" "language_tagger.py" "isbooking_tagger.py" "iata_tagger.py" "helpers.py" "greeting_tagger.py" "geonames_tagger.py" "fn_tagger.py" "event_tagger.py" "eom_tagger.py" "data/" "ct-pipeline.py" "crm_person_tagger.py" "crm_company_tagger.py" "content_tagger.py" "categoryorclass_tagger.py" "base_tagger.py" "airline_tagger.py" "__init__.py" "../" "./")
+
+ ("/Users/mika/Downloads/" (22675 25406 0 0) "zenburn-terminal-master.zip" "zenburn-terminal-master/" "xubuntu-16.04.1-desktop-i386.iso.torrent" "xubuntu-16.04.1-desktop-i386.iso" "wordpress_wp_20160706_350.sql.gz" "WEG Besprechung IVN B32.xlsx" "video_maeusesprung.wmv" "unetbootin-mac-625.dmg" "traledist.tgz" "traledist/" "The Secret of Monkey Island (Amiga).zip" "The Secret of Monkey Island (Amiga)/" "tfidf_bow_lda_classification (1).py" "text_snippets_de_dpt.txt" "test.xlsx" "Template_Bookingfees_data.xlsx" "Template_Bookingfees_data (1).xlsx" "Teampicture.jpg" "table.csv" "swagger.yaml" "swagger (2).yaml" "swagger (1).yaml" "svm-python-v204.tgz" "SÜ_Springteufel e.V._10.Mai 12.49.zip" "Super Mario Bros. 3 (USA).zip" "Super Mario Bros. 3 (USA).nes" "Super Mario 64 (Europe) (En,Fr,De).zip" "Summary_BryanstonResourcesAG_2017-01-01_2017-01-31.pdf.pdf" "Steuerpflichtiger-Einkommensteuer2015-Voransicht.pdf" "Steuerpflichtiger-Einkommensteuer2015-Bescheidvergleich.pdf" "Steuerpflichtiger-Einkommensteuer2015-Anlagen zum Steuerfall.pdf" "Spectacle+1.1.zip" "spark-2.1.0-bin-hadoop2.7.tgz" "Slack for iOS Upload.jpg" "Slack for iOS Upload (3).jpg" "Slack for iOS Upload (2).jpg" "Slack for iOS Upload (1).jpg" "sensalytics_brochure_de-web.pdf" "sebastian_pic.png" "scummvm-1.9.0.2-macosx.dmg" "scummvm-1.9.0-macosx-ppc.dmg" "Screen Shot 2016-09-28 at 11.42.22.png" "SchulRV_Anlage 3_Kooperationsvertrag-PDF.pdf" "SchulRV_Anlage 3_Kooperationsvertrag-PDF (1).pdf" "Schleierschwanz_Delta_SKIZZE.pdf" "samples.zip" "samples/" "RP_161014_1900_59-23.png" "RG201511738621.pdf" "Reporting Struktur.xlsx" "rechnung_AR20161128A0719064.pdf" "Rechnung_2016_05_03_OL16064800257763.pdf" "python-flask-server-generated.zip" "Probabilistic Graphical Models Principles and Techniques.pdf" "player.jnlp" "Persönliches Finanzmanagement_Transactions_Export.xlsx" "personalanteile-hort-2014.xls" "Pasted image at 2016_12_16 09_44 AM.png" "Pac-Man (Europe).zip" "Pac-Man (Europe).nes" "original_msg.txt" "Official Booking Items-1486054061734.json" "Official Booking Items-1481200321231.json" "noname.eml" "NLPAssignment-Sarkan.pdf" "NLPAssignment-Jamalabadi.pdf" "NLPAssignment-Hassan.pdf" "NLPAssignment-Guggilla.pdf" "NLPAssignment-Czarnecki.pdf" "NLPAssignment-Bulut.pdf" "NLPAssignment-Alluri.pdf" "NLP Assignment - Young.pdf" "NLP Assignment - Schubert.pdf" "NLP Assignment - Sarkan.pdf" "NLP Assignment - Rasulov.pdf" "NLP Assignment - Quraishi.pdf" "NLP Assignment - Pardo.pdf" "NLP Assignment - Lopez.pdf" "NLP Assignment - Kotnis.pdf" "NLP Assignment - Kokatjuhha.pdf" "NLP Assignment - Koch.pdf" "NLP Assignment - Kettemann.pdf" "NLP Assignment - Kashkarev.pdf" "NLP Assignment - Carlowitz-Ghori.pdf" "natural-language-processing-engineer-interview-questions.pdf" "mxkozzzz.dmg" "mdb-mit_welcher_kostenbeteiligung_muss_ich_rechnen__hort_.pdf" "lyu-reliability07.pdf" "logo.jpg" "Lichtrondo_Modulor_Newsletter.pdf" "Liberation_Sans-Regular.ttf" "Liberation_Sans-Regular (1).ttf" "l2s.tar.gz" "l2s.pdf" "l2s/" "konwert_1.8.orig.tar.gz" "knowtator-1.9_beta2.zip" "KeePass2.23.zip" "KeePass2.23.app/" "KDD05-Tang-et-al-Email-data-cleaning.ppt" "Kalender2017Springteufel.pdf" "Kalender2017.xlsx" "Kalender2017-Entwurf(2).xlsx" "jquery-ui-1.11.4.custom.zip" "jquery-ui-1.11.4.custom (1).zip" "jquery-ui-1.11.4.custom/" "iso-languagecodes.txt" "invoices-2016-08-08-2016-08-08.zip" "invoices-2016-08-08-2016-08-08/" "Invoice_75256430.pdf" "Invoice_71287339.pdf" "integration_test_requests (1).json" "Initial_LinkedInDataExport_09-27-2016.zip" "IMG_0070.mp4" "imap.tar.Z" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-12-19.pdf" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-11-20.pdf" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-10-19.pdf" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-08-21.pdf" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-07-19.pdf" "Ihre Kreditkartenabrechnung (EBSCL1) TARGO 00005203014101020324 am 2016-05-19.pdf" "identity-toolkit-python-master.zip" "identity-toolkit-python-master/" "hierarchy.zip" "helmers_lebenslauf.pdf" "grafana_data_export.csv" "grafana_data_export (9).csv" "grafana_data_export (8).csv" "grafana_data_export (7).csv" "grafana_data_export (6).csv" "grafana_data_export (5).csv" "grafana_data_export (4).csv" "grafana_data_export (31).csv" "grafana_data_export (30).csv" "grafana_data_export (3).csv" "grafana_data_export (29).csv" "grafana_data_export (28).csv" "grafana_data_export (27).csv" "grafana_data_export (26).csv" "grafana_data_export (25).csv" "grafana_data_export (24).csv" "grafana_data_export (23).csv" "grafana_data_export (22).csv" "grafana_data_export (21).csv" "grafana_data_export (20).csv" "grafana_data_export (2).csv" "grafana_data_export (19).csv" "grafana_data_export (18).csv" "grafana_data_export (17).csv" "grafana_data_export (16).csv" "grafana_data_export (15).csv" "grafana_data_export (14).csv" "grafana_data_export (13).csv" "grafana_data_export (12).csv" "grafana_data_export (11).csv" "grafana_data_export (10).csv" "grafana_data_export (1).csv" "GloVe-1.2.zip" "GlobalAirportDatabase.zip" "GlobalAirportDatabase/" "generative-adversarial-nets.bib" "G_161014_1800_50-37.png" "Fuzzified_Aho-Corasick_search_automata.pdf" "fuel-code-directory.xls" "for_evaluation.zip" "for_evaluation-20161219T133157Z.zip" "FIFA_12_EUR_GERMAN_PSP-ABSTRAKT.rar" "extract.py" "Experts Performance Dashbard-1478622288072.json" "Expense Template.xlsx" "Expense Template (1).xlsx" "ESOP Comtravo_Sebastian Mika.docx" "ESOP Comtravo_Sebastian Mika (2).docx" "ESOP Comtravo_Sebastian Mika (1).docx" "env" "emacs-for-clojure-book1.zip" "emacs-for-clojure-book1/" "einnahmekalkulation-2016-160629.xls" "edu.uchsc.ccp.knowtator/" "Eclipse Installer.app/" "easyadapt.pl.gz" "easyadapt.pl" "DSR Hiring Day Invitation - 15 July 2016.pdf" "DSC_1873.JPG" "DSC_0716.JPG" "Doodle.ics" "DMITRYBOYKALEBENSLAUF.pdf" "demos.zip" "de.json" "de-token.bin" "de-token (1).bin" "de-token/" "de-sent.bin" "dcatap.rdf" "db1fdf11-e051-4e85-ba5b-7dfb59b4f60b.pdf" "d22ffc79-ebd5-456b-b845-db9b2f456f04.pdf" "cudnn-8.0-linux-x64-v5.1.tgz" "cudnn-8.0-linux-x64-v5.0-ga.tgz" "crfsuite-0.12.tar.gz" "crf-benson.ppt" "Contract_CT-EX2015D245981-103.pdf" "contextualslu.bib" "Complete_LinkedInDataExport_09-27-2016.zip" "comments.js" "CodeCogsEqn.gif" "client_secret_136719520832-runhae8t6vro3e7atlmd01nncmehi0r4.apps.googleusercontent.com (1).json" "client-2017-01-01-2017-01-31.tsv" "classifier_05.npy" "classifier" "cities15000.zip" "c3a043f1-42fc-4993-af8c-de19dbc66548.pdf" "c3a043f1-42fc-4993-af8c-de19dbc66548 (1).pdf" "Brants-CLAUS98.ps.gz" "Brants-CLAUS98.ps" "bootstrap-3.3.7.zip" "bootstrap-3.3.7/" "bootstrap-3.3.6-dist.zip" "bootstrap-3.3.6-dist/" "bokeh_plot.png" "bokeh_plot (5).png" "bokeh_plot (4).png" "bokeh_plot (4) (1).png" "bokeh_plot (3).png" "bokeh_plot (2).png" "bokeh_plot (1).png" "bionotate_v1.0.zip" "bionotate_v1.0 2/" "bionotate_v1.0/" "Bildschirmfoto 2016-07-13 um 09.35.53.png" "biblio.bib.old" "biblio.bib (1).old" "Bestaetigung_Vorsorge_ab_07_2000_AL_0057606356_20161220_161843.pdf" "Bestaetigung_PrivatRente_Klassik_AL_0057606356_20160801_082134.pdf" "berschussbericht_PrivatRente_Klassik_AL_0057606356_20160907_063556.pdf" "berligram.tbz" "Berligram/" "b573d160-b4e7-45dc-aec3-d35b999d492c.pdf" "b573d160-b4e7-45dc-aec3-d35b999d492c (1).pdf" "Auskunft_PrivatRente_Klassik_AL_0057606356_20160711_141643.pdf" "audit_is_comments.py" "audit.js" "Atom.app/" "atom-mac.zip" "annotator_macos.jnlp" "annotator_macos (3).jnlp" "annotator_macos (2).jnlp" "annotator_macos (1).jnlp" "annotation.conf" "AnaforaManual.pdf" "alternateNames.zip" "alternateNames (1).zip" "allCountries.zip" "airports.dat" "agrep2ps.zip" "Abrechnung_10-16_0993_KSB.xls.zip" "Abrechnung_10-16_0993.xls.zip" "5338084_Wertmitteilung_01122015.pdf" "5338084_Wertmitteilung_01122015 (2).pdf" "5338084_Wertmitteilung_01122015 (1).pdf" "5338084_Information-zur-Ueberschussbeteiligung_01122015.pdf" "5338084_Beitragsfreistellung_07072016.pdf" "4c99f7cd-7f05-4860-b993-47c66f6730e2.pdf" "3dad9805-3f96-4923-ae7d-07984ea0be19.pdf" "32VH_GR_EG_b_201.pdf" "2017KilaKonzeptionsübefrarbeitung.docx" "20161109104500_annotated_tickets.json.bz2" "20160907_Protokoll_EVT.pdf" "2016-11-27 KV Nachweis Mika 2017.pdf" "2016 Elternbefragung_Kila_Schüli Auswertung.xlsx" "2016 Elternbefragung_Kila_Schüli Auswertung - Zusammenfassung Kila.pdf" "2015-12-08 KV Nachweis Mika.pdf" "2015-12-08 KV Nachweis Mika (1).pdf" "160801_I_Stunden.xlsx" "160622 Annotation Instructions.key" "1469722653000.tml" "1469722604000.tml" "12732tjo.ps" "04960054-a881-4a7f-95da-a9c406573843.pdf" ".localized" ".DS_Store" "- (1).txt" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/kpis/" (22673 55378 0 0) "tpt/" "time_per_booking.py" "private_travelers.py" "flight_numbers_per_flight_items.py" "departure_time.py" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/1001-1050/" (22674 64829 0 0) "01049-06704_response.json" "01049-06704_request.json" "01049-06704.txt" "01049-06704.ann" "01048-06703_response.json" "01048-06703_request.json" "01048-06703.txt" "01048-06703.ann" "01047-06702_response.json" "01047-06702_request.json" "01047-06702.txt" "01047-06702.ann" "01046-06701_response.json" "01046-06701_request.json" "01046-06701.txt" "01046-06701.ann" "01045-06700_response.json" "01045-06700_request.json" "01045-06700.txt" "01045-06700.ann" "01044-06699_response.json" "01044-06699_request.json" "01044-06699.txt" "01044-06699.ann" "01043-06698_response.json" "01043-06698_request.json" "01043-06698.txt" "01043-06698.ann" "01042-06697_response.json" "01042-06697_request.json" "01042-06697.txt" "01042-06697.ann" "01041-06696_response.json" "01041-06696_request.json" "01041-06696.txt" "01041-06696.ann" "01040-06695_response.json" "01040-06695_request.json" "01040-06695.txt" "01040-06695.ann" "01039-06694_response.json" "01039-06694_request.json" "01039-06694.txt" "01039-06694.ann" "01038-06693_response.json" "01038-06693_request.json" "01038-06693.txt" "01038-06693.ann" "01037-06691_response.json" "01037-06691_request.json" "01037-06691.txt" "01037-06691.ann" "01036-06690_response.json" "01036-06690_request.json" "01036-06690.txt" "01036-06690.ann" "01035-06689_response.json" "01035-06689_request.json" "01035-06689.txt" "01035-06689.ann" "01034-06688_response.json" "01034-06688_request.json" "01034-06688.txt" "01034-06688.ann" "01033-06682_response.json" "01033-06682_request.json" "01033-06682.txt" "01033-06682.ann" "01032-06679_response.json" "01032-06679_request.json" "01032-06679.txt" "01032-06679.ann" "01031-06678_response.json" "01031-06678_request.json" "01031-06678.txt" "01031-06678.ann" "01030-06677_response.json" "01030-06677_request.json" "01030-06677.txt" "01030-06677.ann" "01029-06676_response.json" "01029-06676_request.json" "01029-06676.txt" "01029-06676.ann" "01028-06675_response.json" "01028-06675_request.json" "01028-06675.txt" "01028-06675.ann" "01027-06673_response.json" "01027-06673_request.json" "01027-06673.txt" "01027-06673.ann" "01026-06671_response.json" "01026-06671_request.json" "01026-06671.txt" "01026-06671.ann" "01025-06670_response.json" "01025-06670_request.json" "01025-06670.txt" "01025-06670.ann" "01024-06669_response.json" "01024-06669_request.json" "01024-06669.txt" "01024-06669.ann" "01023-06668_response.json" "01023-06668_request.json" "01023-06668.txt" "01023-06668.ann" "01022-06667_response.json" "01022-06667_request.json" "01022-06667.txt" "01022-06667.ann" "01021-06666_response.json" "01021-06666_request.json" "01021-06666.txt" "01021-06666.ann" "01020-06665_response.json" "01020-06665_request.json" "01020-06665.txt" "01020-06665.ann" "01019-06664_response.json" "01019-06664_request.json" "01019-06664.txt" "01019-06664.ann" "01018-06663_response.json" "01018-06663_request.json" "01018-06663.txt" "01018-06663.ann" "01017-06662_response.json" "01017-06662_request.json" "01017-06662.txt" "01017-06662.ann" "01016-06661_response.json" "01016-06661_request.json" "01016-06661.txt" "01016-06661.ann" "01015-06657_response.json" "01015-06657_request.json" "01015-06657.txt" "01015-06657.ann" "01014-06656_response.json" "01014-06656_request.json" "01014-06656.txt" "01014-06656.ann" "01013-06655_response.json" "01013-06655_request.json" "01013-06655.txt" "01013-06655.ann" "01012-06654_response.json" "01012-06654_request.json" "01012-06654.txt" "01012-06654.ann" "01011-06651_response.json" "01011-06651_request.json" "01011-06651.txt" "01011-06651.ann" "01010-06648_response.json" "01010-06648_request.json" "01010-06648.txt" "01010-06648.ann" "01009-06646_response.json" "01009-06646_request.json" "01009-06646.txt" "01009-06646.ann" "01008-06644_response.json" "01008-06644_request.json" "01008-06644.txt" "01008-06644.ann" "01007-06643_response.json" "01007-06643_request.json" "01007-06643.txt" "01007-06643.ann" "01006-06642_response.json" "01006-06642_request.json" "01006-06642.txt" "01006-06642.ann" "01005-06641_response.json" "01005-06641_request.json" "01005-06641.txt" "01005-06641.ann" "01004-06640_response.json" "01004-06640_request.json" "01004-06640.txt" "01004-06640.ann" "01003-06639_response.json" "01003-06639_request.json" "01003-06639.txt" "01003-06639.ann" "01002-06637_response.json" "01002-06637_request.json" "01002-06637.txt" "01002-06637.ann" "01001-06636_response.json" "01001-06636_request.json" "01001-06636.txt" "01001-06636.ann" "01000-06635_response.json" "01000-06635_request.json" "01000-06635.txt" "01000-06635.ann" ".stats_cache" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/1051-1100/" (22674 64829 0 0) "01099-06784_response.json" "01099-06784_request.json" "01099-06784.txt" "01099-06784.ann" "01098-06783_response.json" "01098-06783_request.json" "01098-06783.txt" "01098-06783.ann" "01097-06782_response.json" "01097-06782_request.json" "01097-06782.txt" "01097-06782.ann" "01096-06781_response.json" "01096-06781_request.json" "01096-06781.txt" "01096-06781.ann" "01095-06780_response.json" "01095-06780_request.json" "01095-06780.txt" "01095-06780.ann" "01094-06779_response.json" "01094-06779_request.json" "01094-06779.txt" "01094-06779.ann" "01093-06778_response.json" "01093-06778_request.json" "01093-06778.txt" "01093-06778.ann" "01092-06777_response.json" "01092-06777_request.json" "01092-06777.txt" "01092-06777.ann" "01091-06776_response.json" "01091-06776_request.json" "01091-06776.txt" "01091-06776.ann" "01090-06775_response.json" "01090-06775_request.json" "01090-06775.txt" "01090-06775.ann" "01089-06774_response.json" "01089-06774_request.json" "01089-06774.txt" "01089-06774.ann" "01088-06773_response.json" "01088-06773_request.json" "01088-06773.txt" "01088-06773.ann" "01087-06772_response.json" "01087-06772_request.json" "01087-06772.txt" "01087-06772.ann" "01086-06771_response.json" "01086-06771_request.json" "01086-06771.txt" "01086-06771.ann" "01085-06770_response.json" "01085-06770_request.json" "01085-06770.txt" "01085-06770.ann" "01084-06767_response.json" "01084-06767_request.json" "01084-06767.txt" "01084-06767.ann" "01083-06766_response.json" "01083-06766_request.json" "01083-06766.txt" "01083-06766.ann" "01082-06761_response.json" "01082-06761_request.json" "01082-06761.txt" "01082-06761.ann" "01081-06760_response.json" "01081-06760_request.json" "01081-06760.txt" "01081-06760.ann" "01080-06758_response.json" "01080-06758_request.json" "01080-06758.txt" "01080-06758.ann" "01079-06757_response.json" "01079-06757_request.json" "01079-06757.txt" "01079-06757.ann" "01078-06749_response.json" "01078-06749_request.json" "01078-06749.txt" "01078-06749.ann" "01077-06745_response.json" "01077-06745_request.json" "01077-06745.txt" "01077-06745.ann" "01076-06744_response.json" "01076-06744_request.json" "01076-06744.txt" "01076-06744.ann" "01075-06743_response.json" "01075-06743_request.json" "01075-06743.txt" "01075-06743.ann" "01074-06742_response.json" "01074-06742_request.json" "01074-06742.txt" "01074-06742.ann" "01073-06740_response.json" "01073-06740_request.json" "01073-06740.txt" "01073-06740.ann" "01072-06738_response.json" "01072-06738_request.json" "01072-06738.txt" "01072-06738.ann" "01071-06736_response.json" "01071-06736_request.json" "01071-06736.txt" "01071-06736.ann" "01070-06735_response.json" "01070-06735_request.json" "01070-06735.txt" "01070-06735.ann" "01069-06734_response.json" "01069-06734_request.json" "01069-06734.txt" "01069-06734.ann" "01068-06733_response.json" "01068-06733_request.json" "01068-06733.txt" "01068-06733.ann" "01067-06732_response.json" "01067-06732_request.json" "01067-06732.txt" "01067-06732.ann" "01066-06731_response.json" "01066-06731_request.json" "01066-06731.txt" "01066-06731.ann" "01065-06730_response.json" "01065-06730_request.json" "01065-06730.txt" "01065-06730.ann" "01064-06729_response.json" "01064-06729_request.json" "01064-06729.txt" "01064-06729.ann" "01063-06727_response.json" "01063-06727_request.json" "01063-06727.txt" "01063-06727.ann" "01062-06721_response.json" "01062-06721_request.json" "01062-06721.txt" "01062-06721.ann" "01061-06719_response.json" "01061-06719_request.json" "01061-06719.txt" "01061-06719.ann" "01060-06718_response.json" "01060-06718_request.json" "01060-06718.txt" "01060-06718.ann" "01059-06717_response.json" "01059-06717_request.json" "01059-06717.txt" "01059-06717.ann" "01058-06716_response.json" "01058-06716_request.json" "01058-06716.txt" "01058-06716.ann" "01057-06715_response.json" "01057-06715_request.json" "01057-06715.txt" "01057-06715.ann" "01056-06714_response.json" "01056-06714_request.json" "01056-06714.txt" "01056-06714.ann" "01055-06713_response.json" "01055-06713_request.json" "01055-06713.txt" "01055-06713.ann" "01054-06711_response.json" "01054-06711_request.json" "01054-06711.txt" "01054-06711.ann" "01053-06709_response.json" "01053-06709_request.json" "01053-06709.txt" "01053-06709.ann" "01052-06708_response.json" "01052-06708_request.json" "01052-06708.txt" "01052-06708.ann" "01051-06706_response.json" "01051-06706_request.json" "01051-06706.txt" "01051-06706.ann" "01050-06705_response.json" "01050-06705_request.json" "01050-06705.txt" "01050-06705.ann" ".stats_cache" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/annotator_C/" (22674 64828 0 0) "1951-2000/" "1901-1950/" "1851-1900/" "1801-1850/" "1751-1800/" "1701-1750/" "1651-1700/" "1601-1650/" "1551-1600/" "1501-1550/" "1451-1500/" "1401-1450/" "1351-1400/" "1301-1350/" "1251-1300/" "1201-1250/" "1151-1200/" "1101-1150/" "1051-1100/" "1001-1050/" "0001-0050/" ".stats_cache" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/season_2/" (22674 64831 0 0) "visual.conf~" "visual.conf" "training/" "tools.conf" "kb_shortcuts.conf" "annotator_C/" "annotator_B/" "annotator_A/" "annotation.conf~" "annotation.conf" ".stats_cache" ".all/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/brat_annotations/" (22674 64797 0 0) "season_2/" "season_1/" "brat.tar.bz2" ".stats_cache" "../" "./")
+
+ ("/Users/mika/comtravo/ct-nlp-data/" (22672 39217 0 0) "raw_data.pkl.bz2.OLD" "LOGS/" "geonames/" "e2e_eval.pkl" "brat_annotations/" "booking.com.example.json" "annotated_corpus_2017-01-18T12:32:05Z.json" "annotated_corpus_2017-01-05T14_31_26Z.json" "all_msg/" ".stats_cache" ".DS_Store" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/nlp_models/base_model/" (22667 16168 0 0) "base_model.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/tests/" (22666 27599 0 0) "test_type/" "test_event/" "test_content/" "test_confidence/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/brat_io/" (22572 10564 0 0) "setup.cfg" "Makefile" "brat_io/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/" (22661 58659 0 0) "zendesk/" "ssh_into_boxes/" "scripts/" "jenkins/" "git/" "aws/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/fetch_mail/" (22665 54883 0 0) "tickets_to_brat.py" "README.md" "mail_fetcher_raw.py" "__pycache__/" "../" "./")
+
+ ("/Users/" (22543 51990 0 0) "Shared/" "mika/" "Guest/" ".localized" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/integration_tests/" (22663 20260 0 0) "full_cycle_test.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/jwt_auth/tests/" (22572 10540 0 0) "test_get_keys.py" "test_decode_token.py" "test_authenticate.py" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_support/es_client/" (22662 4696 0 0) "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_support/" (22662 5388 0 0) "tests/" "setup.cfg" "README.md" "Makefile" "es_client/" "duckling_client/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/test/" (22661 59313 0 0) "test_rf.py" "test_postprocessing.py" "data/" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/" (22662 21997 0 0) "train_randomforest_model.py" "test_pipe.py" "test/" "setup.cfg" "MANIFEST" "Makefile" "make_test_files.py" "event_model/" "evaluation.py" "aws_setup.md" "__pycache__/" ".coverage" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/event_model/postprocessing/" (22661 62247 0 0) "under_development/" "most_common_iata.json" "convert_to_flightrequest.py" "conversion_helpers.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/python_lib/nlp_models/event_model/event_model/" (22661 62247 0 0) "postprocessing/" "models/" "helpers.py" "data/" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/unit_tests/" (22662 1140 0 0) "test_firehose.py" "test_failure_spacy.json" "test_fails_no_fail.json" "test_fails.py" "test_annotate.py" "__pycache__/" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/integration/" (22662 743 0 0) "full_cycle_test.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/nlp/tests/unit/" (22661 64857 0 0) "test_firehose.py" "test_failure_spacy.json" "test_fails_no_fail.json" "test_fails.py" "test_annotate.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/infrastructure/services/" (22661 58657 0 0) "website.yml" "ticket.yml" "search.yml" "pdf-generator.yml" "payment.yml" "nlp.yml" "duckling.yml" "document-storage.yml" "crm.yml" "cockpit.yml" "checkout.yml" "booking.yml" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/infrastructure/services_local/" (22661 58657 0 0) "website.yml" "ticket.yml" "search.yml" "pdf-generator.yml" "payment.yml" "payment-mysql.yml" "nlp.yml" "fake-zendesk.yml" "fake-aws.yml" "duckling.yml" "document-storage.yml" "crm.yml" "crm-mongo.yml" "cockpit.yml" "checkout.yml" "booking.yml" "booking-mongo.yml" "booking-elastic-search.yml" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/tools/scripts/kpis/tpt/" (22572 10540 0 0) "transforms.py" "loader.py" "helpers.py" "__pycache__/" "__init__.py" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/duckling/" (22647 33690 0 0) "test/" "target/" "src/" "resources/" "README.md" "project.clj" "Makefile" "Dockerfile" "cookies" ".lein-repl-history" ".lein-failures" ".gitignore" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/resources/languages/en/corpus/" (22644 46198 0 0) "time.clj" "temperature.clj" "numbers.clj" "measure.clj" "finance.clj" "communication.clj" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/resources/languages/de/rules/" (22644 46198 0 0) "time.clj" "numbers.clj" "duration.clj" "cycles.clj" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/resources/languages/en/rules/" (22644 46198 0 0) "time.clj" "temperature.clj" "numbers.clj" "measure.clj" "finance.clj" "duration.clj" "cycles.clj" "communication.clj" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/resources/languages/" (22644 46198 0 0) "zh/" "vi/" "uk/" "tr/" "sv/" "ru/" "pt/" "pl/" "nb/" "my/" "ko/" "ja/" "it/" "id/" "ga/" "fr/" "et/" "es/" "en/" "de/" "da/" "ar/" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/" (22644 47807 0 0) "test/" "target/" "src/" "resources/" "README.md" "project.clj" "pom.xml" "PATENTS" "LICENSE" "circle.yml" "bin/" ".nrepl-port" ".lein-repl-history" ".lein-failures" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/test/" (22362 46270 0 0) "duckling/" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/test/duckling/" (22362 46270 0 0) "util_test.clj" "time/" "ml/" "core_test.clj" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/test/duckling/time/" (22362 46270 0 0) "pred_test.clj" "obj_test.clj" "../" "./")
+
+ ("/Users/mika/comtravo/ct-backend/services/duckling/src/" (22526 37168 0 0) "duckling_service/" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/src/duckling/time/" (22606 26964 0 0) "prod.clj" "pred.clj" "obj.clj" "api.clj" "../" "./")
+
+ ("/Users/mika/comtravo/duckling/src/duckling/" (22606 26964 0 0) "util.clj" "time/" "resource.clj" "qa.clj" "ml/" "learn.clj" "helpers.clj" "engine.clj" "dev.clj" "corpus.clj" "core.clj" "../" "./")
+
+ ("/Users/mika/comtravo/PTEST/" (22638 18952 0 0) "taggers.py" "por_model.py" "perceptron.py" "__pycache__/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

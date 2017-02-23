@@ -1,0 +1,31 @@
+import os
+import json
+from . brat import bratify_ann
+import regex as re
+
+
+def _load_airlines_data():
+    path = os.path.dirname(os.path.abspath(__file__))
+    return json.load(open(os.path.join(path, '../../../data/airlines.json'), 'r'))
+
+
+def _build_re_flight_number(_airline_data):
+    r_code = r'|'.join([a['AirlineCode'] for a in _airline_data['AirlineInfo']])
+    r_code = r'(?i)(?P<airline_code>' + r_code + r')'
+    r_fn = (r'(?<=\s|\p{{P}}|^){airline_code}\s*'
+            '(?P<flight_number>\d{{3,4}})(?=\s|\p{{P}}|$)').format(airline_code=r_code)
+    return re.compile(r_fn, re.VERSION1 | re.MULTILINE)
+
+
+_airline_data = _load_airlines_data()
+_re_flight_number = _build_re_flight_number(_airline_data)
+
+
+def tag_flight_numbers(msg):
+    matches = {}
+    for m in _re_flight_number.finditer(msg['body']):
+        a = bratify_ann(msg, 'FlightNumber', m.start(), m.end(),
+                        attributes={'airline_code': m.group('airline_code'),
+                                    'flight_number': m.group('flight_number')})
+        matches.append(a)
+    return matches

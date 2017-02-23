@@ -1,0 +1,327 @@
+import json
+import os
+import requests
+import pandas as pd
+
+# Silence non valid cert warning
+requests.packages.urllib3.disable_warnings(
+    requests.packages.urllib3.exceptions.InsecureRequestWarning)
+
+
+def get_booking_items(start_date, end_date):
+    """Get all relevant booking items from elasticsearch"""
+    bi_uri = os.environ.get('COMTRAVO_BI_URI', 'http://bi')
+    bi_user = os.environ.get('COMTRAVO_BI_USER')
+    bi_password = os.environ.get('COMTRAVO_BI_PASSWORD')
+    booking_items = []
+    try:
+        # Get scroll id, filter to include start_date and exclude end_date UTC 00:00:00
+        query = {
+            "query": {
+                "bool": {
+                    "should": [
+                        {
+                            "range": {
+                                "booking_item.meta_data.created_at": {
+                                    "gte": '{}'.format(start_date.strftime("%Y-%m-%dT00:00:00Z")),
+                                    "lt": '{}'.format(end_date.strftime("%Y-%m-%dT00:00:00Z"))
+                                }
+                            }
+                        },
+                        {
+                            "range": {
+                                "booking_item.canceled_at": {
+                                    "gte": '{}'.format(start_date.strftime("%Y-%m-%dT00:00:00Z")),
+                                    "lte": '{}'.format(end_date.strftime("%Y-%m-%dT00:00:00Z"))
+                                }
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }
+            }
+        }
+        r = requests.post(bi_uri + '/booking_items/_search?scroll=1m&size=1000',
+                          headers={'Accept': 'application/json',
+                                   'Content-Type': 'application/json'},
+                          auth=(bi_user, bi_password),
+                          data=json.dumps(query),
+                          verify=False)  # Self signed cert...
+        if r.status_code != 200:
+            raise Exception('querying elasticsearch on {} failed: {}'.format(
+                bi_uri,
+                r.status_code))
+        # Get results
+        r = r.json()
+        scroll_id = r['_scroll_id']
+        booking_items += r['hits']['hits']
+        while True:
+            # Iterate scroll until no more items are left
+            r = requests.get(bi_uri + '/_search/scroll',
+                             headers={'Accept': 'application/json',
+                                      'Content-Type': 'application/json'},
+                             data=json.dumps({'scroll': '1m',
+                                              'scroll_id': scroll_id}),
+                             auth=(bi_user, bi_password),
+                             verify=False)  # Self signed cert...
+            if r.status_code != 200:
+                raise Exception('querying elasticsearch on {} failed: {}'.format(
+                    bi_uri,
+                    r.status_code))
+            r = r.json()
+            scroll_id = r['_scroll_id']
+            if len(r['hits']['hits']) == 0:
+                break
+            booking_items += r['hits']['hits']
+    except requests.exceptions.ConnectionError as e:
+        raise Exception("could not connect to elasticsearch: {}".format(e))
+    return booking_items
+
+
+def generate_report(hits):
+    # For testing, use locally saved data
+    # with open('booking_items.json', 'r') as f:
+    #    hits = json.load(f)
+
+    # Create a "flat" table from the booking items; no need to care for
+    # nested arrays as there is nothing in there we need
+    items = pd.io.json.json_normalize([h['_source'] for h in hits
+                                       if h['_source']['status'] != 'draft'])
+    # Just in case...
+    assert items._id.nunique() == items.shape[0]
+    items = items.set_index('_id')
+    # Calculate gross amount
+    items['booking_item.client_accounting_item.amount_gross'] = (
+        items['booking_item.client_accounting_item.amount'] *
+        (1.0+items['booking_item.client_accounting_item.vat']/100.))
+    print('Got {} booking items'.format(len(items)))
+
+    # REMOVE: this is my own code to get the parent_status - but that
+    # should be in elasticsearch at some point in time
+    #
+    # items['booking_item.parent_status'] = None
+    # for i_id, i in items.iterrows():
+    #     if type(i['booking_item.rebooked_from']) is str:
+    #         items.set_value(i_id, 'booking_item.parent_status',
+    #                         items.ix[i['booking_item.rebooked_from']]['booking_item.status'])
+    #     if type(i['booking_item.refund_for']) is str:
+    #         items.set_value(i_id, 'booking_item.parent_status',
+    #                         items.ix[i['booking_item.refund_for']]['booking_item.status'])
+
+    # Find items that are both, refund_for and rebooked_from - that should not be - should it?
+    refund_and_rebook_idx = (items['booking_item.rebooked_from'].notnull() &
+                             items['booking_item.refund_for'].notnull())
+    refund_and_rebook = items[refund_and_rebook_idx]
+    print('Found {} items which are refund_for and rebooking_from'.format(
+        refund_and_rebook_idx.sum()))
+
+    assert len(items[(items['booking_item.rebooked_from'].notnull() |
+                      items['booking_item.refund_for'].notnull())
+                     & -items['booking_item.parent_status'].notnull()]) == 0
+
+    # Calculate 26+ low-level buckets
+    def assign_to_status(items, name, status, canceled, rebooked, refund_for,
+                         rebooked_from, parent_status):
+        """Helper to create new columns"""
+        items[name] = ((items['booking_item.status'] == status) &
+                       (items['booking_item.canceled'] == canceled) &
+                       (items['booking_item.rebooked'] == rebooked) &
+                       (items['booking_item.refund_for'].isnull() if refund_for == 0 else
+                        items['booking_item.refund_for'].notnull()) &
+                       (items['booking_item.rebooked_from'].isnull() if rebooked_from == 0
+                        else items['booking_item.rebooked_from'].notnull()) &
+                       (items['booking_item.parent_status'].isnull() if parent_status is
+                        None else items['booking_item.parent_status'] == parent_status)).astype(int)
+
+    assign_to_status(items, 'is_booking', 'processed', 0, 0, 0, 0, None)
+    assign_to_status(items, 'is_booking_rebooked', 'processed', 0, 1, 0, 0, None)
+    assign_to_status(items, 'is_booking_canceled', 'processed', 1, 0, 0, 0, None)
+    assign_to_status(items, 'is_rebooking', 'processed', 0, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_rebooking_rebooked', 'processed', 0, 1, 0, 1, 'processed')
+    assign_to_status(items, 'is_rebooking_canceled', 'processed', 1, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_correction_rebooking', 'processed', 0, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_rebooked', 'processed', 0, 1, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_canceled', 'processed', 1, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_refund', 'processed', 0, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_refund_refunded', 'processed', 1, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_correction_refund', 'processed', 0, 0, 1, 0, 'fuckup')
+    assign_to_status(items, 'is_correction_refund_refunded', 'processed', 1, 0, 1, 0, 'fuckup')
+
+    assign_to_status(items, 'is_unknown_1', 'fuckup', 0, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_unknown_2', 'fuckup', 0, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_unknown_3', 'fuckup', 0, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_unknown_4', 'fuckup', 0, 0, 1, 0, 'fuckup')
+    assign_to_status(items, 'is_unknown_5', 'fuckup', 0, 0, 0, 0, None)
+
+    assign_to_status(items, 'is_booking_corrected_by_rebooking', 'fuckup', 0, 1, 0, 0, None)
+    assign_to_status(items, 'is_booking_corrected_by_cancelation', 'fuckup', 1, 0, 0, 0, None)
+    assign_to_status(items, 'is_rebooking_corrected_by_rebooking', 'fuckup', 0, 1, 0, 1,
+                     'processed')
+    assign_to_status(items, 'is_rebooking_corrected_by_cancelation', 'fuckup',
+                     1, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_correction_rebooking_corrected_by_rebooking', 'fuckup',
+                     0, 1, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_corrected_by_cancelation', 'fuckup',
+                     1, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_refund_corrected_by_refund', 'fuckup', 1, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_correction_refund_corrected_by_refund', 'fuckup',
+                     1, 0, 1, 0, 'fuckup')
+
+    # Handle corrupted data
+    items['is_corrupted_data'] = 0
+    items.set_value(refund_and_rebook.index, 'is_corrupted_data', 1)
+
+    # check that every item is assigned to exactly one group, whether or
+    # not it is counted
+    assert all(items.filter(regex='is_*').sum(1) == 1)
+
+    # Calculate high-level buckets
+    items['cnt_booking_at_created_at'] = (
+        items.is_booking +
+        items.is_booking_rebooked +
+        items.is_booking_canceled +
+        items.is_booking_corrected_by_rebooking +
+        items.is_booking_corrected_by_cancelation
+    )
+    items['cnt_rebooking_at_created_at'] = (
+        items.is_rebooking +
+        items.is_rebooking_rebooked +
+        items.is_rebooking_canceled +
+        items.is_correction_rebooking +
+        items.is_correction_rebooking_rebooked +
+        items.is_correction_rebooking_canceled +
+        items.is_rebooking_corrected_by_rebooking +
+        items.is_rebooking_corrected_by_cancelation +
+        items.is_correction_rebooking_corrected_by_rebooking +
+        items.is_correction_rebooking_corrected_by_cancelation
+    )
+    items['cnt_correction_at_created_at'] = (
+        items.is_correction_rebooking +
+        items.is_correction_rebooking_rebooked +
+        items.is_correction_rebooking_canceled +
+        items.is_correction_rebooking_corrected_by_rebooking +
+        items.is_correction_rebooking_corrected_by_cancelation
+    )
+    items['cnt_correction_at_canceled_at'] = (
+        items.is_booking_corrected_by_cancelation +
+        items.is_rebooking_corrected_by_cancelation +
+        items.is_correction_rebooking_corrected_by_cancelation
+    )
+    items['cnt_cancellation_at_canceled_at'] = (
+        items.is_booking_canceled +
+        items.is_rebooking_canceled +
+        items.is_correction_rebooking_canceled
+    )
+    items['cnt_refund_at_created_at'] = (
+        items.is_refund +
+        items.is_refund_refunded +
+        items.is_refund_corrected_by_refund
+    )
+    items['cnt_correction_refund_at_created_at'] = (
+        items.is_correction_refund +
+        items.is_correction_refund_refunded +
+        items.is_correction_refund_corrected_by_refund
+    )
+    items['cnt_unknown_correction'] = (
+        items.is_unknown_1 +
+        items.is_unknown_2 +
+        items.is_unknown_3 +
+        items.is_unknown_4 +
+        items.is_unknown_5 +
+        items.is_corrupted_data
+    )
+
+    # Generate report
+    items = items.reset_index()
+    # ...relevant subset of columns item wise
+    report_items = items[[
+        '_id', 'client_accounting.invoice_id', 'company.name', 'traveler.full_name',
+        'booking_item.type', 'booking_item.client_accounting_item.client_cost_center_1',
+        'booking_item.client_accounting_item.client_cost_center_2',
+        'booking_item.client_accounting_item.tax_class',
+        'booking_item.client_accounting_item.amount',
+        'booking_item.client_accounting_item.amount_gross']].copy()
+    report_items.columns = ['ID', 'Invoice ID', 'Company', 'Traveler', 'Offer', 'Cost Center 1',
+                            'Cost Center 2', 'Annotation', 'Net Amount', 'Gross Amount']
+    report_items['Booking Date'] = None
+    report_items['Type'] = None
+
+    # Build fresh data frame with one entry per incidence (which may
+    # contain repeated entries for certain settings - see below)
+    report = pd.DataFrame(columns=[
+        'ID', 'Booking Date', 'Invoice ID', 'Company', 'Traveler', 'Offer', 'Cost Center 1',
+        'Cost Center 2', 'Type', 'Annotation', 'Net Amount', 'Gross Amount'])
+
+    idx = items.cnt_booking_at_created_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Booking'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_rebooking_at_created_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Rebooking'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_refund_at_created_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Refund'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_correction_refund_at_created_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Correction Refund'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_unknown_correction > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Unknown/Correction'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_correction_at_created_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Correction'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.meta_data.created_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_correction_at_canceled_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Correction'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.canceled_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    idx = items.cnt_cancellation_at_canceled_at > 0
+    tmp = report_items[idx.values].copy()
+    tmp['Type'] = 'Cancellation'
+    tmp['Booking Date'] = pd.to_datetime(items['booking_item.canceled_at'][idx]).dt.date
+    report = report.append(tmp)
+
+    # Everything needs to have a date...
+    assert all(report['Booking Date'].notnull())
+
+    # Zero out amounts + annotations where they are not needed - these
+    # are repetitions of e.g. other items also couting as
+    # Booking/Rebooking
+    idx = (report['Type'] == 'Correction') | (report['Type'] == 'Cancellation')
+    report.set_value(idx, 'Net Amount', None)
+    report.set_value(idx, 'Gross Amount', None)
+    report.set_value(idx, 'Annotation', '')
+
+    # Rearrange columns
+    report = report[['ID', 'Booking Date', 'Invoice ID', 'Company', 'Traveler',
+                     'Offer', 'Cost Center 1', 'Cost Center 2', 'Type',
+                     'Annotation', 'Net Amount', 'Gross Amount']]
+    print('Final report has {} entries'.format(len(report)))
+    return report
+
+
+start_date = pd.datetime(2016, 8, 28)  # inclusive
+end_date = pd.datetime(2016, 9, 28)  # exclusive
+items = get_booking_items(start_date, end_date)
+report = generate_report(items)
+report.to_excel('{}_{}_booking_item_report.xlsx'.format(
+    start_date.date(), end_date.date()), index=False)

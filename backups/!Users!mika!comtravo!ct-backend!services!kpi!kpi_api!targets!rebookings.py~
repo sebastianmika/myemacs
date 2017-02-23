@@ -1,0 +1,56 @@
+from .es_target import ESTarget
+
+
+class Cancellations(ESTarget):
+    def __init__(self):
+        super(Cancellations, self).__init__('/booking_items/_search')
+
+    def search(self):
+        return "Cancellations"
+
+    def query(self, from_, to_, freq):
+        term1 = {
+            "bool": {"filter": [
+                {"missing": {"field": "booking_item.rebooked_from"}},
+                {"missing": {"field": "parent_status"}}
+            ]
+            }}
+        term2 = {
+            "bool": {"filter": [
+                {"exists": {"field": "booking_item.rebooked_from"}},
+                {"bool": {
+                    "should": [
+                        {"term": {"parent_status": "processed"}},
+                        {"term": {"parent_status": "fuckup"}}
+                    ]}}
+            ]
+            }}
+        query = {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "filter": [
+                        {"term": {"booking_item.status": "processed"}},
+                        {"term": {"booking_item.canceled": True}},
+                        {"term": {"booking_item.rebooked": False}},
+                        {"missing": {"field": "booking_item.refund_for"}},
+                        {"range": {
+                            "booking_item.meta_data.created_at": {
+                                "gte": '{}'.format(from_.strftime("%Y-%m-%dT%H:%M:%SZ")),
+                                "lt": '{}'.format(to_.strftime("%Y-%m-%dT%H:%M:%SZ"))}}},
+                        {"bool": {"should": [term1, term2]}}
+                    ]
+                }
+            },
+            "aggs": {
+                "item_over_time": {
+                    "date_histogram": {
+                        "field": "booking_item.meta_data.created_at",
+                        "interval": "{}".format(freq)
+                    }
+                }
+            }
+        }
+        es_res = self._query_es(query)
+        return [[r['doc_count'], r['key']]
+                for r in es_res['aggregations']['item_over_time']['buckets']]

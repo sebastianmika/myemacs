@@ -1,0 +1,10 @@
+es_booker = """{
+   "query": {
+       "match": {"booker.email": "alina.drabovych@bryanston.ch"}
+   },
+   "_source": {"include": "booker.*", "exclude": ["*.contact", "*._*"] },
+   "sort": [
+        { "meta_data.updated_at": {"order": "desc"}}
+    ],
+    "size": 1
+}"""

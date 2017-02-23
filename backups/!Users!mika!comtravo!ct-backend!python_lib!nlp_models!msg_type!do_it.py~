@@ -1,0 +1,11 @@
+from msg_type_model.train_model import load_raw_data, train_model, save_model
+from datetime import datetime
+
+
+ts = datetime.now().strftime('%y%m%d')
+data = load_raw_data('.')
+mdl_de = train_model(data, 'de')
+save_model('{}_booking_model_de.pbz'.format(ts), *mdl_de)
+
+mdl_en = train_model(data, 'en')
+save_model('{}_booking_model_en.pbz'.format(ts), *mdl_en)

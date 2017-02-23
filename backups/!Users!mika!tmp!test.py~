@@ -1,0 +1,7 @@
+class base():
+    def __init__():
+        self.test = '123'
+
+class child(base):
+    def xxx():
+        print(self.test)

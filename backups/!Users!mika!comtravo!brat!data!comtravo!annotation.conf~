@@ -1,0 +1,44 @@
+[entities]
+!Technical
+	Attributes
+	Greeting
+	EndOfMsg
+	Location
+	Person
+	TimePoint
+	TimeSpan
+	Entity
+		Airline
+		FlightNumber
+		HotelName
+		CarRentalName
+	Count
+		CountPersons
+		CountRooms
+	Option
+		CategoryOrClass
+		Breakfast
+		Seat
+		Luggage
+		PriceLimit
+		LoyaltyCard
+		Meal
+		CarOption
+
+[attributes]
+Language	Arg:Attributes, Value:en|de|other
+Source		Arg:Attributes, Value:email|skype|sms|other
+Type		Arg:Attributes, Value:booking|rebooking|cancellation|other
+
+[relations]
+travelles_from	Arg1:Origin, Arg2:Traveller
+travelles_to	Arg1:Destination, Arg2:Traveller
+departure_at	Arg1:DepartureDate|DepartureTime, Arg2:Origin
+arrival_at	Arg1:AppivalDate|ArrivalTime, Arg2:Destination
+travel_with	Arg1:Airline|FlightNumber, Arg2:Traveller
+
+[events]
+Flight	who:Person, org:Location, dst:Location, dpt:TimePoint|TimeSpan, arv:TimePoint|TimeSpan, opr:Entity, opt:Price|CategoryOrClass|Option|Airline|FlightNumber
+ReturnFlight	who:Person, org:Location, dst:Location, dpt_inbound:TimePoint|TimeSpan, arv_inbound:TimePoint|TimeSpan, dpt_outbound:TimePoint|TimeSpan, arv_outbound:TimePoint|TimeSpan, opr:Entity, opt:Price|CategoryOrClass|Option|Airline|FlightNumber
+Hotel	who:Person, plc:Location, check_in:TimePoint|TimeSpan, check_out:TimePoint|TimeSpan, duration:TimeSpan, opt:Price|CategoryOrClass|Option, name:Entity
+Car	who:Person, plc:Location, pick_up:TimePoint|TimeSpan, return:TimePoint|TimeSpan, duration:TimeSpan, opt:Price|CategoryOrClass|Option, company:Entity

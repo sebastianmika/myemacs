@@ -1,0 +1,72 @@
+import os
+import json
+from brat_io import bratify_ann
+import regex as re
+from . helpers import TagStatus, tag_wrapper
+
+
+def _load_city_data():
+    path = os.path.dirname(os.path.abspath(__file__))
+    return {int(k): v for k, v in json.load(open(os.path.join(
+        path, 'data/org.geonames.cities15000.json'), 'r')).items()}
+
+
+def _city_to_id(cities):
+    c2id = {}
+    for k, v in cities.items():
+        if v['name'] not in c2id:
+            c2id[v['name']] = set([])
+        c2id[v['name']].add(k)
+        if v['alternate_names'] is not None:
+            for x in v['alternate_names']:
+                if x['name'] not in c2id:
+                    c2id[x['name']] = set([])
+                c2id[x['name']].add(k)
+    for k, v in c2id.items():
+        c2id[k] = list(v)
+    return c2id
+
+
+def _build_re_city(cities):
+    # sort from longest to shortest city, first in list matches first...
+    cities = sorted(cities, key=lambda x: -len(x))
+    r_names = r'|'.join([re.escape(c) for c in cities])
+    r_names = r'(?P<city_name>' + r_names + r')'
+    r_names = (r'(?<=\s|\p{{P}}|\||^){names}(?=\s|\p{{P}}|\||$)').format(
+        names=r_names)
+    return re.compile(r_names, re.VERSION1 | re.MULTILINE)
+
+
+_cities = _load_city_data()
+_city2id = _city_to_id(_cities)
+_re_cities = _build_re_city(list(_city2id.keys()))
+
+
+@tag_wrapper("cities")
+def tag_cities(msg, result):
+    matches = []
+    for m in _re_cities.finditer(msg['body']):
+        # Special cases to handle:
+        # - "Date
+        # - "Zug
+        # - "Berlin Tegel"
+        # - "für Martin"/"Martin"
+        # - "Mobile:"
+        # - "Berlin Charlottenburg"
+        # - "Roman Kirsch"
+        # - "Marion"
+        # - "Seppeler-Rietberg GmbH"
+        # - "D.dorf" missed
+        # - "Tegel" -> sub part of Berlin instead of airport
+        # - "Best"
+        a = bratify_ann(msg, 'Location', m.start(), m.end(),
+                        attributes={'geonames_ids': sorted(_city2id[m.group('city_name')])},
+                        where='body')
+        matches.append(a)
+    for m in _re_cities.finditer(msg['subject']):
+        a = bratify_ann(msg, 'Location', m.start(), m.end(),
+                        attributes={'geonames_ids': sorted(_city2id[m.group('city_name')])},
+                        where='subject')
+        matches.append(a)
+    result['annotations'] += matches
+    return TagStatus.success

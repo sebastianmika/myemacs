@@ -1,0 +1,14 @@
+stats = []
+for r in raw_data:
+    def cnt_type(es, t):
+        return len([e for e in es if e['type'] == t])
+
+    e = r['ann']['events']
+    stats.append({
+        'Flight': cnt_type(e, 'Flight'),
+        'Return Flight': cnt_type(e, 'ReturnFlight'),
+        'Hotel': cnt_type(e, 'Hotel'),
+        'Rental Car': cnt_type(e, 'RentalCar'),
+        'Train': cnt_type(e, 'Train'),
+        'Transfer': cnt_type(e, 'Transfer'),
+    })

@@ -1,0 +1,23 @@
+(defproject corenlp-service "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :min-lein-version "2.0.0"
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [compojure "1.4.0"]
+                 [ring/ring-defaults "0.1.5"]
+                 [ring/ring-json "0.4.0"]
+                 [org.clojure/data.json "0.2.6"]
+                 [edu.stanford.nlp/stanford-corenlp "3.6.0"]
+                 [edu.stanford.nlp/stanford-corenlp "3.6.0" :classifier "models" ]
+                 [edu.stanford.nlp/stanford-corenlp "3.6.0" :classifier "models-german" ]
+                 [org.slf4j/slf4j-simple "1.7.21"]
+                 [clj-time "0.12.0"]]
+  :plugins [[lein-ring "0.9.7"]]
+  :ring {:handler nlp-tools-server.handler/app}
+  :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                                  [ring/ring-mock "0.3.0"]]}}
+  :global-vars {*assert* false}
+  ;; we need a lot of memore for the Stanford Core NLP - 2GB are the
+  ;; suggested minimum. Since we are loading two pipelines (German +
+  ;; English) we need more (and it indeed fails with only 2GB)
+  :jvm-opts ["-Xmx4g"])

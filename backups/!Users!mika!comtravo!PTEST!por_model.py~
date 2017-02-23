@@ -1,0 +1,25 @@
+import json
+import bz2
+from textblob_aptagger import PerceptronTagger
+import logging
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+data = json.loads(
+    bz2.BZ2File('nlp_data/annotated_corpus_2016-12-12T11:18:51Z.json.bz2', 'rb').read().decode())
+
+pts = {}
+for lang in ['de', 'en']:
+    sents = []
+    for d in data:
+        if d['ann']['language'] != lang:
+            continue
+        words = [a['text'] for a in d['ann']['annotations']]
+        tags = ['{0}.{1}.{2}.{4}'.format(*a['label'].split('.')).replace('ReturnFlight', 'Flight')
+            if a['label'] != 'O' else 'O'
+            for a in d['ann']['annotations']]
+        sents.append((words, tags))
+    pt = PerceptronTagger(load=False)
+    pt.train(sents, nr_iter=25)
+    pts[lang] = pt

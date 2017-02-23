@@ -1,0 +1,9 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch fix/en_time_ct
+# Changes to be committed:
+#	modified:   resources/languages/de/rules/time.clj
+#	modified:   resources/languages/en/corpus/time.clj
+#	modified:   resources/languages/en/rules/time.clj
+#

@@ -1,0 +1,48 @@
+#
+# Read locally stored mails, parse them and store on a per message basis
+#
+from email_parser import parse_mail
+from email_tagger import tag_mail
+from filter_threads import skip_thread
+import numpy as np
+import pickle as pkl
+import os
+import json
+
+
+def pickle_loader(pkl_file):
+    try:
+        while True:
+            yield pkl.load(pkl_file)
+    except EOFError:
+        pass
+
+
+def load_data(fname):
+    msgs = []
+    with open(fname, 'rb') as f:
+        for msg in pickle_loader(f):
+            msgs.append(msg)
+    return msgs
+
+
+fname = 'raw_messages@2016-05-23T14:02:21.pkl'
+messages = load_data(fname)
+
+thread_ids = np.unique([m['threadId'] for m in messages])
+
+for thread_id in thread_ids:
+    thread_messages = [m for m in messages if m['threadId'] == thread_id and m is not None]
+    thread_messages.sort(key=lambda x: x['internalDate'])
+    first_msg = parse_mail(thread_messages[0])
+    # Skip all threads that
+    if skip_thread(first_msg):
+        continue
+    ddir = 'per_thread/{}'.format(thread_id)
+    if not os.path.exists(ddir):
+        os.makedirs(ddir)
+    for mail in [parse_mail(m) for m in thread_messages]:
+        with open('{}/{}.json'.format(ddir, mail['message_id']), 'w') as fid:
+            json.dump(mail, fid)
+        with open('{}/{}.ann'.format(ddir, mail['message_id']), 'w') as fid:
+            json.dump({'version': 1, 'annotations': tag_mail(mail)['tags']}, fid)

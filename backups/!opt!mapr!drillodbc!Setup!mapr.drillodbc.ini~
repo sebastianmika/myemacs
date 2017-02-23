@@ -1,0 +1,14 @@
+
+[Driver]
+## - Note that this default DriverManagerEncoding of UTF-32 is for iODBC.
+DisableAsync=0
+DriverManagerEncoding=UTF-32
+ErrorMessagesPath=/opt/mapr/drillodbc/ErrorMessages
+
+LogLevel=0
+LogPath=
+SwapFilePath=/tmp
+
+#   iODBC
+ODBCInstLib=libiodbcinst.dylib
+

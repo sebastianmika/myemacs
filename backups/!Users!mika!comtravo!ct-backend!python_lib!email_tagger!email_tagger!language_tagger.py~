@@ -1,0 +1,25 @@
+from . base_tagger import BaseTagger, TagStatus
+import logging
+from langdetect import detect
+from langdetect.lang_detect_exception import LangDetectException
+from . helpers import _del_reply
+
+logger = logging.getLogger(__name__)
+
+
+class LanguageTagger(BaseTagger):
+    def tag(self, msg, result):
+        if type(msg) is not str:
+            msg = _del_reply(msg['subject']) + ' ' + msg['body']
+        if len(msg) < 30:
+            result['language'] = 'unknown'
+            return TagStatus.success
+        else:
+            try:
+                result['language'] = detect(msg)
+                return TagStatus.success
+            except LangDetectException as e:
+                # This happens e.g. when data contains only numbers
+                logger.warning('language detection failed: {}'.format(str(e)))
+                result['language'] = 'unknown'
+                return TagStatus.server_error

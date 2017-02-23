@@ -1,0 +1,38 @@
+T1	Attributes 183 183	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking}
+T2	Greeting 193 220	Hallo liebes Comtravo Team,
+T3	Person 394 412	Andrea Wißner-Dick
+#2	AnnotatorNotes T3	{"crm_ids": ["56b904240dde60010094f2fb", "56b9045a0dde60010094f340"]}
+T4	Person 670 685	Ludwig Forstner
+#3	AnnotatorNotes T4	{"crm_ids": ["57441d5d18016c0100b2e7c8"]}
+T5	Person 687 701	Vincent Fourmi
+#4	AnnotatorNotes T5	{"crm_ids": ["56b903e5eb2c4601003a9a33"]}
+T6	Person 25 39	Vincent Fourmi
+#5	AnnotatorNotes T6	{"crm_ids": ["56b903e5eb2c4601003a9a33"]}
+T7	Location 272 275	HAJ
+#6	AnnotatorNotes T7	{"iata_code": "HAJ"}
+T8	Location 278 281	MUC
+#7	AnnotatorNotes T8	{"iata_code": "MUC"}
+T9	FlightNumber 300 307	LH 2103
+#8	AnnotatorNotes T9	{"flight_number": "2103", "airline_code": "LH"}
+T10	TimeRange 284 297	20.15 - 21.25
+#9	AnnotatorNotes T10	{"to": {"value": "2016-02-03T21:26:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-02-03T20:15:00.000Z", "grain": "minute"}}
+T11	TimePoint 260 269	16.3.2016
+#10	AnnotatorNotes T11	{"type": "value", "value": "2016-03-16T00:00:00.000Z", "grain": "day"}
+T12	TimePoint 586 590	002.
+#11	AnnotatorNotes T12	{"type": "value", "value": "2016-03-02T00:00:00.000Z", "grain": "day"}
+T13	TimePoint 366 370	001.
+#12	AnnotatorNotes T13	{"type": "value", "value": "2016-03-01T00:00:00.000Z", "grain": "day"}
+T14	TimePoint 303 307	2103
+#13	AnnotatorNotes T14	{"type": "value", "value": "2016-02-03T21:03:00.000Z", "grain": "minute"}
+T15	TimePoint 593 596	@01
+#14	AnnotatorNotes T15	{"type": "value", "value": "2016-02-03T13:00:00.000Z", "grain": "hour"}
+T16	TimePoint 373 376	@01
+#15	AnnotatorNotes T16	{"type": "value", "value": "2016-02-03T13:00:00.000Z", "grain": "hour"}
+T17	Location 481 491	Düsseldorf
+#16	AnnotatorNotes T17	{"geonames_ids": [2934246]}
+T18	Location 778 785	München
+#17	AnnotatorNotes T18	{"geonames_ids": [2867714]}
+T19	Location 812 819	München
+#18	AnnotatorNotes T19	{"geonames_ids": [2867714]}
+T20	EndOfMsg 327 354;356 392;394 412;414 434;436 458;459 474;475 491;493 508;510 511;513 528;530 531;533 550;552 553;555 574;576 612;614 636;637 659;661 765;766 819;821 1244	Vielen Dank und beste Grüße [cid:image001.png@01D15E62.62F9F790] Andrea Wißner-Dick Vorstandsassistentin Woodmark Consulting AG Kreuzstrasse 20 40210 Düsseldorf www.woodmark.de M +49 172 6308502 T +49 211 542011-20 F +49 211 542011-9820 [cid:image002.png@01D15E62.62F9F790] Informationssicherheit ISO 27001 zertifiziert Vorstand Ludwig Forstner, Vincent Fourmi, Rainer Unsöld Vorsitzender des Aufsichtsrats Wolfram Tietscher Amtsgericht München HRB 127959 Sitz Grasbrunn/München Bitte beachten Sie: Diese E-Mail kann vertrauliche und/oder rechtlich geschützte Informationen enthalten. Der Inhalt ist ausschließlich für den bezeichneten Adressaten bestimmt. Wenn Sie nicht der richtige Adressat oder dessen Vertreter sind, setzen Sie sich bitte mit dem Absender der E-Mail in Verbindung. Jede Form der Veröffentlichung, Vervielfältigung oder Weitergabe des Inhalts fehlgeleiteter E-Mails ist unzulässig.

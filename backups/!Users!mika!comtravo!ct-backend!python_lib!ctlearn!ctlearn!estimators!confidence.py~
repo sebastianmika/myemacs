@@ -1,0 +1,95 @@
+from .. base import Estimator
+from itertools import zip_longest
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.model_selection import StratifiedKFold
+import numpy as np
+
+
+class ConfidenceEstimator(Estimator):
+    def __init__(self):
+        super(ConfidenceEstimator, self).__init__(input_keys=['annotation', 'language', 'content'],
+                                                  output_key='confidence',
+                                                  target_key='y_confidence')
+
+    def fit(self, target, annotation, language, content, **fit_params):
+        X, y = self._prepare_data(target, annotation, language, content)
+        skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=2016)
+        clf = ExtraTreesClassifier(n_estimators=200, criterion='gini', max_depth=None,
+                                   min_samples_split=2, min_samples_leaf=1,
+                                   min_weight_fraction_leaf=0.0, max_features="auto",
+                                   max_leaf_nodes=None, min_impurity_split=1e-07, bootstrap=True,
+                                   n_jobs=1, random_state=2016, class_weight="balanced")
+        cal_clf = CalibratedClassifierCV(base_estimator=clf, method='isotonic', cv=skf)
+        cal_clf.fit(X, y)
+        self.model = cal_clf
+
+    def transform(self, annotation, language, content):
+        if not (hasattr(self, 'model') and self.model):
+            raise ValueError('model not initialized; load or fit before calling transform')
+        if len(annotation) != len(language) or len(language) != len(content):
+            raise ValueError('input sequences must have same length')
+        X, _ = self._prepare_data([], annotation, language, content)
+        return self.model.predict_proba(X)[:, 1]
+
+    @classmethod
+    def encode(cls, annotation, language, content):
+        content_types = ["transfer", "flight", "other", "hotel", "rental_car", "train"]
+        # extract features
+        x, names = [], []
+        # number of tokens
+        names.append("n-token")
+        x.append(len(annotation))
+        # number of characters
+        names.append("n-char-body")
+        x.append(max([s['end'] for a in annotation for s in a['spans']
+                      if a['where'] == 'body'], 0) -
+                 min([s['start'] for a in annotation for s in a['spans']
+                      if a['where'] == 'body'], 0))
+        names.append("n-char-subject")
+        x.append(max([s['end'] for a in annotation for s in a['spans']
+                      if a['where'] == 'subject'], 0) -
+                 min([s['start'] for a in annotation for s in a['spans']
+                      if a['where'] == 'subject'], 0))
+        # rner stats
+        rner_cnt = 0
+        rner_time_cnt = 0
+        rner_loc_cnt = 0
+        for token in annotation:
+            if token["rner"] != "O-":
+                rner_cnt += 1
+                if "Time" in token["rner"]:
+                    rner_time_cnt += 1
+                if "Location" in token["rner"]:
+                    rner_loc_cnt += 1
+        names.append("n_rners")
+        x.append(rner_cnt)
+        names.append("n_rner_time")
+        x.append(rner_time_cnt)
+        names.append("n_rner_loc")
+        x.append(rner_loc_cnt)
+        # content type
+        for k in content_types:
+            names.append(k)
+            if k in content:
+                x.append(content[k])
+            else:
+                x.append(0.0)
+        # language
+        names.append("language_de")
+        x.append(1 if language == 'de' else 0)
+        names.append("language_en")
+        x.append(1 if language == 'en' else 0)
+        # return the x
+        return x
+    
+    @classmethod
+    def _prepare_data(cls, target, annotation, language, content):
+        X, y = [], []
+        for t, a, l, c in enumerate(zip_longest(target, annotation, language, content)):
+            X.append(cls.encode(a, l, c))
+            if t:
+                y.append(t)
+            else:
+                y.append(0)
+        return np.array(X), np.array(y).ravel()

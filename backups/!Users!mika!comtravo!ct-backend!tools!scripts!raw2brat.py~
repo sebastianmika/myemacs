@@ -1,0 +1,72 @@
+#
+# Read locally stored mails, parse them and store on a per message basis
+#
+from email_parser import parse_mail
+from email_tagger import tag_mail
+from email_tagger.brat import ann2brat
+from filter_threads import skip_thread
+from datetime import datetime
+import numpy as np
+import pickle as pkl
+import os
+import json
+
+
+def pickle_loader(pkl_file):
+    try:
+        while True:
+            yield pkl.load(pkl_file)
+    except EOFError:
+        pass
+
+
+def load_data(fname):
+    msgs = []
+    with open(fname, 'rb') as f:
+        for msg in pickle_loader(f):
+            msgs.append(msg)
+    return msgs
+
+fname = '../../../raw_messages@2016-06-20T11:34:37.pkl'
+messages = load_data(fname)
+
+thread_ids = np.unique([m['threadId'] for m in messages])
+
+
+def write_header(msg, f):
+    # fixture on CR LF not required for newly parsed on subject/fixed in email_parser
+    head =  'SUBJECT: {}\n'.format(msg['subject'].replace('\r\n', '\n').replace('\r', '\n').replace('\n', ' '))
+    head += 'DATE: {}\n'.format(datetime.utcfromtimestamp(msg['date']/1e3))
+    head += 'FROM: {} - {}\n'.format(msg['from']['name'], msg['from']['email'])
+    for t in msg['to']:
+        head += 'TO: {} - {}\n'.format(t['name'], t['email'])
+    for c in msg['cc']:
+        head += 'CC: {} - {}\n'.format(c['name'], c['email'])
+    head += '------ End of header -------\n'
+    f.write(head)
+    return len(head)
+
+
+cnt = 0
+for thread_id in thread_ids:
+    thread_messages = [m for m in messages if m['threadId'] == thread_id and m is not None]
+    thread_messages.sort(key=lambda x: x['internalDate'])
+    first_msg = parse_mail(thread_messages[0])
+    # Skip all threads that
+    if skip_thread(first_msg):
+        continue
+    ddir = 'first_messages'
+    if not os.path.exists(ddir):
+        os.makedirs(ddir)
+    file_stem = '{:05d}'.format(cnt) + '-' + thread_id + '-' + first_msg['message_id']
+    with open(os.path.join(ddir, file_stem + '.json'), 'w',
+              encoding='utf-8') as fid:
+        json.dump(first_msg, fid)
+    with open(os.path.join(ddir, file_stem + '.txt'), 'w',
+              encoding='utf-8') as fid:
+        write_header(first_msg, fid)
+        # No tabs in text
+        fid.write(first_msg['body'].replace('\t', ' '))
+    annotations = tag_mail(first_msg)
+    ann2brat({'tags': annotations, 'events': []}, os.path.join(ddir, file_stem))
+    cnt += 1

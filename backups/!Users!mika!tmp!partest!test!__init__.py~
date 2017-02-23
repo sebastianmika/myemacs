@@ -1,0 +1,14 @@
+from mod1 import doit as doit1
+from mod2 import doit as doit2
+
+doit1()
+doit2()
+
+from mod1 import _glob as _glob1
+from mod2 import _glob as _glob2
+
+print(_glob1)
+print(_glob2)
+
+def test():
+    return _glob1, _glob2

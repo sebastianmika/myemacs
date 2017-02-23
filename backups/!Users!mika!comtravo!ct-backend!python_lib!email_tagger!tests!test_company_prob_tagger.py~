@@ -1,0 +1,13 @@
+from unittest import TestCase
+from unittest.mock import patch
+from email_tagger.company_prob_tagger import CompanyProbTagger
+
+
+@patch('email_tagger.company_prob_tagger._query_elasticsearch')
+class CompanyProbTaggerTest(TestCase):
+    def test_no_companies(self, es_mock):
+        payload = {'crm': {'companies': [], 'users': []}}
+        response = {'crm': {'companies': [], 'users': []}}
+        c = CompanyProbTagger()
+        c(None, payload)
+        self.assertEqual(payload, response)

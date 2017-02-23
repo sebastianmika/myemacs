@@ -1,0 +1,53 @@
+import connexion
+import os
+import logging
+import sys
+from flask_compress import Compress
+from .targets.bookings import Bookings
+
+
+logger = logging.getLogger(__name__)
+
+targets = []
+
+
+def register_targets():
+    targets.append(Bookings())
+
+
+def create_app(debug=False):
+    debug = os.environ.get('DEBUG', '0') == '1'
+    app = connexion.App(__name__, specification_dir='.', debug=debug)
+    compress = Compress()
+    compress.init_app(app.app)
+    app.add_api('kpi.yaml', arguments={
+        'title': 'Provides an API to get KPIs'},
+                validate_responses=True)
+    if debug:
+        log_level = logging.DEBUG
+    else:
+        log_level = logging.INFO
+    logging.basicConfig(level=log_level,
+                        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logger.debug("TEST")
+    register_targets()
+    return app
+
+
+def main():
+    try:
+        if len(sys.argv) == 1:
+            port = 80
+        else:
+            port = int(sys.argv[1])
+    except ValueError:
+        logger.error('could not parse port number on command line')
+        return
+    logger.info("Creating app object...")
+    app = create_app()
+    logger.info("...app object created")
+    app.run(port=port, host="0.0.0.0")
+
+
+if __name__ == "__main__":
+    main()

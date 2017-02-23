@@ -1,0 +1,28 @@
+T1	Attributes 172 172	
+#1	AnnotatorNotes T1	{"source": "email", "language": "de", "request_type": "booking"}
+T2	Person 9 20	heiko stern
+#2	AnnotatorNotes T2	{"crm_ids": ["56d969f7b0cee501003eea89"]}
+T3	Person 378 382;384 397	leni Leni Hartmann
+#3	AnnotatorNotes T3	{"crm_ids": ["56b904690dde60010094f34f", "574448ea18016c0100b2e7c9"]}
+T4	Person 753 767	Markus Gawenda
+#4	AnnotatorNotes T4	{"crm_ids": ["56dffab1d4fbdc0100a4ba67"]}
+T6	TimePoint 630 634	2015
+#6	AnnotatorNotes T6	{"type": "value", "value": "2016-05-17T20:15:00.000Z", "grain": "minute"}
+T7	TimePoint 569 573	2015
+#7	AnnotatorNotes T7	{"type": "value", "value": "2016-05-17T20:15:00.000Z", "grain": "minute"}
+T8	TimePoint 444 448	2151
+#8	AnnotatorNotes T8	{"type": "value", "value": "2016-05-17T21:51:00.000Z", "grain": "minute"}
+T9	TimePoint 419 423	2151
+#9	AnnotatorNotes T9	{"type": "value", "value": "2016-05-17T21:51:00.000Z", "grain": "minute"}
+T11	TimePoint 27 35	31.05.16
+#11	AnnotatorNotes T11	{"type": "value", "value": "2016-05-31T00:00:00.000Z", "grain": "day"}
+T14	Location 309 342	August-Bebel-Platz 4
+20329 Bremen
+#14	AnnotatorNotes T14	{"geonames_ids": [2944388]}
+T15	Location 690 697	Krefeld
+#15	AnnotatorNotes T15	{"geonames_ids": [2884509]}
+T16	Location 723 730	Krefeld
+#16	AnnotatorNotes T16	{"geonames_ids": [2884509]}
+T17	EndOfMsg 366 382;384 397;398 409;410 413;415 433;435 438;440 459;461 465;467 491;493 496;498 512;514 578;580 639;641 665;666 683;684 697;699 767	Liebe grüße leni Leni Hartmann Back Office Tel +49 2151 479 444 0 Fax +49 2151 479 448 55 Mail leni.hartmann@shoch3.com Web www.shoch3.com [http://www.shoch3.com/images/mailsignature/Sonic_Logo_2015.png] [http://www.shoch3.com/images/mailsignature/SONIC_2015.png] Sonic Sales Support GmbH Bischofstraße 120 47809 Krefeld HRB 13734 - Amtsgericht Krefeld   |  Geschäftsführer: Markus Gawenda
+T12	HotelName 277 308	Balladins Superior Hotel Bremen
+T5	Location 309 329;330 342	August-Bebel-Platz 4 20329 Bremen

@@ -1,0 +1,235 @@
+{
+  "travelers": {
+    "warmers": null,
+    "settings": {
+      "index": {
+        "version": {
+          "upgraded": "2030299",
+          "created": "1050299"
+        },
+        "uuid": "sbF4gpuCSOO_o6-PkVmO_w",
+        "number_of_replicas": "1",
+        "number_of_shards": "5",
+        "legacy": {
+          "routing": {
+            "use_type": "false",
+            "hash": {
+              "type": "org.elasticsearch.cluster.routing.DjbHashFunction"
+            }
+          }
+        },
+        "creation_date": "1466361510381"
+      }
+    },
+    "mappings": {
+      "traveler": {
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "preference": {
+            "properties": {
+              "transfer": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "train": {
+                "properties": {
+                  "zone": {
+                    "type": "string"
+                  },
+                  "section": {
+                    "type": "string"
+                  },
+                  "seat": {
+                    "type": "string"
+                  },
+                  "reservation": {
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rental_car": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  }
+                }
+              },
+              "hotel": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "airplane": {
+                "properties": {
+                  "section": {
+                    "type": "string"
+                  },
+                  "seat": {
+                    "type": "string"
+                  },
+                  "preferred_airline": {
+                    "type": "string"
+                  },
+                  "luggage": {
+                    "type": "boolean"
+                  },
+                  "food": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "phone": {
+            "type": "string"
+          },
+          "nationality": {
+            "type": "string"
+          },
+          "middle_name": {
+            "type": "string"
+          },
+          "loyalty_card": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "pin": {
+                "type": "string"
+              },
+              "expires_at": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              },
+              "discount": {
+                "type": "long"
+              },
+              "class": {
+                "type": "string"
+              },
+              "card_number": {
+                "type": "string"
+              }
+            }
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "identification": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "issuing_country": {
+                "type": "string"
+              },
+              "issued_at": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              },
+              "id": {
+                "type": "string"
+              },
+              "expires_at": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              }
+            }
+          },
+          "gender": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "contact": {
+            "properties": {
+              "phone": {
+                "properties": {
+                  "default": {
+                    "type": "string"
+                  }
+                }
+              },
+              "booking_emails": {
+                "properties": {
+                  "reminder_weekend": {
+                    "type": "string"
+                  },
+                  "reminder": {
+                    "type": "string"
+                  },
+                  "invoice": {
+                    "type": "string"
+                  },
+                  "confirmation": {
+                    "type": "string"
+                  }
+                }
+              },
+              "address": {
+                "properties": {
+                  "zip_code": {
+                    "type": "string"
+                  },
+                  "street_1": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "company": {
+            "type": "string"
+          },
+          "birthday": {
+            "format": "epoch_millis||dateOptionalTime",
+            "type": "date"
+          },
+          "__v": {
+            "type": "long"
+          }
+        },
+        "_timestamp": null
+      }
+    },
+    "aliases": null
+  }
+}

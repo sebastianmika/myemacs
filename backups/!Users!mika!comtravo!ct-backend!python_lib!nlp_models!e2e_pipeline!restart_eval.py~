@@ -1,0 +1,13 @@
+i_start = 321
+for i, m in enumerate(raw_data):
+    if i<i_start:
+        continue
+    if i % 10 == 0:
+        print('At message {} of {}'.format(i, len(raw_data)))
+    if m['id'] in pred_anns:
+        m['pred_ann'] = pred_anns[m['id']]
+    else:
+        payload = json.dumps(m['msg'])
+        response = requests.post(annotate_url, data=payload, headers=headers)
+        m['pred_ann'] = response.json()
+        pred_anns[m['id']] = m['pred_ann']

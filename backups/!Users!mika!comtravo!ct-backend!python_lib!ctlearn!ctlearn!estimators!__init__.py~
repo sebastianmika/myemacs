@@ -1,0 +1,19 @@
+from ..base import Estimator
+
+
+class TestEstimator(Estimator):
+    def __init__(self, name, i):
+        super(TestEstimator, self).__init__(id=name, input_keys=i, output_key=name)
+        self.name = name
+
+    def transform(self, *args):
+        return ['{}.transform({})'.format(self.name, ', '.join(map(str, tup)))
+                for tup in zip(*args)]
+
+    def fit(self, *args):
+        return ('{}.fit({})'.format(self.name, ', '.join(map(str, args))))
+
+    def fit_transform(self, splits, fold_idx, *args):
+        res = ['{}.fit_transform({})'.format(self.name, ', '.join(map(str, tup)))
+               for idx, tup in enumerate(zip(*args)) if idx in splits[fold_idx]['test_idx']]
+        return res

@@ -1,0 +1,5 @@
+(
+{}
+
+ "LH1234"
+ (fn [token _] (= :flightnumber (:dim token)))

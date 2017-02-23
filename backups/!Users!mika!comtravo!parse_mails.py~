@@ -1,0 +1,126 @@
+#
+# Read locally stored mails, parse them and store on a per message basis
+#
+from email_parser import parse_mail
+from email_tagger import tag_mail
+from filter_threads import skip_thread
+import numpy as np
+import pickle as pkl
+import os
+import json
+
+
+def pickle_loader(pkl_file):
+    try:
+        while True:
+            yield pkl.load(pkl_file)
+    except EOFError:
+        pass
+
+
+def load_data(fname):
+    msgs = []
+    with open(fname, 'rb') as f:
+        for msg in pickle_loader(f):
+            msgs.append(msg)
+    return msgs
+
+
+fname = 'raw_messages@2016-05-23T14:02:21.pkl'
+messages = load_data(fname)
+
+thread_ids = np.unique([m['threadId'] for m in messages])
+
+
+def thread_is_boilerplate(first_msg):
+    # Ignore threads starting with a sender in a email domain ending in ...
+    ign_from_domains = ['accounts.google.com',
+                        'aer.de',
+                        'airberlin.com',
+                        'airbnb.com',
+                        'amadeus.com',
+                        'artefacti.com',
+                        'artefacti.de',
+                        'austrian.com',
+                        'baydin.com',
+                        'comtravo.com',
+                        'docs.google.com',
+                        'easybooking.at',
+                        'edigitalresearch.com',
+                        'expedia.com',
+                        'expediamail.com',
+                        'feefo.com',
+                        'hrs.com',
+                        'hrs.de',
+                        'klm-info.com',
+                        'lufthansa.com',
+                        'services.dlh.de',
+                        'skype.com',
+                        'tns-survey.com',
+                        'tripcase.com',
+                        'victors.de',
+                        'omenahotels.com',
+                        'cityhotel-ahlen.de',
+                        'sns.amazonaws.com',
+                        'waldorfastoria.com']
+    # Ignore threads starting with a username in the from address
+    # (i.e. user@example.com) containing these strings (any position)
+    ign_from_user = ['noreply',
+                     'mailer-daemon']
+    # Ignore threads starting with messages from these senders
+    blacklist_from = ['sales.nohfelden@victors.de',
+                      'scarout88@gmail.com',
+                      'imedialab.dnepr@gmail.com',
+                      'toni.hellmuth@web.de',
+                      'mail@michaelriegel.de',
+                      'michael.riegel@whu.edu',
+                      'thomas.pfleiderer@gmail.com',
+                      'notify@google.com']
+    # Ignore threads whose first subject contains these strings at any
+    # position and case (i.e. all compared in lower case)
+    blacklist_subject = ['Abwesenheitsnotiz',
+                         'Bewerbung',
+                         'Internship',
+                         'Automatische Antwort',
+                         'Abwesenheit',
+                         'Erinnerung',
+                         'Out of Office',
+                         'Automatic reply',
+                         'AWS Notification']
+    for x in ign_from_domains:
+        if first_msg['from']['email'].endswith(x):
+            return True
+    for x in ign_from_user:
+        if x in first_msg['from']['email']:
+            return True
+    if first_msg['from']['email'] in blacklist_from:
+        return True
+    for x in blacklist_subject:
+        if x.lower() in first_msg['subject'].lower():
+            return True
+    return False
+
+
+def thread_starts_not_to_booking(first_mg):
+    """A thread is excluded, iff the first message is not to booking@ or
+    buchung@comtravo.com
+    """
+    return all([(f['email'] != 'booking@comtravo.com' and
+                 f['email'] != 'buchung@comtravo.com') for f in first_msg['to']])
+
+
+for thread_id in thread_ids:
+    thread_messages = [m for m in messages if m['threadId'] == thread_id and m is not None]
+    thread_messages.sort(key=lambda x: x['internalDate'])
+    first_msg = parse_mail(thread_messages[0])
+    # Skip all threads that
+    if skip_thread(first_msg):
+        continue
+    ddir = 'per_thread/{}'.format(thread_id)
+    if not os.path.exists(ddir):
+        os.makedirs(ddir)
+    for mail in [parse_mail(m) for m in thread_messages]:
+        with open('{}/{}.json'.format(ddir, mail['message_id']), 'w') as fid:
+            json.dump(mail, fid)
+        with open('{}/{}.ann'.format(ddir, mail['message_id']), 'w') as fid:
+            json.dump({'version': 1, 'annotations': tag_mail(mail)['tags']}, fid)

@@ -1,0 +1,12 @@
+from unittest import TestCase
+from email_tagger import tag_cities
+
+
+class TestTagCities(TestCase):
+    def test_empty(self):
+        self.assertEqual(tag_cities(
+            {'body': ''}), [])
+
+    def test_hit(self):
+        self.assertEqual(len(tag_cities(
+            {'body': 'Bielefeld'})), 1)

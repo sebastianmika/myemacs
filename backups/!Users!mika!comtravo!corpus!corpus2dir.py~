@@ -1,0 +1,4 @@
+import bz2
+import json
+
+coprpus = json.load(bz2.open('corpus.bz2', 'rb))

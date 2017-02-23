@@ -1,0 +1,57 @@
+[labels]
+Greeting | Greeting | GRT
+EndOfMsg | End of message | EOM
+Location | Location | LOC
+Person | Person | PER
+TimePoint | Time Point | TPT
+TimeRange | Time Range | TRN
+Traveller | Traveller | TRV
+Booker | Booker | BKR
+Destination | Destination | DST
+Origin | Origin | ORG
+AirlineOrAlliance | Airline or Alliance | AAL
+FlightNumber | Flight Number | FNB
+Departure | Departure | DPR
+DepartureDate | Departure Date | DDT
+DepartureTime | Departure Time | DTM
+Arrival | Arrival | ARV
+ArrivalDate | Arrival Date | ADT
+ArrivalTime | Arrival Time | ATM
+BookingThread | Booking | BTR
+OtherThread | Other | OTR
+GarbageThread | Garbage | GRB
+date_of_birth | Date of Birth | dob
+
+[drawing]
+Attributes      bgColor:#DF0101
+Greeting        bgColor:#FF4000
+EndOfMsg        bgColor:#FF8000
+Location        bgColor:#FFBF00
+Person          bgColor:#FFFF00
+TimePoint       bgColor:#BFFF00
+TimeRange       bgColor:#80FF00
+Entity          bgColor:#40FF00
+AirlineOrAlliance         bgColor:#00FF00
+FlightNumber    bgColor:#00FF40
+HotelName       bgColor:#00FF80
+CarRentalName   bgColor:#00FFBF
+OtherEntity     bgColor:#00FFDF
+Count           bgColor:#00FFFF
+CountPersons    bgColor:#00BFFF
+CountRooms      bgColor:#0080FF
+Option          bgColor:#0040FF
+CategoryOrClass bgColor:#0000FF
+Breakfast       bgColor:#4000FF
+Seat            bgColor:#8000FF
+Luggage         bgColor:#BF00FF
+PriceLimit      bgColor:#FF00FF
+LoyaltyCard     bgColor:#FF0080
+Meal            bgColor:#FF0040
+CarOption       bgColor:#FA5882
+OtherOption     bgColor:#848484
+Flight          bgColor:#8A0808
+ReturnFlight    bgColor:#8A4b08
+Hotel           bgColor:#688A08
+RentalCar       bgColor:#088A85
+Train           bgColor:#084B8AA
+Transfer        bgColor:#8A0886

@@ -1,0 +1,10 @@
+import time
+
+_glob = {}
+
+
+def doit(s):
+    print("mod1 started")
+    time.sleep(s)
+    _glob['val'] = "set1"
+    print("mod1 done")

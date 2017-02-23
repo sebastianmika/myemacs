@@ -1,0 +1,21 @@
+T1	Attributes 151 151	
+#1	AnnotatorNotes T1	{"language": "de", "source": "email", "request_type": "booking"}
+T2	Greeting 161 173	Guten Abend,
+T3	Person 307 318	Sonja Meyrl
+#2	AnnotatorNotes T3	{"crm_ids": ["56c6d83e07f6e40100cb6215", "56fcf049cad48c01008b85fe", "573564d298f3f60100c8b8b5"]}
+T4	Location 242 245	CGN
+#3	AnnotatorNotes T4	{"iata_code": "CGN"}
+T5	Location 23 26	CGN
+#4	AnnotatorNotes T5	{"iata_code": "CGN"}
+T6	TimeRange 246 258	morgen Abend
+#5	AnnotatorNotes T6	{"to": {"value": "2016-04-09T00:00:00.000Z", "grain": "hour"}, "type": "interval", "from": {"value": "2016-04-08T18:00:00.000Z", "grain": "hour"}}
+T7	TimePoint 213 221	um 19:45
+#6	AnnotatorNotes T7	{"type": "value", "value": "2016-04-07T19:45:00.000Z", "grain": "minute"}
+T9	Location 14 20	Berlin
+#8	AnnotatorNotes T9	{"geonames_ids": [2950159]}
+T10	EndOfMsg 304 318	Lg Sonja Meyrl
+T8	AirlineOrAlliance 195 205	Germanings
+T11	Location 226 236	Schönefeld
+T12	Flight 206 211	 Flug
+E1	Flight:T12 org:T11 dst:T4 dpt:T7 opr:T8 who:T3
+R1	about Arg1:T7 Arg2:T6	

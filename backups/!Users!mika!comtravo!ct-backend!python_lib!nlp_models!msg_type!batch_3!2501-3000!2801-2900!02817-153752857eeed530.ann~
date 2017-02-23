@@ -1,0 +1,60 @@
+T1	Attributes 196 196	
+#1	AnnotatorNotes T1	{"source": "email", "language": "en", "request_type": "rebooking"}de
+T2	Greeting 206 221	Hallo zusammen,
+T3	Person 455 473	Juan Pablo Osornio
+#2	AnnotatorNotes T3	{"crm_ids": ["56d4d1470156a401004985f9", "5728bafa3fe092010083fb34"]}
+T4	Person 906 916	Juan Pablo
+#3	AnnotatorNotes T4	{"crm_ids": ["56d4d1470156a401004985f9", "5728bafa3fe092010083fb34"]}
+T5	Person 988 1006	Juan Pablo Osornio
+#4	AnnotatorNotes T5	{"crm_ids": ["56d4d1470156a401004985f9", "5728bafa3fe092010083fb34"]}
+T6	Person 1064 1068	Juan
+#5	AnnotatorNotes T6	{"crm_ids": ["56d4d1470156a401004985f9", "5728bafa3fe092010083fb34"]}
+T7	Person 223 230	Manuela
+#6	AnnotatorNotes T7	{"crm_ids": ["56d5373cb0cee501003eea70", "56d539beb0cee501003eea71"]}
+T8	Person 596 603	Manuela
+#7	AnnotatorNotes T8	{"crm_ids": ["56d5373cb0cee501003eea70", "56d539beb0cee501003eea71"]}
+T9	Person 1238 1251	Manuela Große
+#8	AnnotatorNotes T9	{"crm_ids": ["56d5373cb0cee501003eea70", "56d539beb0cee501003eea71"]}
+T10	Person 1623 1637	Manuela Grosse
+#9	AnnotatorNotes T10	{"crm_ids": ["56d5373cb0cee501003eea70", "56d539beb0cee501003eea71"]}
+T11	Person 1714 1721	Manuela
+#10	AnnotatorNotes T11	{"crm_ids": ["56d5373cb0cee501003eea70", "56d539beb0cee501003eea71"]}
+T12	Person 383 389	Saskia
+#11	AnnotatorNotes T12	{"crm_ids": ["56d56063b0cee501003eea79", "56e81375f57c160100b15dbd"]}
+T13	TimePoint 727 764	at 4:00 am in the morning on the 21st
+#12	AnnotatorNotes T13	{"type": "value", "value": "2016-03-21T04:00:00.000Z", "grain": "minute"}
+T14	TimeRange 795 811	from the 20-21st
+#13	AnnotatorNotes T14	{"to": {"value": "2016-03-22T00:00:00.000Z", "grain": "day"}, "type": "interval", "from": {"value": "2016-03-20T00:00:00.000Z", "grain": "day"}}
+T15	TimePoint 1672 1680	16-03-22
+#14	AnnotatorNotes T15	{"type": "value", "value": "2016-03-22T00:00:00.000Z", "grain": "day"}
+T16	TimePoint 1022 1030	16-03-22
+#15	AnnotatorNotes T16	{"type": "value", "value": "2016-03-22T00:00:00.000Z", "grain": "day"}
+T17	TimePoint 537 545	16-03-22
+#16	AnnotatorNotes T17	{"type": "value", "value": "2016-03-22T00:00:00.000Z", "grain": "day"}
+T18	TimePoint 1363 1369	17DEC.
+#17	AnnotatorNotes T18	{"type": "value", "value": "2016-12-17T00:00:00.000Z", "grain": "day"}
+T19	TimeRange 789 794	night
+#18	AnnotatorNotes T19	{"to": {"value": "2016-03-15T00:00:00.000Z", "grain": "hour"}, "type": "interval", "from": {"value": "2016-03-14T18:00:00.000Z", "grain": "hour"}}
+T20	TimePoint 667 670	now
+#19	AnnotatorNotes T20	{"type": "value", "value": "2016-03-14T12:44:48.000Z", "grain": "second"}
+T21	TimePoint 2477 2480	may
+#20	AnnotatorNotes T21	{"type": "value", "value": "2016-05-01T00:00:00.000Z", "grain": "month"}
+T22	TimePoint 1359 1362	@01
+#21	AnnotatorNotes T22	{"type": "value", "value": "2016-03-14T13:00:00.000Z", "grain": "hour"}
+T23	TimePoint 13 21	16-03-22
+#22	AnnotatorNotes T23	{"type": "value", "value": "2016-03-22T00:00:00.000Z", "grain": "day"}
+T24	Location 352 358	Berlin
+#23	AnnotatorNotes T24	{"geonames_ids": [2950159]}
+T25	Location 483 488	March
+#24	AnnotatorNotes T25	{"geonames_ids": [2643071]}
+T26	Location 961 966	March
+#25	AnnotatorNotes T26	{"geonames_ids": [2643071]}
+T27	Location 1414 1420	Berlin
+#26	AnnotatorNotes T27	{"geonames_ids": [2950159]}
+T28	Location 2344 2350	Berlin
+#27	AnnotatorNotes T28	{"geonames_ids": [2950159]}
+T29	Location 2387 2393	Berlin
+#28	AnnotatorNotes T29	{"geonames_ids": [2950159]}
+T30	Location 2395 2409	Charlottenburg
+#29	AnnotatorNotes T30	{"geonames_ids": [2940187]}
+T31	EndOfMsg 369 382;383 389;391 403;404 427;428 447;449 473;474 499;500 523;524 571;572 588;590 604;606 833;835 892;894 904;906 916;918 943;944 983;984 1008;1009 1056;1058 1069;1070 1232;1234 1236;1238 1251;1252 1279;1280 1341;1342 1378;1379 1385;1386 1434;1435 1486;1487 1529;1531 1583;1584 1618;1619 1662;1663 1706;1708 1722;1724 1840;1842 1934;1936 2025;2027 2039;2041 2047;2049 2051;2052 2077;2078 2098;2100 2234;2235 2311;2312 2350;2351 2422;2423 2454;2456 2540;2541 2661	Kind regards, Saskia Finance / HR T: +49 (0)221 27070-318 E: s.luy@ecofys.com From: Juan Pablo Osornio Sent: 14 March 2016 12:23 To: secretariat-germany Subject: RE: 16-03-22 - Neue Hotelbuchung AVARI Importance: High Liebe Manuela, I am really sorry, I just checked the reservations in detail now. I need to have two nights at the Serena since I arrive at 4:00 am in the morning on the 21st, we need to pay for the night from the 20-21st. I’d like to shower ☺ Apologies for the misunderstanding and the inconvenience. Thank you, Juan Pablo From: secretariat-germany Sent: Wednesday, March 09, 2016 8:09 AM To: Juan Pablo Osornio > Subject: FW: 16-03-22 - Neue Hotelbuchung AVARI Hallo Juan, anbei findest du die neue Hotelbuchung und den Reiseplan mit der Ticketnummer der Airline (Ausdrucke im PF). Ich hoffe, das ist jetzt für die Partner akzeptabel ☺ LG Manuela Große Facility and Office Support ------------------------------------------------------------- [cid:image001.png@01D17DEC.48C0BE00] Ecofys Albrechtstraße 10 c | 10117 Berlin | Deutschland T: +49 (0)30 29773579-80 | F: +49 (0)30 29773579-99 E: m.grosse@ecofys.com | I: www.ecofys.com From: Comtravo Buchung [mailto:buchung@comtravo.com] Sent: Dienstag, 8. März 2016 17:39 To: Manuela Grosse >; secretariat-germany > Subject: 16-03-22 - Neue Hotelbuchung AVARI Liebe Manuela, anbei findest Du die Stornorechnung der Hotels Avari 22.-24.03. sowie 25.-26.03. und des Hotel Javson vom 24.-25.03. Als neue Bestätigung/Rechnung die neue Hotelbuchung im Avari, durchgehend vom 22.-26.03.2016 Bitte prüfe nochmal, ob alle Buchungsdetails okay sind. Bei Fragen melde Dich bitte kurz. Beste Grüße, Sandra -- Website: www.comtravo.com Tel: +49 30 23933698 [https://docs.google.com/uc?export=download&id=0ByaerJ4ZxnlbbnNjNl8wMVgtUm8&revid=0ByaerJ4ZxnlbdUNqZ0VnVStsOC9RMFNMSy9PblhTVmZYSE9zPQ] Comtravo ist ein Angebot der MTR Travel Technologies UG (haftungsbeschränkt) Köpenicker Str. 126 | D – 10179 Berlin Handelsregistereintrag: Amtsgericht Berlin (Charlottenburg), HRB 169481 Geschäftsführer: Michael Riegel * This email message may contain legally privileged and/or confidential information. You are hereby notified that any disclosure, copying, distribution, or use of this email message is strictly prohibited.

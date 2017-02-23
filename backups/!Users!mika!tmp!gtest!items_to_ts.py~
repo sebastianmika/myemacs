@@ -1,0 +1,200 @@
+import pandas as pd
+
+
+def items_to_ts(hits):
+    # For testing, use locally saved data
+    # with open('booking_items.json', 'r') as f:
+    #    hits = json.load(f)
+
+    # Create a "flat" table from the booking items; no need to care for
+    # nested arrays as there is nothing in there we need
+    items = pd.io.json.json_normalize([h['_source'] for h in hits
+                                       if h['_source']['booking_item']['status']
+                                       in ['processed', 'fuckup']])
+    # Just in case...
+    assert items['booking_item.id'].nunique() == items.shape[0]
+    items = items.set_index('booking_item.id')
+    # Calculate gross amount
+    print('Got {} booking items'.format(len(items)))
+
+    # REMOVE: this is my own code to get the parent_status - but that
+    # should be in elasticsearch at some point in time
+    #
+    # items['booking_item.parent_status'] = None
+    # for i_id, i in items.iterrows():
+    #     if type(i['booking_item.rebooked_from']) is str:
+    #         items.set_value(i_id, 'booking_item.parent_status',
+    #                         items.ix[i['booking_item.rebooked_from']]['booking_item.status'])
+    #     if type(i['booking_item.refund_for']) is str:
+    #         items.set_value(i_id, 'booking_item.parent_status',
+    #                         items.ix[i['booking_item.refund_for']]['booking_item.status'])
+
+    # Find items that are both, refund_for and rebooked_from - that should not be - should it?
+    refund_and_rebook_idx = (items['booking_item.rebooked_from'].notnull() &
+                             items['booking_item.refund_for'].notnull())
+    refund_and_rebook = items[refund_and_rebook_idx]
+    print('WARNING: Found {} items which are refund_for and rebooking_from'.format(
+        refund_and_rebook_idx.sum()))
+    print(' -> will be assigned to "corrupted" group')
+
+    n_missing_parent = ((items['booking_item.rebooked_from'].notnull() |
+                        items['booking_item.refund_for'].notnull())
+                        & items['parent_status'].isnull()).sum()
+    if not n_missing_parent == 0:
+        print('WARNING: {} items should have a parent_status but have none assigned'.format(
+              n_missing_parent))
+        print(' -> assigning parent_status="processed" for now based on manual check')
+        items.set_value((items['booking_item.rebooked_from'].notnull() |
+                         items['booking_item.refund_for'].notnull())
+                        & items['parent_status'].isnull(),
+                        'parent_status',
+                        'processed')
+        assert ((items['booking_item.rebooked_from'].notnull() |
+                 items['booking_item.refund_for'].notnull())
+                & items['parent_status'].isnull()).sum() == 0
+
+    # Calculate 26+ low-level buckets -> see Google Docs "Booking Item Stati"
+    def assign_to_status(items, name, status, canceled, rebooked, refund_for,
+                         rebooked_from, parent_status):
+        """Helper to create new columns"""
+        items[name] = ((items['booking_item.status'] == status) &
+                       (items['booking_item.canceled'] == canceled) &
+                       (items['booking_item.rebooked'] == rebooked) &
+                       (items['booking_item.refund_for'].isnull() if refund_for == 0 else
+                        items['booking_item.refund_for'].notnull()) &
+                       (items['booking_item.rebooked_from'].isnull() if rebooked_from == 0
+                        else items['booking_item.rebooked_from'].notnull()) &
+                       (items['parent_status'].isnull() if parent_status is
+                        None else items['parent_status'] == parent_status)).astype(int)
+
+    assign_to_status(items, 'is_booking', 'processed', 0, 0, 0, 0, None)
+    assign_to_status(items, 'is_booking_rebooked', 'processed', 0, 1, 0, 0, None)
+    assign_to_status(items, 'is_booking_canceled', 'processed', 1, 0, 0, 0, None)
+    assign_to_status(items, 'is_rebooking', 'processed', 0, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_rebooking_rebooked', 'processed', 0, 1, 0, 1, 'processed')
+    assign_to_status(items, 'is_rebooking_canceled', 'processed', 1, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_correction_rebooking', 'processed', 0, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_rebooked', 'processed', 0, 1, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_canceled', 'processed', 1, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_refund', 'processed', 0, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_refund_refunded', 'processed', 1, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_correction_refund', 'processed', 0, 0, 1, 0, 'fuckup')
+    assign_to_status(items, 'is_correction_refund_refunded', 'processed', 1, 0, 1, 0, 'fuckup')
+
+    assign_to_status(items, 'is_unknown_1', 'fuckup', 0, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_unknown_2', 'fuckup', 0, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_unknown_3', 'fuckup', 0, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_unknown_4', 'fuckup', 0, 0, 1, 0, 'fuckup')
+    assign_to_status(items, 'is_unknown_5', 'fuckup', 0, 0, 0, 0, None)
+
+    assign_to_status(items, 'is_booking_corrected_by_rebooking', 'fuckup', 0, 1, 0, 0, None)
+    assign_to_status(items, 'is_booking_corrected_by_cancelation', 'fuckup', 1, 0, 0, 0, None)
+    assign_to_status(items, 'is_rebooking_corrected_by_rebooking', 'fuckup', 0, 1, 0, 1,
+                     'processed')
+    assign_to_status(items, 'is_rebooking_corrected_by_cancelation', 'fuckup',
+                     1, 0, 0, 1, 'processed')
+    assign_to_status(items, 'is_correction_rebooking_corrected_by_rebooking', 'fuckup',
+                     0, 1, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_correction_rebooking_corrected_by_cancelation', 'fuckup',
+                     1, 0, 0, 1, 'fuckup')
+    assign_to_status(items, 'is_refund_corrected_by_refund', 'fuckup', 1, 0, 1, 0, 'processed')
+    assign_to_status(items, 'is_correction_refund_corrected_by_refund', 'fuckup',
+                     1, 0, 1, 0, 'fuckup')
+
+    # Handle corrupted data
+    items['is_corrupted_data'] = 0
+    items.set_value(refund_and_rebook.index, 'is_corrupted_data', 1)
+
+    # check that every item is assigned to exactly one group, whether or
+    # not it is counted
+    assert all(items.filter(regex='is_*').sum(1) == 1)
+
+    items['t'] = None
+    # Calculate high-level buckets
+    # cnt_booking_at_created_at
+    items['Bookings'] = (
+        items.is_booking +
+        items.is_booking_rebooked +
+        items.is_booking_canceled +
+        items.is_booking_corrected_by_rebooking +
+        items.is_booking_corrected_by_cancelation
+    )
+    idx = items['Bookings'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Rebookings'] = (
+        items.is_rebooking +
+        items.is_rebooking_rebooked +
+        items.is_rebooking_canceled +
+        # items.is_correction_rebooking +
+        # items.is_correction_rebooking_rebooked +
+        # items.is_correction_rebooking_canceled +
+        items.is_rebooking_corrected_by_rebooking +
+        items.is_rebooking_corrected_by_cancelation
+        # items.is_correction_rebooking_corrected_by_rebooking +
+        # items.is_correction_rebooking_corrected_by_cancelation
+    )
+    idx = items['Rebookings'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Corr. Rebook'] = (
+        items.is_correction_rebooking +
+        items.is_correction_rebooking_rebooked +
+        items.is_correction_rebooking_canceled +
+        items.is_correction_rebooking_corrected_by_rebooking +
+        items.is_correction_rebooking_corrected_by_cancelation
+    )
+    idx = items['Corr. Rebook'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Refunds'] = (
+        items.is_refund +
+        items.is_refund_refunded +
+        items.is_refund_corrected_by_refund
+    )
+    idx = items['Refunds'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Corr. Refund'] = (
+        items.is_correction_refund +
+        items.is_correction_refund_refunded +
+        items.is_correction_refund_corrected_by_refund
+    )
+    idx = items['Corr. Refund'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Corr. Unknown'] = (
+        items.is_unknown_1 +
+        items.is_unknown_2 +
+        items.is_unknown_3 +
+        items.is_unknown_4 +
+        items.is_unknown_5 +
+        items.is_corrupted_data
+    )
+    idx = items['Corr. Unknown'] > 0
+    items.loc[idx, 't'] = items.loc[idx, 'booking_item.meta_data.created_at']
+
+    items['Corr. Cancel'] = (
+        items.is_booking_corrected_by_cancelation +
+        items.is_rebooking_corrected_by_cancelation +
+        items.is_correction_rebooking_corrected_by_cancelation
+    )
+    idx = items['Corr. Cancel'] > 0
+    if any(idx):
+        items.loc[idx, 't'] = items.loc[idx, 'booking_item.canceled_at']
+
+    items['Cancellations'] = (
+        items.is_booking_canceled +
+        items.is_rebooking_canceled +
+        items.is_correction_rebooking_canceled
+    )
+    idx = items['Cancellations'] > 0
+    if any(idx):
+        items.loc[idx, 't'] = items.loc[idx, 'booking_item.canceled_at']
+    
+    for c in items.columns:
+        if c.startswith('is_') or c.startswith('booking_item'):
+            del items[c]
+
+    items.t = pd.to_datetime(items.t.values, utc=True)
+    return items.reset_index().set_index('t').sort_index()

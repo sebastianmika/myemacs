@@ -1,0 +1,9 @@
+# KPI Endpoint
+
+Used to provide some metrics to grafana that cannot be generated
+
+- easily with grafana's elasticsearch support or
+
+- require some other heavy lifting that cannot be done with
+  elasticsearch in the first place (esp. if no scripts are available
+  as in our case)

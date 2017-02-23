@@ -1,0 +1,106 @@
+from glob import glob
+import os
+import numpy as np
+import regex as re
+import json
+from bokeh.plotting import figure, show
+from email_tagger.brat import brat2ann
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.cross_validation import ShuffleSplit, StratifiedKFold
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.grid_search import GridSearchCV
+from sklearn.metrics import roc_curve, auc
+from scipy import interp
+import pickle
+
+load_from_file = True
+
+print("Loading raw data...")
+if load_from_file:
+    with open('raw_data.pkl', 'rb') as f:
+        raw_data = pickle.load(f)
+        ids = pickle.load(f)
+else:
+    path = '.'
+    raw_data = []
+    ids = set()
+    for file in glob(os.path.join(path, '**/*.ann'), recursive=True):
+        file_stem = file.replace(".ann", "")
+        ann, _ = brat2ann(file_stem)
+        msg = json.load(open(file.replace(".ann", ".json"), 'r'))
+        raw_data.append((os.path.basename(file_stem), msg, ann))
+    ids.add(os.path.basename(file_stem))
+    with open('raw_data.pkl', 'wb') as f:
+        pickle.dump(raw_data, f)
+        pickle.dump(ids, f)
+print("...got {} annotations for {} different message".format(len(raw_data), len(ids)))
+
+print("Getting labels and dropping unlabelled....")
+ids = set()
+raw_data = [(id, msg, ann['tags'][0]['attributes']['request_type'], ann) for (id, msg, ann) in raw_data
+            if ann['tags'][0]['attributes']['request_type'] != 'booking|negotiation|rebooking|cancellation|other']
+print("...{} remained".format(len(raw_data)))
+
+print("Checking for agreeement...")
+data = {}
+for id, msg, lbl, ann in raw_data:
+    if id not in data:
+        data[id] = {'msg': msg, 'lbl': lbl, 'ann': ann, 'ok': True}
+    else:
+        if data[id]['lbl'] != lbl:
+            print('label mismatch for {}: {} vs. {}'.format(
+                id, data[id]['lbl'], lbl))
+            data[id]['ok'] = False
+
+print("Keeping only uniquly labeled data...")
+data = [(id, x['msg'], x['lbl'], x['ann']) for id, x in data.items()]
+print("...total of {}".format(len(data)))
+
+
+def preprocessor(txt):
+    """remove all sequences of only numbers longer than 4 from the text"""
+    return re.sub(r'[0-9]{5,}', '', txt)
+
+
+def get_msg_txt(id, msg, lbl, ann):
+    start_body = max([s['end'] for a in ann['tags']
+                      if a['type'] == 'Greeting' for s in a['spans']], 0)
+    end_body = min([s['start'] for a in ann['tags']
+                    if a['type'] == 'EndOfMsg' for s in a['spans']], len(msg['body'])) - 1
+    return msg['subject'] + ' ' + msg['body'][start_body:end_body]
+
+
+X = np.array([get_msg_txt(*x) for x in data])
+y = np.array([1 if x[2] == 'booking' else -1 for x in data])
+
+
+outer_cv = StratifiedKFold(y, n_folds=3)
+mean_tpr = 0.0
+mean_fpr = np.linspace(0, 1, 100)
+params = {
+    'vect__min_df': (1, 5, 50),
+    'vect__strip_accents': (None, 'unicode'),
+    'vect__ngram_range': ((1, 1), (1, 3)),
+    'vect__binary': (False, True)}
+
+fig = figure(title='roc analysis', x_axis_label='fp', y_axis_label='tp')
+
+for i, (tr_idx, te_idx) in enumerate(outer_cv):
+    gnb_clf = Pipeline([('vect', CountVectorizer()),
+                        ('clf', MultinomialNB())])
+    inner_cv = ShuffleSplit(len(tr_idx), n_iter=5, test_size=0.1)
+    cv = GridSearchCV(gnb_clf, params, cv=inner_cv, n_jobs=-1, verbose=1)
+    res = cv.fit(X[tr_idx], y[tr_idx])
+    proba = res.best_estimator_.predict_proba(X[te_idx])
+    fpr, tpr, ths = roc_curve(y[te_idx], proba[:, 1])
+    mean_tpr += interp(mean_fpr, fpr, tpr)
+    mean_tpr[0] = 0.0
+    roc_auc = auc(fpr, tpr)
+    fig.line(fpr, tpr, line_width=1, legend='ROC fold %d (area = %0.2f)' % (i, roc_auc))
+
+mean_tpr /= 3.0
+mean_roc_auc = auc(mean_fpr, mean_tpr)
+fig.line(mean_fpr, mean_tpr, line_width=3, line_color='red', legend='ROC avg (area = %0.2f)' % (mean_roc_auc))
+
+show(fig)

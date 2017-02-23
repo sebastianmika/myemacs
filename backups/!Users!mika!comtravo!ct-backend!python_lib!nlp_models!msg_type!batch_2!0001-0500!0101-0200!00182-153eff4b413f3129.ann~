@@ -1,0 +1,36 @@
+T1	Attributes 199 199	
+#1	AnnotatorNotes T1	{"language": "de", "source": "email", "request_type": "booking"}
+T2	Greeting 209 219	Dear team,
+T3	Person 257 278	Konstantin Shelyastin
+#2	AnnotatorNotes T3	{"crm_ids": ["56e7e334176c4c01007eee0e"]}
+T4	Person 34 44	Shelyastin
+#3	AnnotatorNotes T4	{"crm_ids": ["56e7e334176c4c01007eee0e"]}
+T5	Person 554 573	Tatyana Novopashina
+#4	AnnotatorNotes T5	{"crm_ids": ["56e7ceeb0e120101007caa07"]}
+T6	FlightNumber 324 331	SU 1852
+#5	AnnotatorNotes T6	{"flight_number": "1852", "airline_code": "SU"}
+T7	FlightNumber 386 392	J2 854
+#6	AnnotatorNotes T7	{"flight_number": "854", "airline_code": "J2"}
+T8	TimePoint 354 362	15.04.16
+#7	AnnotatorNotes T8	{"type": "value", "value": "2016-04-07T15:04:16.000Z", "grain": "second"}
+T9	TimePoint 292 300	11.04.16
+#8	AnnotatorNotes T9	{"type": "value", "value": "2016-04-07T11:04:16.000Z", "grain": "second"}
+T12	TimeRange 332 341	0010-0410
+#11	AnnotatorNotes T12	{"type": "value", "value": "2016-04-07T10:00:00.000Z", "grain": "hour"}
+T13	Location 308 314	Moscow
+#12	AnnotatorNotes T13	{"geonames_ids": [524901, 5601538]}
+T14	Location 315 319	Baku
+#13	AnnotatorNotes T14	{"geonames_ids": [587084]}
+T15	Location 370 374	Baku
+#14	AnnotatorNotes T15	{"geonames_ids": [587084]}
+T16	Location 375 381	Moscow
+#15	AnnotatorNotes T16	{"geonames_ids": [524901, 5601538]}
+T17	Location 704 710	Moscow
+#16	AnnotatorNotes T17	{"geonames_ids": [524901, 5601538]}
+T18	EndOfMsg 499 520;521 553;554 573;574 609;610 652;653 666;667 696;697 710;711 729;731 755;756 779;781 813;814 838	Thank you in advance! ________________________________ Tatyana Novopashina Assistant to administrative manager [cid:DBAB7B51-CFF7-4ACC-86AD-DF63352F9262] Bryanston CIS 10 Palikha Str., Building 5C3 127055 Moscow Russian Federation Tel.: +7 (495) 789 23 50 Mob.: +7 905  744 18 74 tatyana.novopashina@bryanston.ch http://www.bryanston.ch/
+T19	TimeRange 393 403	 1900-2110
+T20	CategoryOrClass 415 422	Economy
+T10	ReturnFlight 247 252	offer
+E1	ReturnFlight:T10 who:T3 dpt_outbound:T9 org:T13 dst:T14 fn_outbnd:T6 dpt_inbound:T8 org2:T15 dst2:T16 fn_inbnd:T7 with:T20
+R1	about Arg1:T9 Arg2:T12	
+R2	about Arg1:T8 Arg2:T19	

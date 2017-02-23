@@ -1,0 +1,897 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": "5",
+      "number_of_replicas": "1"
+    }
+  },
+  "mappings": {
+    "offer": {
+      "properties": {
+        "__id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "__v": {
+          "type": "long"
+        },
+        "_booker": {
+          "properties": {
+            "__v": {
+              "type": "long"
+            },
+            "_id": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "contact": {
+              "properties": {
+                "booking_emails": {
+                  "properties": {
+                    "confirmation": {
+                      "type": "string"
+                    },
+                    "invoice": {
+                      "type": "string"
+                    },
+                    "reminder": {
+                      "type": "string"
+                    },
+                    "reminder_weekend": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          }
+        },
+        "_company": {
+          "properties": {
+            "__v": {
+              "type": "long"
+            },
+            "_id": {
+              "type": "string"
+            },
+            "address": {
+              "properties": {
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "street_1": {
+                  "type": "string"
+                },
+                "street_2": {
+                  "type": "string"
+                },
+                "zip_code": {
+                  "type": "string"
+                }
+              }
+            },
+            "billing_aggregation": {
+              "type": "string"
+            },
+            "billing_time": {
+              "type": "string"
+            },
+            "booker": {
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                }
+              }
+            },
+            "cost_center_mandatory": {
+              "type": "boolean"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "fare_codes": {
+              "type": "string"
+            },
+            "industry": {
+              "type": "string"
+            },
+            "invoice_email": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            },
+            "loyalty_card": {
+              "properties": {
+                "card_number": {
+                  "type": "string"
+                },
+                "class": {
+                  "type": "string"
+                },
+                "pin": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "name": {
+              "type": "string"
+            },
+            "payment_method": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "vat": {
+              "type": "string"
+            }
+          }
+        },
+        "_travelers": {
+          "properties": {
+            "__v": {
+              "type": "long"
+            },
+            "_id": {
+              "type": "string"
+            },
+            "birthday": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "company": {
+              "type": "string"
+            },
+            "contact": {
+              "properties": {
+                "booking_emails": {
+                  "properties": {
+                    "confirmation": {
+                      "type": "string"
+                    },
+                    "invoice": {
+                      "type": "string"
+                    },
+                    "reminder": {
+                      "type": "string"
+                    },
+                    "reminder_weekend": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "phone": {
+                  "properties": {
+                    "default": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "full_name": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "identification": {
+              "properties": {
+                "expires_at": {
+                  "type": "date",
+                  "format": "strict_date_optional_time||epoch_millis"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "issued_at": {
+                  "type": "date",
+                  "format": "strict_date_optional_time||epoch_millis"
+                },
+                "issuing_country": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "language": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "loyalty_card": {
+              "properties": {
+                "card_number": {
+                  "type": "string"
+                },
+                "class": {
+                  "type": "string"
+                },
+                "discount": {
+                  "type": "long"
+                },
+                "expires_at": {
+                  "type": "date",
+                  "format": "strict_date_optional_time||epoch_millis"
+                },
+                "pin": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "middle_name": {
+              "type": "string"
+            },
+            "nationality": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "preference": {
+              "properties": {
+                "airplane": {
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    },
+                    "food": {
+                      "type": "string"
+                    },
+                    "preferred_airline": {
+                      "type": "string"
+                    },
+                    "seat": {
+                      "type": "string"
+                    },
+                    "section": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "hotel": {
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rental_car": {
+                  "properties": {
+                    "class": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "train": {
+                  "properties": {
+                    "class": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "reservation": {
+                      "type": "boolean"
+                    },
+                    "seat": {
+                      "type": "string"
+                    },
+                    "section": {
+                      "type": "string"
+                    },
+                    "zone": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "transfer": {
+                  "properties": {
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "title": {
+              "type": "string"
+            }
+          }
+        },
+        "booker_id": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "guest_travelers": {
+          "properties": {
+            "birthday": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "contact": {
+              "properties": {
+                "booking_emails": {
+                  "properties": {
+                    "confirmation": {
+                      "type": "string"
+                    },
+                    "reminder": {
+                      "type": "string"
+                    },
+                    "reminder_weekend": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "email": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "loyalty_cards": {
+              "properties": {
+                "card_number": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            },
+            "middle_name": {
+              "type": "string"
+            },
+            "nationality": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            }
+          }
+        },
+        "meta_data": {
+          "properties": {
+            "created_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "created_by": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "updated_by": {
+              "type": "string"
+            }
+          }
+        },
+        "number_of_travelers": {
+          "type": "long"
+        },
+        "offer_id": {
+          "type": "string"
+        },
+        "offer_items": {
+          "properties": {
+            "email_annotation": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "options": {
+              "properties": {
+                "email_annotation": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "option_items": {
+                  "properties": {
+                    "flight_item": {
+                      "properties": {
+                        "cancelable": {
+                          "type": "boolean"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "item_source_id": {
+                          "type": "string"
+                        },
+                        "rebookable": {
+                          "type": "boolean"
+                        },
+                        "slices": {
+                          "properties": {
+                            "baggage_allowance": {
+                              "type": "long"
+                            },
+                            "segments": {
+                              "properties": {
+                                "airline": {
+                                  "type": "string"
+                                },
+                                "flight_number": {
+                                  "type": "string"
+                                },
+                                "legs": {
+                                  "properties": {
+                                    "arrival_location": {
+                                      "type": "string"
+                                    },
+                                    "arrival_time": {
+                                      "properties": {
+                                        "date_value": {
+                                          "type": "date",
+                                          "format": "strict_date_optional_time||epoch_millis"
+                                        },
+                                        "time_value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "arrival_time_utc": {
+                                      "type": "date",
+                                      "format": "strict_date_optional_time||epoch_millis"
+                                    },
+                                    "booking_class": {
+                                      "type": "string"
+                                    },
+                                    "departure_location": {
+                                      "type": "string"
+                                    },
+                                    "departure_time": {
+                                      "properties": {
+                                        "date_value": {
+                                          "type": "date",
+                                          "format": "strict_date_optional_time||epoch_millis"
+                                        },
+                                        "time_value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    },
+                                    "departure_time_utc": {
+                                      "type": "date",
+                                      "format": "strict_date_optional_time||epoch_millis"
+                                    },
+                                    "flight_class": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "operator": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "traveler_item_data": {
+                          "properties": {
+                            "gross_amount": {
+                              "type": "double"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "number_of_luggage_items": {
+                              "type": "long"
+                            },
+                            "type_of_seat": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type_of_flight": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "hotel_item": {
+                      "properties": {
+                        "cancelable": {
+                          "type": "boolean"
+                        },
+                        "cancelable_until": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "checkin_time": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "checkout_time": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "hotel_data": {
+                          "properties": {
+                            "address": {
+                              "properties": {
+                                "city": {
+                                  "type": "string"
+                                },
+                                "country": {
+                                  "type": "string"
+                                },
+                                "state": {
+                                  "type": "string"
+                                },
+                                "street_1": {
+                                  "type": "string"
+                                },
+                                "zip_code": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "category": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "website": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "includes_breakfast": {
+                          "type": "boolean"
+                        },
+                        "includes_wifi": {
+                          "type": "boolean"
+                        },
+                        "rebookable": {
+                          "type": "boolean"
+                        },
+                        "traveler_item_data": {
+                          "properties": {
+                            "gross_amount": {
+                              "type": "long"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "number_of_occupants": {
+                              "type": "long"
+                            },
+                            "shares_a_room": {
+                              "type": "boolean"
+                            },
+                            "type_of_room": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "rental_car_item": {
+                      "properties": {
+                        "cancelable": {
+                          "type": "boolean"
+                        },
+                        "class": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "operator": {
+                          "type": "string"
+                        },
+                        "pickup_location": {
+                          "properties": {
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "street_1": {
+                              "type": "string"
+                            },
+                            "zip_code": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "pickup_time": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "rebookable": {
+                          "type": "boolean"
+                        },
+                        "return_location": {
+                          "properties": {
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "street_1": {
+                              "type": "string"
+                            },
+                            "zip_code": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "return_time": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "traveler_item_data": {
+                          "properties": {
+                            "gross_amount": {
+                              "type": "long"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "is_driver": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "train_item": {
+                      "properties": {
+                        "cancelable": {
+                          "type": "boolean"
+                        },
+                        "class": {
+                          "type": "string"
+                        },
+                        "flex": {
+                          "type": "boolean"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "rebookable": {
+                          "type": "boolean"
+                        },
+                        "slices": {
+                          "properties": {
+                            "segments": {
+                              "properties": {
+                                "arrival_location": {
+                                  "type": "string"
+                                },
+                                "arrival_time": {
+                                  "type": "date",
+                                  "format": "strict_date_optional_time||epoch_millis"
+                                },
+                                "departure_location": {
+                                  "type": "string"
+                                },
+                                "departure_time": {
+                                  "type": "date",
+                                  "format": "strict_date_optional_time||epoch_millis"
+                                },
+                                "operator": {
+                                  "type": "string"
+                                },
+                                "train_number": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "traveler_item_data": {
+                          "properties": {
+                            "applied_discount": {
+                              "type": "long"
+                            },
+                            "gross_amount": {
+                              "type": "long"
+                            },
+                            "id": {
+                              "type": "string"
+                            },
+                            "seat_reservation": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "transfer_item": {
+                      "properties": {
+                        "arrival_location": {
+                          "properties": {
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "street_1": {
+                              "type": "string"
+                            },
+                            "zip_code": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "cancelable": {
+                          "type": "boolean"
+                        },
+                        "departure_location": {
+                          "properties": {
+                            "city": {
+                              "type": "string"
+                            },
+                            "country": {
+                              "type": "string"
+                            },
+                            "state": {
+                              "type": "string"
+                            },
+                            "street_1": {
+                              "type": "string"
+                            },
+                            "zip_code": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "departure_time": {
+                          "type": "date",
+                          "format": "strict_date_optional_time||epoch_millis"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "operator": {
+                          "type": "string"
+                        },
+                        "rebookable": {
+                          "type": "boolean"
+                        },
+                        "traveler_item_data": {
+                          "properties": {
+                            "gross_amount": {
+                              "type": "long"
+                            },
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "payment_link_id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "travelers": {
+          "type": "string"
+        },
+        "zendesk_ticket_id": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

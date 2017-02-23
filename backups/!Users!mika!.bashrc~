@@ -1,0 +1,49 @@
+export PS1="\[\033[0;33m\][\!]\`if [[ \$? = "0" ]]; then echo "\\[\\033[32m\\]"; else echo "\\[\\033[31m\\]"; fi\`[\u: \`if [[ `pwd|wc -c|tr -d " "` > 18 ]]; then echo "\\W"; else echo "\\w"; fi\`]\$\[\033[0m\] "; echo -ne "\033]0;`hostname -s`:`pwd`\007"
+export CLASSPATH=$HOME/comtravo/stanford/ner:$HOME/comtravo/stanford/pos:$HOME/comtravo/stanford/parser
+export STANFORD_MODELS=$HOME/comtravo/stanford/models/ner
+
+export PATH=/Applications/Emacs.app/Contents/MacOS/:/Users/mika/bin:/usr/local/texlive/2016/bin/x86_64-darwin/:$PATH
+alias emacs="emacs -nw"
+export EDITOR="emacs -nw"
+
+source ~/.git-completion
+
+# Set config variables first
+GIT_PROMPT_ONLY_IN_REPO=1
+
+GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+
+# GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+GIT_PROMPT_SHOW_UNTRACKED_FILES=no # can be no, normal or all; determines counting of untracked files
+
+# GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
+
+# GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+# GIT_PROMPT_END=...      # uncomment for custom prompt end sequence
+
+# as last entry source the gitprompt script
+# GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
+GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
+# Git prompt
+source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+
+export TERM=screen-256color
+
+
+# Setup PYTHONPATH for comtravo
+function join { local IFS="$1"; shift; echo "$*"; }
+
+CP1=`ls -d $HOME/comtravo/ct-backend/python_lib/**`
+CP1=`join : $CP1`
+CP2=`ls -d $HOME/comtravo/ct-backend/python_lib/nlp_models/**`
+CP2=`join : $CP2`
+export CP=$PYTHONPATH:$CP1:$CP2
+
+
+export SIMBAINI=$HOME/.mapr.drillodbc.ini
+export ODBCSYSINI=$HOME/.odbcinst.ini
+export ODBCINI=$HOME/.odbc.ini
+export DYLD_LIBRARY_PATH=/usr/local/iODBC/lib:/opt/mapr/drillodbc/lib/universal
+
+
+alias bipython="PYTHONPATH=$CP COMTRAVO_BI_URI=https://bi.comtravo.com COMTRAVO_BI_USER=alphago COMTRAVO_BI_PASSWORD=diehuman ZEN_USER=thomas.pfleiderer@comtravo.com ZEN_PW='!Travel2014' ipython"

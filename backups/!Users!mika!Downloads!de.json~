@@ -1,0 +1,68 @@
+{
+	"Layover in {{city}} ({{iataCode}})": "Layover in {{city}} ({{iataCode}})",
+	"Hello {{name}}": "Hello {{name}}",
+	"Non stop": "Non stop",
+	"Flight duration": "Flugdauer",
+	"Dear {{title}} {{first_name}},": "Dear {{title}} {{first_name}},",
+	"Thanks for your inquiry to Comtravo.": "Thanks for your inquiry to Comtravo.",
+	"We can offer you the following options:": "We can offer you the following options:",
+	"Payment details": "Payment details",
+	"Pickup": "Pickup",
+	"Return": "Return",
+	"Agents comments": "Agents comments",
+	"Duration": "Duration",
+	"Departure": "Departure",
+	"Destination": "Destination",
+	"Checkin": "Checkin",
+	"Checkout": "Checkout",
+	"Wish you a nice day,": "Wish you a nice day,",
+	"%s traveler": {
+		"one": "%s traveler",
+		"other": "%s travelers"
+	},
+	"Price per day": "Price per day",
+	"Price": "Price",
+	"%s single room": {
+		"one": "%s single room",
+		"other": "%s single rooms"
+	},
+	"Transfer time": "Transfer time",
+	"%s double room": {
+		"one": "%s double room",
+		"other": "%s double rooms"
+	},
+	"Flight to %s": "Flight to %s",
+	"Outbound flight": "Outbound flight",
+	"Return flight": "Return flight",
+	"Outbound trip": "Outbound trip",
+	"Return trip": "Return trip",
+	"%s night": {
+		"one": "%s night",
+		"other": "%s nights"
+	},
+	"%s day": {
+		"one": "%s day",
+		"other": "%s days"
+	},
+	"discount %s&#37;": {
+		"one": "discount %s&#37;",
+		"other": "discount %s&#37;"
+	},
+	"no discount": {
+		"one": "no discount",
+		"other": "no discount"
+	},
+	"EUR": "€",
+	"USD": "$",
+	"Flight": "Flug",
+	"Airline locator": "Airline locator",
+	"Flightnumber": "Flugnummer",
+	"From": "Von",
+	"To": "Nach",
+	"Comtravo emergency number": "Comtravo Notfall Hotline",
+	"Name": "Name",
+	"Booking reference": "Buchungsbestätigung",
+	"Street": "Strasse",
+	"Country": "Land",
+	"Zip, city": "PLZ, Stadt"
+}

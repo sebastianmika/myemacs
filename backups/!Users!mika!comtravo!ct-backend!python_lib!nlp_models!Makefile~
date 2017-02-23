@@ -1,0 +1,5 @@
+#!make
+test:
+	#@$(MAKE) -C event_model test
+	@$(MAKE) -C msg_type_model test
+.PHONY: test

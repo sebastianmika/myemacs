@@ -1,0 +1,32 @@
+(ns wit-server.handler
+  (:require [compojure.core :refer :all]
+            [compojure.route :as route]
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [duckling.core :as p]
+            [clojure.data.json :as json]))
+
+(defn wit
+  ""
+  [text]
+  (json/write-str (p/parse :en$core
+                text
+                [:time]
+                )
+       )
+  )
+
+(defroutes app-routes
+  (GET "/" [] "Hello World")
+  (POST "/wit" req
+        (let [text (get (:params req) :text)]
+          (wit text)))
+  (route/not-found "Not Found")
+  )
+
+(defn init
+  ""
+  []
+  (p/load!))
+
+(def app
+  (wrap-defaults app-routes api-defaults))

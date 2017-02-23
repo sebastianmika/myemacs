@@ -1,0 +1,31 @@
+from . base_tagger import BaseTagger, TagStatus
+
+
+class TestTagger(BaseTagger):
+    def __init__(self, only_main_body=True):
+        self.only_main_body = only_main_body
+
+    def tag(self, msg, result):
+        # Shrink message for further processing if only the main part
+        # between Greeting and EndOfMsg/Reply should be tagged
+        result['analyzed'] = {'body': {'text': None, 'start': None, 'end': None},
+                              'subject': {'text': msg['subject'],
+                                          'start': 0, 'end': len(msg['subject'])}}
+        if self.only_main_body:
+            # only keep tags that are after the greeting and before eom/replies
+            result['analyzed']['body']['start'] = max(
+                [s['end'] for a in result['annotations']
+                 if a['type'] == 'Greeting' for s in a['spans']],
+                default=0)
+            result['analyzed']['body']['end'] = min(
+                min([s['start'] for a in result['annotations']
+                     if a['type'] == 'EndOfMsg' for s in a['spans']], default=len(msg['body'])),
+                min([s['start'] for a in result['annotations']
+                     if a['type'] == 'Reply' for s in a['spans']], default=len(msg['body']))
+            )
+        else:
+            result['analyzed']['body']['start'] = 0
+            result['analyzed']['body']['end'] = len(msg['body'])
+        result['analyzed']['body']['text'] = msg['body']
+        msg['body'] = msg['body'][result['analyzed']['body']['start']:result['analyzed']['body']['end']]
+        return TagStatus.success

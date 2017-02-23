@@ -1,0 +1,32 @@
+def format_log_entry(e, df_users):
+    if e['audit']['author_id'] != -1:
+        str = """{created_at}\n\t{type} - {email} - {role}""".format(
+              type=e['type'],
+              created_at=e['audit']['created_at'],
+              **df_users[['role', 'email']].ix[e['audit']['author_id']].to_dict())
+    else:
+        str = """{created_at}\n\t{type} - NO AUTHOR""".format(
+              type=e['type'],
+              created_at=e['audit']['created_at'])
+    if 'via' in e and 'channel' in e['via']:
+        str += "\n\tvia: {}".format(e['via']['channel'])
+    else:
+        str += "\n\tvia: {}".format(e['audit']['via']['channel'])
+    if e['type'] == "Comment":
+        str += """\n\tpublic: {public}\n\tbody: {body!r:.80s}""".format(**e)
+    elif e['type'] == "Create" or e['type'] == "Change":
+        str += """\n\tfield_name: {field_name} {prev_val} -> {value}""".format(
+                **e, prev_val=e.get('previous_value', 'None'))
+    elif e['type'] == "External":
+        if e['via']['channel'] == "rule":
+            str += "\n\ttitle: {}".format(e['via']['source']['from']['title'])
+    elif e['type'] == "AgentMacroReference":
+        str += "\n\tmacro: {}".format(e["macro_title"])
+    elif e['type'] == "Cc":
+        str += "\n\tCc: ???"
+    elif e['type'] == "Notification":
+        if e['body'] == "{{dc.trigger-out-of-business-hours}}":
+            str += "\n\tnotification: out of business hours"
+    else:
+        raise Exception("Unknown audit entry")
+    return str

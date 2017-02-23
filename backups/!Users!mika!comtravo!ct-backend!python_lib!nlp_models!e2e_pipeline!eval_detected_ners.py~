@@ -1,0 +1,4 @@
+def eval_detected_ners(raw_data, ner_type):
+    for c in raw_data:
+        true_ann = [a in c['ann']['annotations'] if a['type'] == ner_type]
+        pred_ann = [a in c['pred_ann']['annotations'] if a['type'] == ner_type]

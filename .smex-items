@@ -1,0 +1,66 @@
+
+;; ----- smex-history -----
+(
+ jedi:install-server
+ jedi:complete
+ package-list-packages
+ package-install
+ uncomment-region
+ query-replace
+ comment-region
+)
+
+;; ----- smex-data -----
+(
+ (cider-jack-in . 2)
+ (line-number-mode . 2)
+ (comment-region . 41)
+ (paredit-mode . 7)
+ (json-pretty-print-buffer . 29)
+ (search-forward-regexp . 3)
+ (query-replace . 150)
+ (query-replace-regexp . 14)
+ (whitespace-mode . 30)
+ (diff-mode . 3)
+ (compare-windows . 1)
+ (diff-buffer-with-file . 2)
+ (highlight-compare-buffers . 1)
+ (indent-region . 3)
+ (column-number-mode . 4)
+ (diff . 1)
+ (ediff-buffers . 3)
+ (json-pretty-print . 8)
+ (uncomment-region . 14)
+ (decrease-left-margin . 2)
+ (package-install . 10)
+ (insert-file . 28)
+ (python-menu . 1)
+ (python-mode . 5)
+ (latex-insert-block . 8)
+ (sql-mysql . 1)
+ (sql-mode-menu . 2)
+ (sql-linter . 1)
+ (sql-product-interactive . 3)
+ (sql-highlight-ansi-keywords . 1)
+ (flycheck-manual . 1)
+ (flycheck-mode . 4)
+ (tetris . 31)
+ (flycheck-buffer . 1)
+ (json-reformat-region . 3)
+ (count-lines-page . 2)
+ (pong . 1)
+ (toggle-save-place-globally . 2)
+ (increase-left-margin . 1)
+ (replace-string . 2)
+ (replace-regexp . 31)
+ (regexp-builder . 1)
+ (magit-diff . 1)
+ (diff-git-buffer-stage . 1)
+ (magit-status . 1)
+ (goto-char . 3)
+ (doctor . 1)
+ (clean-buffer-list . 1)
+ (package-list-packages . 4)
+ (jedi:complete . 1)
+ (jedi:install-server . 1)
+)

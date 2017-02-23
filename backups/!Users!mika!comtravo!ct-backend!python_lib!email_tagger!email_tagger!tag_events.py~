@@ -1,0 +1,16 @@
+import logging
+from . helpers import tag_wrapper, TagStatus
+from msg_type_model import apply_model
+
+
+logger = logging.getLogger(__name__)
+
+
+@tag_wrapper("isbooking")
+def tag_isbooking(msg, result):
+    try:
+        result['p_booking'] = apply_model(msg, result)
+    except Exception as e:
+        logger.error("faild to predict p_booking: {}".format(e))
+        return TagStatus.server_error
+    return TagStatus.success

@@ -1,0 +1,18 @@
+[nosetests]
+with-timer=True
+timer-top-n=0
+verbosity=2
+with-coverage=True
+cover-package=msg_type_model
+cover-erase=True
+cover-min-percentage=75
+cover-inclusive=True
+
+[flake8]
+max-line-length = 100
+
+[coverage:run]
+omit = */train_model.py
+
+[coverage:report]
+show_missing=True

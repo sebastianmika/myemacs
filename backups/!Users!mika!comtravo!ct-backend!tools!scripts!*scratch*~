@@ -1,0 +1,34 @@
+spacy_tagger = SpacyTagger()
+merge_tagger = MergeAnnotationsTagger()
+
+
+
+data = load_data()
+m = [d for d in data if d ['id'] == '01027-06673'] [0]
+
+body_txt = m['msg']['body']
+
+subject_txt = m['msg']['subject']
+
+m['annotations_orig'] = deepcopy(m['annotations'])
+res = {
+    'annotations': m['ann']['annotations_orig'],
+    'analyzed': {
+        'body': {
+            'text': body_txt,
+            'start': 0,
+            'end': len(body_txt)
+        },
+        'subject': {
+            'text': subject_txt,
+            'start': 0,
+            'end': len(subject_txt)}},
+    'log': [],
+    'language': m['ann']['language']
+}
+m
+spacy_tagger(m['msg'], res)
+
+
+merge_tagger(m['msg'], res)
+

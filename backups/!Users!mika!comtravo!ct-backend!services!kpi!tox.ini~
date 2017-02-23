@@ -1,0 +1,18 @@
+[tox]
+envlist = py35
+
+[testenv]
+setenv=
+   TEST = 1
+deps=
+   --editable=file:///{toxinidir}/../../python_lib/brat_io/
+   --editable=file:///{toxinidir}/../../python_lib/nlp_models/msg_type/
+   --editable=file:///{toxinidir}/../../python_lib/email_tagger/
+   --editable=file:///{toxinidir}/../../python_lib/jwt_auth/
+   nose
+   coverage
+   flake8
+   flask-testing==0.5.0
+commands=
+   nosetests
+   flake8

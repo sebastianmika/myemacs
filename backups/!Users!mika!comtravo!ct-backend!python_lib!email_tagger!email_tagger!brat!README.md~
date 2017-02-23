@@ -1,0 +1,5 @@
+# Brat File Handling #
+
+This module contains some files copied from the original brat
+distribution, namely from `server/src`. They deal with reading the
+brat annotation file format.

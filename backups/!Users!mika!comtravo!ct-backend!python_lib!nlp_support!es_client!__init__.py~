@@ -1,0 +1,30 @@
+import os
+import requests
+import json
+
+
+def _query_elasticsearch(query, index='travelers'):
+    """Given a dictionary of a query (the python json equivalent of what
+    elasticsearch expects), run that query against travelers on
+    bi.comtravo.com and return the result as dict
+
+    """
+    bi_uri = os.environ.get('COMTRAVO_BI_URI', 'http://bi:9200')
+    bi_user = os.environ.get('COMTRAVO_BI_USER')
+    bi_password = os.environ.get('COMTRAVO_BI_PASSWORD')
+    try:
+        r = requests.get(bi_uri + '/{}/_search'.format(index),
+                         headers={'Accept': 'application/json', 'Content-Type': 'application/json'},
+                         data=json.dumps(query),
+                         auth=(bi_user, bi_password),
+                         verify=False)  # Self signed cert...
+    except requests.exceptions.ConnectionError as e:
+        logger.error("could not connect to elasticsearch: {}".format(e))
+        return {'status': 900, 'result': {}}
+    if r.status_code == 200:
+        return {'status': 200, 'result': r.json()}
+    else:
+        logger.error('querying elasticsearch on {} failed: {}'.format(bi_uri, r.status_code))
+        return {'status': r.status_code, 'result': {}}
+
+

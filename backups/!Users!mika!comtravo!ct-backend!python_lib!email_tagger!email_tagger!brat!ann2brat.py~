@@ -1,0 +1,50 @@
+typemap = {
+    'greeting': 'Greeting',
+    'end_of_message': 'EndOfMsg',
+    'person': 'Person',
+    'message': None
+}
+
+
+def strip(s):
+    rs = s.rstrip()
+    nr = len(s) - len(rs)
+    ls = s.lstrip()
+    nl = len(s) - len(ls)
+    return s.strip(), nl, nr
+
+
+def ann2brat(msg, ann, f):
+    t_count = 1
+    f.write('T{t_count}\t{type} {range}\t{text}\n'.format(
+        t_count=t_count, type="Attributes", range='0 0', text=''))
+    a_count = 0
+    for a in ann['annotations']:
+        if a['type'] == 'segment':
+            type = typemap[a['value']['type']]
+            if type is not None:
+                text = msg['body'][a['value']['start']:a['value']['end']].replace('\t', ' ')
+                ranges = []
+                texts = []
+                text_lines = text.split('\n')
+                pos = a['value']['start']
+                for l in text_lines:
+                    ls, nl, nr = strip(l)
+                    if len(ls) > 0:
+                        ranges.append('{} {}'.format(pos+nl, pos+nl+len(ls)))
+                        texts.append(ls)
+                    pos += len(l) + 1
+                t_count += 1
+                f.write('T{t_count}\t{type} {range}\t{text}\n'.format(
+                    t_count=t_count, type=type, range=';'.join(ranges),
+                    text=' '.join(texts)))
+        elif a['type'] == 'lang':
+            a_count += 1
+            f.write('A{a_count}\tLanguage T1 {lang}\n'.format(
+                a_count=a_count, lang=a['value']))
+        elif a['type'] == 'source':
+            a_count += 1
+            f.write('A{a_count}\tSource T1 {src}\n'.format(
+                a_count=a_count, src=a['value']))
+        else:
+            print('WARNING: UNHANDLED SEGMENT TYPE {}'.format(a['type']))

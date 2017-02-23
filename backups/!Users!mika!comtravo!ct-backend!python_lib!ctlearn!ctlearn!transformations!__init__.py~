@@ -1,0 +1,32 @@
+from .language import LanguageTransformer  # noqa
+from .source import SourceTransformer  # noqa
+from .type import TypeTransformer  # noqa
+from .eom import EOMTransformer  # noqa
+from .greeting import GreetingTransformer  # noqa
+from .reply import ReplyTransformer  # noqa
+from .truncate import TruncateTransformer  # noqa
+from .iata import IATATransformer  # noqa
+from .crm_company import CRMCompanyTransformer  # noqa
+from .crm_person import CRMPersonTransformer  # noqa
+from .person import PersonTransformer  # noqa
+from .time import TimeTransformer  # noqa
+from .fn import FlightNumberTransformer  # noqa
+from .location import LocationTransformer  # noqa
+from .airline import AirlineTransformer  # noqa
+from .category_or_class import CategoryOrClassTransformer  # noqa
+from .luggage import LuggageTransformer  # noqa
+from .company_prob import CompanyProbTransformer  # noqa
+from .person_prob import PersonProbTransformer  # noqa
+from .spacy import SpacyTransformer  # noqa
+from .merge import MergeTransformer  # noqa
+from ..base import Transformer
+
+
+class TestTransformer(Transformer):
+    def __init__(self, name, i):
+        super(TestTransformer, self).__init__(id=name, input_keys=i, output_key=name)
+        self.name = name
+
+    def transform(self, *args):
+        return ['{}.transform({})'.format(self.name, ', '.join(map(str, tup)))
+                for tup in zip(*args)]

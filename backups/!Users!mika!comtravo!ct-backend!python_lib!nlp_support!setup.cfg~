@@ -1,0 +1,20 @@
+[nosetests]
+with-timer=True
+timer-top-n=0
+verbosity=2
+with-coverage=True
+cover-package=email_tagger
+cover-erase=True
+cover-min-percentage=75
+cover-inclusive=True
+processes=-1
+process-timeout=60
+
+[flake8]
+max-line-length = 100
+
+[coverage:run]
+omit = */brat/*.py
+
+[coverage:report]
+show_missing=True

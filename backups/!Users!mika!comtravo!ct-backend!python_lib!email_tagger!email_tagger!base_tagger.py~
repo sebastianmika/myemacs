@@ -1,0 +1,3 @@
+class BaseTagger():
+    def _tag(msg, result):
+        return TagStatus.success

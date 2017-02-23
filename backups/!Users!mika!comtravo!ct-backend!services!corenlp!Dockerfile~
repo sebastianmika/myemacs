@@ -1,0 +1,16 @@
+FROM java:8
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY tools/nlp_tools_server /usr/src/app/tools/nlp_tools_server
+
+WORKDIR /usr/src/app/tools/nlp_tools_server
+RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+RUN chmod +x lein && mv lein /usr/bin
+
+ENV LEIN_ROOT True
+
+RUN lein
+RUN lein deps
+
+CMD "lein ring server"

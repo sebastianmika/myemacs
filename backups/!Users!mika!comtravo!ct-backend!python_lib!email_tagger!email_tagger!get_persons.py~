@@ -1,0 +1,66 @@
+from . helpers import _query_elasticsearch
+
+
+def get_persons(company_ids):
+    """Given a list of company_id's, query elasticsearch for all booker
+    and traveler that match documents for this company and return a unique
+    list of matches. The returned records are normalized to have the same
+    format which is:
+
+    {
+      'roles': ['booker'|'taveler'|'both'],
+      'first_name': 'Hans',
+      'last_name': 'Mustermann',
+      'full_name': 'Hans Mustermann',
+      'email': 'the email',
+      'id': 'id of person'
+    }
+    """
+    query = {
+        'query': {
+            'bool': {
+                'must': [{'terms': {'company_id': company_ids}}]
+            }
+        },
+        'sort': [  # Sort here to get the latest entries last - person
+                   # data on a per booking basis will probably not get
+                   # updated once they are in bi.
+            {'meta_data.updated_at': {'order': 'asc'}}
+        ],
+        '_source': {'include': ['booker.*',
+                                'booking_items.traveler.*', 'booking_items.traveler_id']}
+    }
+    ans = _query_elasticsearch(query)
+    if ans is None:
+        return []
+    if ans['hits']['total'] == 0:
+        return []
+
+    persons = []
+    for p in ans['hits']['hits']:
+        persons.append({
+            'role': 'booker',
+            'id': p['booker']['_id'],
+            'first_name': p['first_name'],
+            'last_name': p['last_name'],
+            'full_name': p['full_name'],
+            'email': p['email']
+        })
+        for bi in p['booking_items']:
+            persons.append({
+                'role': 'traveler',
+                'id': bi['traveler_id'],
+                'first_name': bi['traveler']['first_name'],
+                'last_name': bi['traveler']['last_name'],
+                'full_name': bi['traveler']['full_name'],
+                'email': bi['traveler']['email']
+            })
+    # Make persons unique according to id; iterate over timely sorted
+    # entries (see original query) and update with latest data seen
+    upersons = {}
+    for p in persons:
+        if p['id'] in upersons:
+            upersons[p['id']].update(p)
+        else:
+            upersons[p['id']] = p
+    return list(upersons.values())

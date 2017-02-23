@@ -1,0 +1,10 @@
+(
+ "2 Stunden"
+ (duration :hour 2)
+
+ "00:45 Std"
+ (duration :hour 0 :minute 45)
+
+ "02:03 Std"
+ (duration :hour 2 :minute 3)
+)

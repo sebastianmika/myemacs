@@ -1,0 +1,23 @@
+echo "add_vectors=None, matcher=None, parser=None, tagger=None"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None, tagger=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None, tagger=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None, tagger=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+
+echo "add_vectors=None, matcher=None, parser=None"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None, parser=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+
+echo "add_vectors=None, matcher=None"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\", add_vectors=None, matcher=None)')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+
+echo "Full spacy"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\")')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\")')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+python -c "import timeit, resource; print(\"Time: \", timeit.timeit('import spacy; spacy.load(\"de\")')); print(\"Mem: \", resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1024/1024)"
+
+
+
+

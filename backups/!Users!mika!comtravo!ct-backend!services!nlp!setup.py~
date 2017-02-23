@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+from distutils.core import setup
+
+
+setup(
+    name='NLP API',
+    version='0.0.1',
+    description='Comtravo NLP API',
+    author='Comtravo',
+    author_email='sebastian.mika@comtravo.com',
+    packages=['nlp_api'],
+    install_requires=[
+        'connexion==1.0.103',
+        'email_tagger==0.0.1'
+    ],
+    test_suite='nose.collector',
+    tests_require=['nose']
+)

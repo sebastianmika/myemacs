@@ -1,0 +1,87 @@
+import regex as re
+from . get_companies import get_companies
+from . get_persons import get_persons
+from brat_io import bratify_ann
+from . base_tagger import BaseTagger, TagStatus
+from . helpers import _get_longest_match, _insert_non_ascii_matching, _merge_double_matches
+
+
+class PersonTagger(BaseTagger):
+    def tag(self, msg, result):
+        """Given a msg, query the BI backend
+        and tag all entities that are potentially known persons.
+        """
+        # Get persons relevant for this message
+        tag_status = get_companies(msg, result)
+        if tag_status != TagStatus.success:
+            return tag_status
+        tag_status = get_persons(msg, result)
+        if tag_status != TagStatus.success:
+            return tag_status
+        if len(result['crm']['users']) == 0:
+            return TagStatus.success
+        # persons is a list of dicts with 'email',
+        # 'last_name', 'first_name' and sometime 'middle_name'
+        # Its unique wrt. to 'email'
+        matches = []
+        for pid, p in result['crm']['users'].items():
+            # Could add that in...but first collect more examples/patterns
+            # salutations_neutral = ['Dr\.', 'RA', 'Dipl\.[ -]Kfm\.', 'BA', 'MA']
+            salutations_female = ['Fräulein', 'Frau', 'Fr\.?', 'Mrs\.?', 'Mdm\.?']
+            salutations_male = ['Herrn', 'Herr', 'Hr\.?', 'Mr\.?']
+            if 'gender' in p and p['gender'] == 'f':
+                rr_salutation = r'(?:' + r'\s+|'.join(salutations_female) + r'\s+)'
+            elif 'gender' in p and p['gender'] == 'm':
+                rr_salutation = r'(?:' + r'\s+|'.join(salutations_male) + r'\s+)'
+            else:
+                rr_salutation = (r'(?:' + r'\s+|'.join(salutations_female) + '\s+|' +
+                                 r'\s+|'.join(salutations_male) + r'\s+)')
+
+            # Get a list of all first names and a expression that matches
+            # any upper case letter followed by a '.' (for abbreviated
+            # middle names with might not be part of the known data)
+            firstname_parts = _insert_non_ascii_matching(p['first_name']).split(' ')
+            firstname_parts_and_initials = firstname_parts + [r'\p{Lu}\.']
+            # missing out edge cases where the name is preceeded by a
+            # capitalized word that is also a name but changes the
+            # "person" to someone else we do not know. Could require a non
+            # capitalized word before a space like this:
+            # (?:(?-i)(?<!\p{{Lu}}\p{{Ll}}+)\s) - but then we miss things
+            # like "Hello Ralf", i.e. we would allow for capitalized
+            # greeting clauses...too complicated right now.
+            rr = (r'(?i)(?:^|\s|\p{{P}})(?P<person>{salutations}?'
+                  '(?:(?:(?:{firstname_parts_and_initials})\s+)+{lastname}|'
+                  '(?-i){lastname}|(?-i){firstname}|(?-i)(?:{firstname_parts})))'
+                  # End with an optional plural s or a space *not*
+                  # followed by a capital letter (that is another name
+                  # part that we could not match and indicates a different
+                  # person), a punctation, the end of line/text or an
+                  # apostrophe;
+                  '(?:(?-i)(?:\s(?!\p{{Lu}}))|s?(?:\p{{P}}|$|\')|s\s)').format(
+                      salutations=rr_salutation,
+                      lastname=_insert_non_ascii_matching(p['last_name']).replace(' ', r'\s+'),
+                      firstname=_insert_non_ascii_matching(p['first_name']).replace(' ', r'\s+'),
+                      firstname_parts_and_initials=r'|'.join(firstname_parts_and_initials),
+                      firstname_parts=r'|'.join(firstname_parts))
+            # This is rather expensive - the regex expression is very
+            # long, primarily because of the _insert_non_ascii_matching,
+            # which leads to rather long compile times inside regex.
+            additional_roles = set()
+            for m in re.finditer(rr, msg['body'], re.VERSION1 | re.MULTILINE):
+                a = bratify_ann(msg, 'Person', m.start('person'), m.end('person'),
+                                attributes={'crm_ids': [pid]}, where='body')
+                matches.append(a)
+                additional_roles.add('body')
+            for m in re.finditer(rr, msg['subject'], re.VERSION1 | re.MULTILINE):
+                a = bratify_ann(msg, 'Person', m.start('person'), m.end('person'),
+                                attributes={'crm_ids': [pid]}, where='subject')
+                matches.append(a)
+                additional_roles.add('subject')
+            p['msg_roles'] += sorted(list(additional_roles))
+        # There might be multiple overlapping matches for the same part of
+        # the message - that possbily cannot be with a person. Take that
+        # match which covers the longest text part. If there are
+        # overlapping matches which cover the same number of characters
+        # leave in both.
+        result['annotations'] += _merge_double_matches(_get_longest_match(matches))
+        return TagStatus.success

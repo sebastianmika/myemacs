@@ -1,0 +1,10 @@
+nlp:
+  volumes:
+    - ../../python_lib:/usr/src/app/python_lib
+    - ../../nodejs_lib/:/usr/src/app/nodejs_lib
+    - ../../data/:/usr/src/app/data
+    - .:/usr/src/app/services/nlp
+  environment:
+    - DEBUG:1
+  ports:
+    - "10000:80"

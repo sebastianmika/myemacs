@@ -1,0 +1,6 @@
+import timeit
+import resource
+
+t = timeit.timeit('import spacy; space.load("en", add_vectors=None, matcher=None, parser=None')
+m = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+print("time: %d memory: %d".format(t, m))

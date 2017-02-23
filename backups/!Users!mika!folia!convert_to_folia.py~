@@ -1,0 +1,27 @@
+from pynlpl.formats import folia
+
+
+def convert_to_folia(msg):
+    doc = folia.Document(id='someid')
+    text = doc.add(folia.Text)
+    paragraph = text.add(folia.Paragraph)
+    paragraph.add(folia.Word, 'This')
+    paragraph.add(folia.Word, 'is')
+    paragraph.add(folia.Word, 'a')
+    paragraph.add(folia.Word, 'test')
+    paragraph.add(folia.Word, 'to')
+    paragraph.add(folia.Word, 'book')
+    paragraph.add(folia.Word, 'a')
+    paragraph.add(folia.Word, 'flight')
+    paragraph.add(folia.Word, 'from')
+    paragraph.add(folia.Word, 'TXL')
+    paragraph.add(folia.Word, 'to')
+    paragraph.add(folia.Word, 'LHR')
+    paragraph.add(folia.Word, 'on')
+    paragraph.add(folia.Word, 'Dec')
+    paragraph.add(folia.Word, '1st')
+    paragraph.add(folia.Word, '.')
+    doc.save()
+
+convert_to_folia(None)
+

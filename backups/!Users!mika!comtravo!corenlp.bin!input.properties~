@@ -1,0 +1,5 @@
+annotators = tokenize, ssplit
+
+tokenize.language = de
+tokenize.whitespace = true
+tokenize.untokenizable = allKeep

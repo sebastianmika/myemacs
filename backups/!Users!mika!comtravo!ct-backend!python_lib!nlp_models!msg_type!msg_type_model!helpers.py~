@@ -1,0 +1,21 @@
+def gen_text(anns):
+    """Convert an array of annotations into a text where all known 'rners'
+    are replaced by their type
+    """
+    pos = 0
+    while True:
+        if pos == len(anns):
+            break
+        elif anns[pos]['rner'][2:] in ['Greeting', 'Reply']:
+            pos += 1
+        elif anns[pos]['rner'][2:] == 'EndOfMsg':
+            return
+        elif anns[pos]['rner'] == 'O-':
+            yield anns[pos]['text'].lower()
+            pos += 1
+        elif anns[pos]['rner'].startswith('B-'):
+            txt = anns[pos]['rner'][2:].lower()
+            pos += 1
+            while pos < len(anns) and (anns[pos]['rner'][0] not in ['B', 'O']):
+                pos += 1
+            yield txt

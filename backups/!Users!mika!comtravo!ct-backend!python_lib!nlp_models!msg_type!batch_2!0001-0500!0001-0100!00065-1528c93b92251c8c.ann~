@@ -1,0 +1,65 @@
+T1	Attributes 168 168	
+#1	AnnotatorNotes T1	{"language": "de", "source": "email", "request_type": "booking"}
+T2	Greeting 178 195	Hallo ihr lieben,
+T3	Person 399 410	Marc Preiss
+#2	AnnotatorNotes T3	{"crm_ids": ["56d4d22a5fcdce010017aa66"]}
+T4	Person 493 508	Patrick Haecker
+#3	AnnotatorNotes T4	{"crm_ids": ["56d4d19d231e530100f21604"]}
+T5	Person 961 974	Leni Hartmann
+#4	AnnotatorNotes T5	{"crm_ids": ["56b904690dde60010094f34f", "574448ea18016c0100b2e7c9"]}
+T6	Person 1330 1344	Markus Gawenda
+#5	AnnotatorNotes T6	{"crm_ids": ["56dffab1d4fbdc0100a4ba67"]}
+T7	Person 296 307	sven hunger
+#6	AnnotatorNotes T7	{"crm_ids": ["56d4d1745fcdce010017aa0d"]}
+T8	Location 608 611	TXL
+#7	AnnotatorNotes T8	{"iata_code": "TXL"}
+T9	Location 635 638	DUS
+#8	AnnotatorNotes T9	{"iata_code": "DUS"}
+T10	TimeRange 677 725	11.02., 08:20                      11.02., 09:30
+#9	AnnotatorNotes T10	{"type": "value", "value": "2016-02-11T08:20:00.000Z", "grain": "minute"}
+T11	TimePoint 913 934	ab 10.00h am 12.02.16
+#10	AnnotatorNotes T11	{"to": {"value": "2016-02-12T12:00:00.000Z", "grain": "hour"}, "type": "interval", "from": {"value": "2016-02-12T00:00:00.000Z", "grain": "hour"}}
+T12	TimeRange 480 490	8.20h-9.30
+#11	AnnotatorNotes T12	{"to": {"value": "2016-01-29T09:31:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-01-28T20:00:00.000Z", "grain": "minute"}}
+T13	TimePoint 451 459	12.02.16
+#12	AnnotatorNotes T13	{"type": "value", "value": "2016-02-12T00:00:00.000Z", "grain": "day"}
+T14	TimeRange 439 449	8.20h-9.35
+#13	AnnotatorNotes T14	{"to": {"value": "2016-01-29T09:36:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-01-28T20:00:00.000Z", "grain": "minute"}}
+T15	TimePoint 411 419	11.02.16
+#14	AnnotatorNotes T15	{"type": "value", "value": "2016-02-11T00:00:00.000Z", "grain": "day"}
+T16	TimeRange 386 396	7.20h-8.20
+#15	AnnotatorNotes T16	{"to": {"value": "2016-01-30T08:21:00.000Z", "grain": "minute"}, "type": "interval", "from": {"value": "2016-01-29T20:00:00.000Z", "grain": "minute"}}
+T17	TimePoint 353 361	12.02.16
+#16	AnnotatorNotes T17	{"type": "value", "value": "2016-02-12T00:00:00.000Z", "grain": "day"}
+T18	TimePoint 308 316	10.02.16
+#17	AnnotatorNotes T18	{"type": "value", "value": "2016-02-10T00:00:00.000Z", "grain": "day"}
+T25	TimeRange 340 351	 8.50h-9.50
+#24	AnnotatorNotes T25	{"type": "value", "value": "2016-01-29T09:50:00.000Z", "grain": "minute"}
+T26	TimePoint 19 27	10.02.16
+#25	AnnotatorNotes T26	{"type": "value", "value": "2016-02-10T00:00:00.000Z", "grain": "day"}
+T27	Location 317 324	Leipzig
+#26	AnnotatorNotes T27	{"geonames_ids": [2879139]}
+T28	Location 362 372	Düsseldorf
+#27	AnnotatorNotes T28	{"geonames_ids": [2934246]}
+T29	Location 420 427	München
+#28	AnnotatorNotes T29	{"geonames_ids": [2867714]}
+T30	Location 428 438	Düsseldorf
+#29	AnnotatorNotes T30	{"geonames_ids": [2934246]}
+T31	Location 460 470	Düsseldorf
+#30	AnnotatorNotes T31	{"geonames_ids": [2934246]}
+T32	Location 471 478	München
+#31	AnnotatorNotes T32	{"geonames_ids": [2867714]}
+T33	Location 1267 1274	Krefeld
+#32	AnnotatorNotes T33	{"geonames_ids": [2884509]}
+T34	Location 1300 1307	Krefeld
+#33	AnnotatorNotes T34	{"geonames_ids": [2884509]}
+T35	EndOfMsg 941 959;961 974;975 986;987 990;992 1010;1012 1015;1017 1036;1038 1042;1044 1068;1070 1073;1075 1089;1091 1155;1157 1216;1218 1242;1243 1260;1261 1274;1276 1344	Vielen Dank und lg Leni Hartmann Back Office Tel +49 2151 479 444 0 Fax +49 2151 479 448 55 Mail leni.hartmann@shoch3.com Web www.shoch3.com [http://www.shoch3.com/images/mailsignature/Sonic_Logo_2015.png] [http://www.shoch3.com/images/mailsignature/SONIC_2015.png] Sonic Sales Support GmbH Bischofstraße 120 47809 Krefeld HRB 13734 - Amtsgericht Krefeld   |  Geschäftsführer: Markus Gawenda
+T36	Location 325 335	düsseldorf
+T37	Location 373 380	leipzig
+T38	Luggage 882 893	Gepäck 20kg
+T19	ReturnFlight 219 224	flüge
+E1	ReturnFlight:T19 who:T7 org:T27 dst:T36 dpt_outbound:T18 org2:T28 dst2:T37 dpt_inbound:T17 who2:T3 org3:T29 dst3:T30 dpt_outbound2:T15 org4:T31 dst4:T32 dpt_inbound2:T13 who3:T4 org5:T8 dst5:T9 dpt_outbound3:T10 dst6:T8 org6:T9 dpt_inbound3:T11 without:T38
+R1	about Arg1:T18 Arg2:T25	
+R2	about Arg1:T17 Arg2:T16	
+R3	about Arg1:T15 Arg2:T14	
+R4	about Arg1:T13 Arg2:T12	

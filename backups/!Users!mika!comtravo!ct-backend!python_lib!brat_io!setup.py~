@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+from distutils.core import setup
+
+
+setup(
+    name='email_tagger',
+    version='0.1',
+    description='Comtravo E-Mail Tagger',
+    author='Comtravo',
+    author_email='sebastian.mika@comtravo.com',
+    packages=['email_tagger', 'email_tagger.brat', 'tests'],
+    install_requires=[
+        'langdetect==1.0.6',
+        'regex==2016.6.19',
+        'requests==2.10.0',
+        'python-dateutil==2.5.3',
+        'pytz==2016.4',
+        'msg_type_model>=0.1'
+    ],
+    package_data={'email_tagger': ['data/UnicodeData.txt',
+                                   'data/airlines.json',
+                                   'data/iata_airports.json',
+                                   'data/org.geonames.cities15000.json']},
+    test_suite='nose.collector',
+    tests_require=['nose']
+)

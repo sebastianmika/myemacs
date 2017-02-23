@@ -1,0 +1,8 @@
+from . helpers import tag_wrapper, TagStatus
+
+@tag_Wrapper("get_corenlp")
+def get_corenlp(msg, result):
+    result['corenlp'] = {
+        'subject': _query_corenlp({'text': msg['subject'], 'lang': result['language']}),
+        'body': _query_corenlp({'text': msg['body'][:end_main_body],
+                                'lang': result['language']})}

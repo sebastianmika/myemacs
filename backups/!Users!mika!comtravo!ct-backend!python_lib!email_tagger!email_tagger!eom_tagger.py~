@@ -1,0 +1,175 @@
+# Need future regex module for matching of unicode character classes ('\p{L}')
+from collections import OrderedDict
+import regex as re
+from brat_io import bratify_ann
+from . helpers import tag_wrapper, TagStatus
+
+_regexs = None
+
+"""Find the "end of a message".
+
+The end is anything from a signoff phrase on (including the
+phrase). Also, anything following a "--" line if there is no previous
+signoff or lines starting with '>' mark the end of the
+message. Similarly, lines of the form "Am <date> um <time> schrieb
+<sender> mark the beginning of a reply. The latter will cause issues
+with inline replies, but this seems to be very rare.
+
+A challenge here is, that we want to find the first match of such a
+phrase. Simply ordering them by decreasing complexity as in the
+greeting case does not work out - there we are just looking at the
+start of the message. Here we might falsly detect a signoff inside a
+cited message down the stream. Hence we need to match all patterns at
+once and find the "earliest" match.
+
+"""
+
+
+def _init_regexs():
+    regexs = OrderedDict()
+    rrs = []
+    #
+    # All regex will be preceeded by .*? - i.e. the shortest possible
+    # part before a regexp matches
+    #
+    # Make sure that each subexpression has exactly one named capture
+    # group called eom '(?P<eom> ...)'
+    #
+
+    # Very certain closing formulas: After a newline or right at the
+    # start of the text match a classic signoff phrase ending in a ws,
+    # comma, !, the end of the text and anything else
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:Mit '
+          # Allow one subsitution for "Mit freundlichem Gruß"
+          '(freundlichen|herzlichen|besten|schönen|vielen|lieben){s<=1}'
+          ' (?:Grüßen|Gruß))(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    # English standard
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:With (best|kind) Regards)(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    # Shorter but still standard
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))'
+          '(?P<eom>(?:Freundliche|Herzliche|Beste|Schöne|Viele|Liebe){i<=1}'
+          '(?: lieben?)? (?:Grüße|Gruß)(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    # The following makes use from the fact that these expressions
+    # will be concatenated and then EVALUATED left to right!!!
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:Best |Kind )?Regards(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    rr = (r'(?-i)(?:\n|^)(?P<eom>Best,.*)')
+    rrs.append(rr)
+    rr = (r'(?-i)(?:\n|^)(?P<eom>Best\n.*)')
+    rrs.append(rr)
+    rr = (r'(?-i)(?:\n|^)(?P<eom>Best \p{Upper}\p{Lower}{2,}\n.*)')
+    rrs.append(rr)
+    rr = r'(?i)(?:^|\n)(?P<eom>-+ original message -+\n.*)'
+    rrs.append(rr)
+    # Match a line containing only "-- "
+    rr = r'(?-i)(?:^|\n)(?P<eom>--\s*\n.*)'
+    rrs.append(rr)
+    # Match a line starging with "sent from my ... "
+    rr = r'(?i)(?:^|\n)(?P<eom>Sent from my .*)'
+    rrs.append(rr)
+    # Match German short forms "LG", "MFG", "VG" - only match them
+    # right after a punctation or as first word on a line - make that case insensitive
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:MFG|LG|VG)(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    # Danke +/und Grüße
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:Danke?|Merci)(?: sehr)? (?:und|&|\+)'
+          '(?: liebe| viele| herzliche)?'
+          ' (?:Grüße|Gruß)(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    # Match phrases like "Vielen Dank und"
+    rr = (r'(?i)(?:\n|^|(?:[.!]\s+))(?P<eom>(?:Vielen|Besten|Lieben|Tausend|1000)'
+          ' Dank(?:(?! für))(?: und|&|im)(?:[,\s!]|$).*)')
+    rrs.append(rr)
+    rr = '.*?(?:' + '|'.join(rrs) + ')'
+    regexs['rr'] = re.compile(rr, re.DOTALL | re.VERSION1)
+
+    # Pretty certain closing formulas, require something before (e.g. a newline)
+    r30 = (r'.*?(?P<eom>[\s.!,](?i)(?:(?:Herzliche|Viele|Beste|Schöne|Freundliche)'
+           '(?: liebe)? Grüße|'
+           'Herzlichen Gruß|'
+           '(?:Kind|Best) regards|'
+           'Lieben Gruß|'
+           'Schönen (?:Abend|Tag)|'
+           'Sent from my|'
+           'Mit(?: freundlichen| besten) Grüßen|'
+           'Danke( euch)?(?: und| &)(?:(?: beste| liebe) Grüße| Gruß| LG)| Grüße)(?-i)'
+           '(?:[ /].*?)?[.!,\s]*\n.*)')
+    regexs['r30'] = re.compile(r30, re.DOTALL | re.VERSION1)
+
+    # Less certain formulas, only match if followed by a new line or punctation or a "und..." phrase
+    r20 = (r'.*?(?P<eom>\n(?:[vV]ielen [dD]ank|Thanks|Thx|Thank you|Danke|Besten Dank|'
+           'Herzlichen Dank|Schönes Wochenende und)'
+           '(?: im Voraus| in advance|und .*?)?[\.!,\s]*\n.*)')
+    regexs['r20'] = re.compile(r20, re.DOTALL)
+
+    return regexs
+
+
+def tag_endofmessage_onlytxt(msg):
+    global _regexs
+    if _regexs is None:
+        _regexs = _init_regexs()
+    for key, r in _regexs.items():
+        m = r.match(msg['body'])
+        if m:
+            return bratify_ann(msg, 'EndOfMsg', m.start('eom'), m.end('eom')), key
+    return None, None
+
+
+def get_name_re_from_email(email):
+    if len(email['name']) > 0:
+        sender = [s.strip().lower() for s in email['name'].split(' ')]
+    else:
+        sender = [s.strip().lower() for s in email['email'].split('@')[0].split('.')]
+    # only keep name parts of at least three characters
+    sender = [s for s in sender if len(s) > 2]
+    if len(sender) == 0:
+        sender_re = None
+    elif len(sender) == 1:
+        sender_re = '(?:{})'.format(sender[0])
+    else:
+        sender_re = r'(?:' + '|'.join(sender) + ')'
+        sender_re = r'{x}(?:[ \t]+{x})*'.format(x=sender_re)
+    return sender_re
+
+
+@tag_wrapper("endofmsg")
+def tag_endofmessage(msg, result):
+    #
+    # Build a regex that matches the name of the sender
+    #
+    sender_re = get_name_re_from_email(msg['from'])
+    body = msg['body']
+    if sender_re:
+        rr = (r'.*?(?:\n|^|\.|!|\?|\))[ \t]*(?i)(?P<eom>'
+              '(?:(?:Lieben?|Vielen?|Freundlichen?) (?:Gruß|Grüße|Dank)|'
+              '(?:Vielen )?Danke?(?: sehr)?(?: und| &|,)?(?: mit)?'
+              '(?: lieben?| vielen?| freundlichen?)?(?: Gruß| Grüßen?| VG)|'
+              'Danke|Gruß|Grüße|'
+              'Thanks?|Thank you|'
+              '(?:Best |Kind )?Regards|Best|LG|MFG|VG)'
+              '[,!\s]+(?:(?:iA|iV|pp|b.o.|i.A.|i.V.|i. A.|i. V.)\s+)?'
+              '{sender_re}.*)').format(sender_re=sender_re)
+        m = re.match(rr, body, re.DOTALL | re.VERSION1)
+        if m:
+            result['annotations'].append(
+                bratify_ann(msg, 'EndOfMsg', m.start('eom'), m.end('eom')))
+            return TagStatus.success, 'sender1'
+    # If we come here, there either was no sender information or it
+    # did not match
+    t, ex = tag_endofmessage_onlytxt(msg)
+    if t:
+        result['annotations'].append(t)
+        return TagStatus.success, ex
+    rr = r'.*?\n(?i)(?P<eom>{sender_re}.*)'.format(sender_re=sender_re)
+    m = re.match(rr, body, re.DOTALL | re.VERSION1)
+    if m:
+        result['annotations'].append(
+            bratify_ann(msg, 'EndOfMsg', m.start('eom'), m.end('eom')))
+        return TagStatus.success, 'sender2'
+    else:
+        return TagStatus.success, None

@@ -1,0 +1,15 @@
+def set_cover(sets):
+    "Input: a list of sets of numbers range(s, e), coded as {'start': s,
+    'end': e} (and probably more fields).
+    
+    Find the smallest subset subs from sets, such that union(subs) == union(sets)
+    
+    This is set set cover problem
+    (cf. https://en.wikipedia.org/wiki/Set_cover_problem#Greedy_algorithm)
+    and here we use the greedy approxiation algorithm.
+
+    """
+    subs = []
+    sub_sets = sorted([set(range(s['start'], s['end'])) for s in sets, lambda x: len(x)]
+    uncovered = 
+    pass

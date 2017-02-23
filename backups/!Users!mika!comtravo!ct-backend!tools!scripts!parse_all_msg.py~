@@ -1,0 +1,43 @@
+#
+# Read locally stored mails, parse them and store on a per message basis
+#
+from email_parser import parse_mail
+from email_tagger import tag_mail
+import numpy as np
+import pickle as pkl
+import os
+import json
+
+
+def pickle_loader(pkl_file):
+    try:
+        while True:
+            yield pkl.load(pkl_file)
+    except EOFError:
+        pass
+
+
+def load_data(fname):
+    msgs = []
+    with open(fname, 'rb') as f:
+        for msg in pickle_loader(f):
+            msgs.append(msg)
+    return msgs
+
+
+fname = '../../../raw_messages@2016-06-29T13:52:03.pkl'
+messages = load_data(fname)
+
+thread_ids = np.unique([m['threadId'] for m in messages])
+
+for thread_id in thread_ids:
+    thread_messages = [m for m in messages if m['threadId'] == thread_id and m is not None]
+    thread_messages.sort(key=lambda x: x['internalDate'])
+    ddir = 'all_msg'
+    if not os.path.exists(ddir):
+        os.makedirs(ddir)
+    for mail in [parse_mail(m) for m in thread_messages]:
+        with open('{}/{}-{}.json'.format(ddir, thread_id, mail['message_id']), 'wb') as fid:
+            json.dump(mail, fid)
+        with open('{}/{}-{}.ann'.format(ddir, thread_id, mail['message_id']), 'wb') as fid:
+            json.dump(tag_mail(mail), fid)

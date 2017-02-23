@@ -1,0 +1,24 @@
+#!make
+DOCKER_IMAGE_NAME:=ct-tools-ducklingserver
+DOCKER_TEST_RUNNER_CONTAINER:=workhorse
+WORK_DIR:=$(CURDIR)
+ROOT_DIR:=$(WORK_DIR)/../..
+
+start-local-env:
+	@echo 'No local enviroment'
+stop-local-env:
+	@echo 'No local enviroment'
+test-docker:
+	@docker run --rm=true -it $(DOCKER_IMAGE_NAME) make test
+lint-docker:
+	@echo 'No lint'
+build:
+	@docker build -f $(WORK_DIR)/Dockerfile -t $(DOCKER_IMAGE_NAME) $(ROOT_DIR)
+test:
+	lein test
+develop:
+	make ssh || true
+ssh:
+	@docker run --rm=true -it -v "$(ROOT_DIR)":/home/ct $(DOCKER_IMAGE_NAME) /bin/bash
+
+.PHONY: test

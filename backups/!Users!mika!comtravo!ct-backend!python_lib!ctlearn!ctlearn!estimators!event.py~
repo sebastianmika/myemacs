@@ -1,0 +1,148 @@
+from ..base_model.base_model import BaseModel
+from . event_model_helpers import create_features_mail, prepare_data, eval_metric
+import numpy as np
+import os
+from sklearn.ensemble import ExtraTreesClassifier
+from . postprocessing import get_flight_request
+
+
+class EventModel(BaseModel):
+    '''
+    Class for the event model
+    '''
+    def __init__(self):
+        self.model = None
+        self.model_name = "event_model"
+        self.model_path = os.path.dirname(__file__) + "/models/" + self.model_name + ".pkl"
+
+    def fit(self, X, y):
+        train, labels, encoders = prepare_data(X, y)
+        clf = ExtraTreesClassifier(n_estimators=300, criterion='gini', max_depth=24, max_features=8,
+                                   bootstrap=False, n_jobs=1, random_state=2016,
+                                   class_weight="balanced")
+        clf.fit(train, labels)
+        self.model = {"model": clf, "encoders": encoders}
+
+    def apply(self, result, datetime):
+        if result is None:
+            return None
+        if 'language' not in result:
+            raise ValueError("language not in payload")
+        if result['language'] not in ["de", "en"]:
+            raise ValueError("language {} not supported".format(result['language']))
+        if 'annotations' not in result:
+            raise ValueError("annotations not in payload")
+        if not result["annotations"]:
+            # If there are not annotations, there is nothing to do
+            return result
+        if self.model:
+            sample = create_features_mail(result, self.model["encoders"])
+            if sample is not None:
+                prediction = self.model["model"].predict_proba(sample)
+                idx = 0
+                for token in result["annotations"]:
+                    if token["rner"] != "O-":
+                        if token["rner"] in self.model["encoders"]["rner"].classes_:
+                            token["prediction"] = self.model["encoders"]["label"]\
+                                                        .inverse_transform(
+                                                    np.argmax(prediction[idx], -1))
+                            token["probability"] = np.max(prediction[idx], -1)
+                            idx += 1
+                        else:
+                            token["prediction"] = "O"
+                            token["probability"] = 1.0
+                    else:
+                        token["prediction"] = "O"
+                        token["probability"] = 1.0
+                result['requests'] = {'flight_requests': get_flight_request(result, datetime)}
+                return result
+            else:
+                for token in result["annotations"]:
+                    token["prediction"] = "O"
+                    token["probability"] = 1.0
+                result['requests'] = {'flight_requests': get_flight_request(result, datetime)}
+                return result
+        else:
+            raise TypeError('No model loaded!')
+
+    @classmethod
+    def prepare_data(cls, data):
+        '''
+        This method implements the model specific preprocessing function.
+        Should return:
+            - X: iterable/dict of iterables
+            - y: iterable/dict of iterables
+        '''
+        X = [d for d in data if d['ann']['language'] in ["en", "de"] and
+             'booking' in d['ann']['label']]
+        for r in X:
+            offset = 0
+            new_ann = []
+            skip = False
+            for a in r['ann']['annotations']:
+                if a['where'] == 'subject':
+                    new_ann.append(a)
+                else:
+                    if a['rner'][2:] == 'Greeting':
+                        offset = a['start'] + a['length']
+                    elif a['rner'][2:] == 'EndOfMsg':
+                        skip = True
+                        continue
+                    elif a['rner'][2:] == 'Reply':
+                        raise Exception("This does lukily not happend")
+                    elif skip:
+                        continue
+                    else:
+                        a['start'] -= offset
+                        new_ann.append(a)
+            r['ann']['annotations'] = new_ann
+        y = []
+        for r in X:
+            ann = []
+            for a in r["ann"]["annotations"]:
+                ann.append(a["label"])
+            y.append(ann)
+        return X, y
+
+    def score(self, X, y):
+        '''
+        Validates the model.
+        Input:
+            - X: list, same length as y
+            - y: list or array, same length as X
+        '''
+        if self.model:
+            errors, cnt = 0, 0
+            for j in range(len(X)):
+                if X[j]['ann']['language'] in ["de", "en"]:
+                    result = X[j]["ann"]
+                    date = X[j]["msg"]["date"]
+                    pred = self.apply(result, date)
+                    y_pred = pred["requests"]['flight_requests']
+                    for i, d in enumerate(X[j]["ann"]["annotations"]):
+                        d["prediction"] = y[j][i]
+                    result["requests"] = {'flight_requests': get_flight_request(result, date)}
+                    y_true = result["requests"]['flight_requests']
+                    errs = self.metric(y_pred, y_true)
+                    if errs > 0:
+                        errors += 1
+                    cnt += 1
+            return errors/cnt
+        else:
+            raise ValueError
+
+    def metric(self, y_pred, y_true):
+        '''
+        The metric to evaluate the model.
+        Input:
+            - a,b: interables
+        Output:
+            - float
+        '''
+        return eval_metric(y_pred, y_true)
+
+    def tune(self, X, y):
+        '''
+        Do a grid search CV with the model and return the best parameters.
+        '''
+        raise NotImplementedError("Tuning is not possible yet!")

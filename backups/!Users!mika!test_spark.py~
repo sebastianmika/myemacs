@@ -1,0 +1,35 @@
+from pyspark.sql import Row
+from pyspark.ml import Pipeline
+from email_tagger.language_tagger import LanguageTagger
+from email_tagger.type_tagger import TypeTagger
+from email_tagger.source_tagger import SourceTagger
+from email_tagger.greeting_tagger import GreetingTagger
+from email_tagger.eom_tagger import EOMTagger
+
+
+def test(sc):
+    d = [{'body': 'Hallo Welt dieser Text muss länger sein, damit das Module macht, was es soll\nMit freundlichen Grüßen,\nsome name',
+          'subject': 'Hallo Welt nochmal',
+          'reply': None,
+          'from': {'email': 'bla', 'name': 'some name'},
+          'zendesk_ticket_id': 0},
+         {'body': 'This is some',
+          'subject': 'and some other',
+          'reply': {'spans': [{'start': 3, 'end': 4}, {'start': 4, 'end': 5}]},
+          'from': {'email': 'bll@comtravo.com', 'name': 'some name'},
+          'zendesk_ticket_id': 1}]
+    df = sc.parallelize(d).map(lambda x: Row(body=x['body'],
+                                             subject=x['subject'],
+                                             reply=x['reply'],
+                                             from_=x['from'],
+                                             zendesk_ticket_id=x['zendesk_ticket_id'])).toDF()
+    lt = LanguageTagger()
+    st = SourceTagger()
+    tt = TypeTagger()
+    gt = GreetingTagger()
+    et = EOMTagger()
+    p = Pipeline(stages=[st, tt, gt, et, lt])
+    m = p.fit(df)
+    df.show()
+    return m.transform(df)
+

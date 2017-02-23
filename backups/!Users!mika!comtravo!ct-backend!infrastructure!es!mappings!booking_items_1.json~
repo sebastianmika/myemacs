@@ -1,0 +1,1040 @@
+{
+  "booking_items_1": {
+    "warmers": null,
+    "settings": {
+      "index": {
+        "version": {
+          "created": "2030299"
+        },
+        "uuid": "wc_tI-EyRe-h9YGd16vFog",
+        "number_of_replicas": "1",
+        "number_of_shards": "5",
+        "creation_date": "1475228328004"
+      }
+    },
+    "mappings": {
+      "booking_item": {
+        "properties": {
+          "zendesk_ticket_id": {
+            "type": "string"
+          },
+          "traveler": {
+            "properties": {
+              "last_name": {
+                "type": "string"
+              },
+              "language": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "full_name": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "email": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              }
+            }
+          },
+          "supplier_booking": {
+            "properties": {
+              "meta_data": {
+                "properties": {
+                  "updated_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "created_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "external_booking_identifier": {
+                "type": "string"
+              },
+              "booking_time": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              },
+              "booking_site": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "booked_by": {
+                "type": "string"
+              }
+            }
+          },
+          "status": {
+            "fields": {
+              "raw": {
+                "ignore_above": 256,
+                "index": "not_analyzed",
+                "type": "string"
+              }
+            },
+            "type": "string"
+          },
+          "parent_status": {
+            "type": "string"
+          },
+          "meta_data": {
+            "properties": {
+              "updated_by": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "updated_at": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              },
+              "created_by": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "created_at": {
+                "format": "epoch_millis||dateOptionalTime",
+                "type": "date"
+              }
+            }
+          },
+          "margin": {
+            "type": "double"
+          },
+          "company_name": {
+            "fields": {
+              "raw": {
+                "ignore_above": 256,
+                "index": "not_analyzed",
+                "type": "string"
+              }
+            },
+            "type": "string"
+          },
+          "company_id": {
+            "type": "string"
+          },
+          "company": {
+            "properties": {
+              "vat": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "payment_method": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "name": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "loyalty_card": {
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "pin": {
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  },
+                  "card_number": {
+                    "type": "string"
+                  }
+                }
+              },
+              "language": {
+                "type": "string"
+              },
+              "invoice_email": {
+                "type": "string"
+              },
+              "industry": {
+                "type": "string"
+              },
+              "fare_codes": {
+                "type": "string"
+              },
+              "currency": {
+                "type": "string"
+              },
+              "cost_center_mandatory": {
+                "type": "boolean"
+              },
+              "booker": {
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "billing_time": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "billing_aggregation": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "address": {
+                "properties": {
+                  "zip_code": {
+                    "type": "string"
+                  },
+                  "street_2": {
+                    "type": "string"
+                  },
+                  "street_1": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "city": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  }
+                }
+              },
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "long"
+              }
+            }
+          },
+          "client_accounting": {
+            "properties": {
+              "payment_reference": {
+                "type": "string"
+              },
+              "meta_data": {
+                "properties": {
+                  "updated_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "created_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  }
+                }
+              },
+              "invoice_id": {
+                "type": "string"
+              },
+              "invoice_file_id": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              }
+            }
+          },
+          "booking_item": {
+            "properties": {
+              "type_of_traveler": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "type": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "traveler_id": {
+                "type": "string"
+              },
+              "transfer_item": {
+                "properties": {
+                  "operator": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "departure_time": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "departure_location": {
+                    "properties": {
+                      "zip_code": {
+                        "type": "string"
+                      },
+                      "street_1": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "city": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "arrival_location": {
+                    "properties": {
+                      "zip_code": {
+                        "type": "string"
+                      },
+                      "street_1": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "city": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "train_item": {
+                "properties": {
+                  "voucher_file_id": {
+                    "type": "string"
+                  },
+                  "number_of_travelers": {
+                    "type": "long"
+                  },
+                  "legs": {
+                    "properties": {
+                      "train_number": {
+                        "type": "string"
+                      },
+                      "reserved_seats": {
+                        "type": "string"
+                      },
+                      "operator": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "departure_time": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "departure_platform": {
+                        "type": "string"
+                      },
+                      "departure_location": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "arrival_time": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "arrival_platform": {
+                        "type": "string"
+                      },
+                      "arrival_location": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "flex": {
+                    "type": "boolean"
+                  },
+                  "class": {
+                    "type": "string"
+                  },
+                  "additional_travelers": {
+                    "properties": {
+                      "loyalty_card": {
+                        "type": "string"
+                      },
+                      "age_group": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "supplier_reference": {
+                "type": "string"
+              },
+              "supplier_booking_item": {
+                "properties": {
+                  "vat": {
+                    "type": "long"
+                  },
+                  "supplier_booking_id": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "amount_eur": {
+                    "type": "double"
+                  },
+                  "amount": {
+                    "type": "double"
+                  }
+                }
+              },
+              "status": {
+                "fields": {
+                  "raw": {
+                    "ignore_above": 256,
+                    "index": "not_analyzed",
+                    "type": "string"
+                  }
+                },
+                "type": "string"
+              },
+              "rental_car_item": {
+                "properties": {
+                  "voucher_file_id": {
+                    "type": "string"
+                  },
+                  "return_time": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "return_location": {
+                    "properties": {
+                      "zip_code": {
+                        "type": "string"
+                      },
+                      "street_1": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "city": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "pickup_time": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "pickup_location": {
+                    "properties": {
+                      "zip_code": {
+                        "type": "string"
+                      },
+                      "street_1": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "country": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "city": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "operator": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "class": {
+                    "type": "string"
+                  }
+                }
+              },
+              "refund_for": {
+                "type": "string"
+              },
+              "rebooked_from": {
+                "type": "string"
+              },
+              "rebooked_at": {
+                "format": "strict_date_optional_time||epoch_millis",
+                "type": "date"
+              },
+              "rebooked": {
+                "type": "boolean"
+              },
+              "rebookable": {
+                "type": "boolean"
+              },
+              "option_item_id": {
+                "type": "string"
+              },
+              "misc_item": {
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "meta_data": {
+                "properties": {
+                  "updated_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "updated_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "created_by": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "created_at": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  }
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "hotel_item": {
+                "properties": {
+                  "voucher_file_id": {
+                    "type": "string"
+                  },
+                  "type_of_room": {
+                    "type": "string"
+                  },
+                  "status_cost_assumption": {
+                    "type": "string"
+                  },
+                  "number_of_occupants": {
+                    "type": "long"
+                  },
+                  "invoice_status_cost_assumption": {
+                    "type": "string"
+                  },
+                  "includes_wifi": {
+                    "type": "boolean"
+                  },
+                  "includes_breakfast": {
+                    "type": "boolean"
+                  },
+                  "hotel_data": {
+                    "properties": {
+                      "website": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "properties": {
+                          "zip_code": {
+                            "type": "string"
+                          },
+                          "street_1": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "fields": {
+                              "raw": {
+                                "ignore_above": 256,
+                                "index": "not_analyzed",
+                                "type": "string"
+                              }
+                            },
+                            "type": "string"
+                          },
+                          "city": {
+                            "fields": {
+                              "raw": {
+                                "ignore_above": 256,
+                                "index": "not_analyzed",
+                                "type": "string"
+                              }
+                            },
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "checkout_time": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  },
+                  "checkin_time": {
+                    "format": "epoch_millis||dateOptionalTime",
+                    "type": "date"
+                  }
+                }
+              },
+              "flight_item": {
+                "properties": {
+                  "type_of_flight": {
+                    "type": "string"
+                  },
+                  "number_of_luggage_items": {
+                    "type": "long"
+                  },
+                  "legs": {
+                    "properties": {
+                      "reserved_seat": {
+                        "type": "string"
+                      },
+                      "operator": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "flight_number": {
+                        "type": "string"
+                      },
+                      "flight_class": {
+                        "type": "string"
+                      },
+                      "departure_time_utc": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "departure_time": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "departure_location": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "checkin_reminder_sent": {
+                        "type": "boolean"
+                      },
+                      "booking_class": {
+                        "type": "string"
+                      },
+                      "arrival_time_utc": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "arrival_time": {
+                        "format": "epoch_millis||dateOptionalTime",
+                        "type": "date"
+                      },
+                      "arrival_location": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      },
+                      "airline": {
+                        "fields": {
+                          "raw": {
+                            "ignore_above": 256,
+                            "index": "not_analyzed",
+                            "type": "string"
+                          }
+                        },
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "client_accounting_item": {
+                "properties": {
+                  "vat": {
+                    "type": "long"
+                  },
+                  "tax_class": {
+                    "type": "string"
+                  },
+                  "currency": {
+                    "fields": {
+                      "raw": {
+                        "ignore_above": 256,
+                        "index": "not_analyzed",
+                        "type": "string"
+                      }
+                    },
+                    "type": "string"
+                  },
+                  "client_cost_center_2": {
+                    "type": "string"
+                  },
+                  "client_cost_center_1": {
+                    "type": "string"
+                  },
+                  "client_accounting_id": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "double"
+                  }
+                }
+              },
+              "cancellation_for": {
+                "type": "string"
+              },
+              "canceled_at": {
+                "format": "strict_date_optional_time||epoch_millis",
+                "type": "date"
+              },
+              "canceled": {
+                "type": "boolean"
+              },
+              "cancelable": {
+                "type": "boolean"
+              },
+              "annotation": {
+                "type": "string"
+              }
+            }
+          },
+          "booking_id": {
+            "type": "string"
+          },
+          "booker_id": {
+            "type": "string"
+          },
+          "booker": {
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "language": {
+                "type": "string"
+              },
+              "gender": {
+                "type": "string"
+              },
+              "full_name": {
+                "type": "string"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "contact": {
+                "properties": {
+                  "booking_emails": {
+                    "properties": {
+                      "reminder_weekend": {
+                        "type": "string"
+                      },
+                      "reminder": {
+                        "type": "string"
+                      },
+                      "invoice": {
+                        "type": "string"
+                      },
+                      "confirmation": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "company": {
+                "type": "string"
+              },
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "long"
+              }
+            }
+          },
+          "annotation_itinerary_top": {
+            "type": "string"
+          },
+          "annotation_itinerary_bottom": {
+            "type": "string"
+          },
+          "annotation": {
+            "type": "string"
+          },
+          "__v": {
+            "type": "long"
+          }
+        }
+      }
+    },
+    "aliases": {
+      "booking_items": null
+    }
+  }
+}
