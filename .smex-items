@@ -1,27 +1,27 @@
 
 ;; ----- smex-history -----
 (
- jedi:install-server
- jedi:complete
- package-list-packages
- package-install
- uncomment-region
  query-replace
- comment-region
+ insert-file
+ increase-left-margin
+ replace-string
+ query-replace-regexp
+ replace-regexp
+ tetris
 )
 
 ;; ----- smex-data -----
 (
  (cider-jack-in . 2)
  (line-number-mode . 2)
- (comment-region . 41)
+ (comment-region . 67)
  (paredit-mode . 7)
- (json-pretty-print-buffer . 29)
+ (json-pretty-print-buffer . 37)
  (search-forward-regexp . 3)
- (query-replace . 150)
- (query-replace-regexp . 14)
- (whitespace-mode . 30)
- (diff-mode . 3)
+ (query-replace . 288)
+ (query-replace-regexp . 21)
+ (whitespace-mode . 32)
+ (diff-mode . 4)
  (compare-windows . 1)
  (diff-buffer-with-file . 2)
  (highlight-compare-buffers . 1)
@@ -30,12 +30,12 @@
  (diff . 1)
  (ediff-buffers . 3)
  (json-pretty-print . 8)
- (uncomment-region . 14)
- (decrease-left-margin . 2)
- (package-install . 10)
- (insert-file . 28)
+ (uncomment-region . 19)
+ (decrease-left-margin . 12)
+ (package-install . 13)
+ (insert-file . 38)
  (python-menu . 1)
- (python-mode . 5)
+ (python-mode . 6)
  (latex-insert-block . 8)
  (sql-mysql . 1)
  (sql-mode-menu . 2)
@@ -44,23 +44,35 @@
  (sql-highlight-ansi-keywords . 1)
  (flycheck-manual . 1)
  (flycheck-mode . 4)
- (tetris . 31)
+ (tetris . 39)
  (flycheck-buffer . 1)
  (json-reformat-region . 3)
  (count-lines-page . 2)
  (pong . 1)
  (toggle-save-place-globally . 2)
- (increase-left-margin . 1)
- (replace-string . 2)
- (replace-regexp . 31)
- (regexp-builder . 1)
+ (increase-left-margin . 5)
+ (replace-string . 17)
+ (replace-regexp . 38)
+ (regexp-builder . 3)
  (magit-diff . 1)
  (diff-git-buffer-stage . 1)
  (magit-status . 1)
  (goto-char . 3)
  (doctor . 1)
  (clean-buffer-list . 1)
- (package-list-packages . 4)
+ (package-list-packages . 9)
  (jedi:complete . 1)
- (jedi:install-server . 1)
+ (jedi:install-server . 4)
+ (quickurl-browse-url . 1)
+ (sphinx-mode . 1)
+ (sphinx-doc-mode . 1)
+ (sphinx-doc . 1)
+ (python-docstring-fill . 45)
+ (yank . 1)
+ (ispell . 3)
+ (haskell-emacs-help . 1)
+ (haskell-mode . 1)
+ (version . 2)
+ (hexl-mode . 1)
+ (flycheck-select-checker . 2)
 )

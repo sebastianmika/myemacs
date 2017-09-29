@@ -1,23 +1,24 @@
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
-# On branch feature/it-936-eval-distributed
-# Your branch is up-to-date with 'origin/feature/it-936-eval-distributed'.
+# On branch feature/it-1489-restructure-postprocessing
+# Your branch is up-to-date with 'origin/feature/it-1489-restructure-postprocessing'.
 #
 # Changes to be committed:
-#	modified:   python_lib/ctlearn/ctlearn/estimators/__init__.py
-#	modified:   python_lib/ctlearn/ctlearn/estimators/confidence.py
-#	new file:   python_lib/ctlearn/ctlearn/estimators/label.py
-#	modified:   python_lib/ctlearn/ctlearn/pipelines/nlp.py
-#	modified:   python_lib/ctlearn/ctlearn/transformations/merge.py
-#	modified:   python_lib/ctlearn/ctlearn/transformations/nlp_results.py
-#	modified:   python_lib/ctlearn/ctlearn/utils/__init__.py
-#	new file:   python_lib/ctlearn/ctlearn/utils/str_encoder.py
-#	new file:   python_lib/ctlearn/tests/test_str_encoder.py
-#	modified:   python_lib/requirements.txt
+#	modified:   ../../python_lib/Makefile
+#	modified:   nlp_api/app.py
+#	modified:   tests/tests_01_integration/full_cycle_test.py
 #
 # Untracked files:
-#	python_lib/ctlearn/pipe_fit_dsk.png
-#	python_lib/ctlearn/test_ctlearn.py
-#	python_lib/ctlearn/test_msg.json
+#	../../data/annotated_corpus_2017-07-12T02:49:09Z.json.bz2
+#	../../data/ctlearn/
+#	../../python_lib/ctlearn.env
+#	../../python_lib/docker-compose.import-local.yml
+#	../../python_lib/pyduckling/
+#	../duckling/docker-compose.local.yml
+#	docker-compose.local.yml
+#	../../tools/scripts/.ipynb_checkpoints/
+#	../../tools/scripts/2017-07-01_2017-07-22_booking_item_report.xlsx
+#	../../tools/scripts/brat_import/event_to_txt.py
+#	../../tools/scripts/brat_import/parse_gold.py
 #

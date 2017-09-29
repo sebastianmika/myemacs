@@ -11,10 +11,10 @@ source ~/.git-completion
 # Set config variables first
 GIT_PROMPT_ONLY_IN_REPO=1
 
-GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+# GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
 
 # GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
-GIT_PROMPT_SHOW_UNTRACKED_FILES=no # can be no, normal or all; determines counting of untracked files
+GIT_PROMPT_SHOW_UNTRACKED_FILES=normal # can be no, normal or all; determines counting of untracked files
 
 # GIT_PROMPT_STATUS_COMMAND=gitstatus_pre-1.7.10.sh # uncomment to support Git older than 1.7.10
 
@@ -35,15 +35,9 @@ function join { local IFS="$1"; shift; echo "$*"; }
 
 CP1=`ls -d $HOME/comtravo/ct-backend/python_lib/**`
 CP1=`join : $CP1`
-CP2=`ls -d $HOME/comtravo/ct-backend/python_lib/nlp_models/**`
-CP2=`join : $CP2`
-export CP=$PYTHONPATH:$CP1:$CP2
+export CP=$PYTHONPATH:$CP1
 
+alias bipython="PYTHONPATH=$CP COMTRAVO_BI_URI=https://bi.comtravo.com COMTRAVO_BI_USER=alphago COMTRAVO_BI_PASSWORD=diehuman ZEN_USER=thomas.pfleiderer@comtravo.com ZEN_PW='!Travel2014' JWT_S2S_AUDIENCE=s2s.comtravo.com JWT_S2S_ISSUER=s2s.comtravo.com JWT_S2S=secret ipython"
 
-export SIMBAINI=$HOME/.mapr.drillodbc.ini
-export ODBCSYSINI=$HOME/.odbcinst.ini
-export ODBCINI=$HOME/.odbc.ini
-export DYLD_LIBRARY_PATH=/usr/local/iODBC/lib:/opt/mapr/drillodbc/lib/universal
-
-
-alias bipython="PYTHONPATH=$CP COMTRAVO_BI_URI=https://bi.comtravo.com COMTRAVO_BI_USER=alphago COMTRAVO_BI_PASSWORD=diehuman ZEN_USER=thomas.pfleiderer@comtravo.com ZEN_PW='!Travel2014' ipython"
+# HASKELL
+export PATH=/Users/mika/.local/bin:$PATH
