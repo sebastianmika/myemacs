@@ -1,3 +1,0 @@
-
-def annotate(request_body=None) -> str:
-    return 'do some magic!'

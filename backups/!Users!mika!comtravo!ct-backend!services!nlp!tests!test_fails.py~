@@ -1,9 +1,0 @@
-from flask_testing import TestCase, patch
-
-
-class TestTaggerFailures(TestCase):
-    @patch('nlp_api.app._init_spacy')
-    def create_app(self, init_spacy_mock):
-        app = create_app()
-        app.app.config['TESTING'] = True
-        return app.app

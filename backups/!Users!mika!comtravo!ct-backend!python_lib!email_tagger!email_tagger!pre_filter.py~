@@ -1,7 +1,0 @@
-def pre_filter(msg):
-    """Filter messages as whether the following pipeling is applicable at all.
-
-    This removes e.g. 
-    ...
-    """
-    pass

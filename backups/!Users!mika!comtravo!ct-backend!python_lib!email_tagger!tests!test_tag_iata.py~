@@ -1,7 +1,0 @@
-from unittest import TestCast
-from email_tagger.tag_iata import tag_iata
-
-
-class TestTagIata(TestCase):
-    def test_empty_message():
-        self.assertEqual(

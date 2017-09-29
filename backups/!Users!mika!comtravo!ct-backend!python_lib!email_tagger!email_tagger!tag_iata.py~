@@ -1,3 +1,0 @@
-def tag_iata(msg):
-    """Tag all appearances of iata codes as Location"""
-    return []

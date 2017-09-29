@@ -1,1 +1,0 @@
-curl -X GET https://bi.comtravo.com/bookings/_search

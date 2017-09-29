@@ -1,9 +1,0 @@
-from unittest import TestCase
-from unittest.mock import patch
-
-
-@patch('email_tagger.get_spacy.sputnik')
-class TestGetSpacy(TestCase):
-    def test_init_spacy(self, sputnik_mock):
-        pass
-    

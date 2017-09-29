@@ -1,4 +1,0 @@
-import logging
-from collections import Counter
-from . base_tagger import BaseTagger, TagStatus
-from . helpers import _query_elasticsearch

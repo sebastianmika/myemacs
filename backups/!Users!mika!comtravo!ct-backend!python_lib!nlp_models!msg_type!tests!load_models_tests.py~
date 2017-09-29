@@ -1,9 +1,0 @@
-from glob import glob
-from msg_type_model import load_model
-
-
-def test_load_models():
-    files = glob('../models/')
-    for f in files:
-        load_model(f)
-        

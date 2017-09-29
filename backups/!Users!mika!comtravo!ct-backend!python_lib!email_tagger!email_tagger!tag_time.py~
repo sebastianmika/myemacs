@@ -1,6 +1,0 @@
-def tag_time(msg):
-    query = {
-        'text': msg['body'],
-        'lang': msg['lang'],
-        'date': msg['date']
-    }

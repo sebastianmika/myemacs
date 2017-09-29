@@ -1,5 +1,0 @@
-import json
-
-
-comments = json.load(open('comments.js', 'r'))['comments']
-audits = json.load(open('audit.js', 'r'))['audits']

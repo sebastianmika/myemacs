@@ -1,8 +1,0 @@
-export SOURCE_URI=https://search-ct-bi-new-ylmjnwwbdltnpb63z7caj7d6km.eu-west-1.es.amazonaws.com/offers_1
-export TARGET_URI=https://search-ct-bi-new-ylmjnwwbdltnpb63z7caj7d6km.eu-west-1.es.amazonaws.com/offers_2
-export TARGET_PROXY_URI=https://alphago:diehuman@bi.comtravo.com
-export INDEX_SPEC=mappings/offers_2.json
-export ACCESS_KEY=AKIAJPU4JKUV6J6TXL3Q
-export SECRET_KEY=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
-
-./copy_bi.sh

@@ -1,8 +1,0 @@
-from abc import ABCMeta, abstractmethod
-from .base import ProcessorBase
-
-
-class Transformer(ProcessorBase, metaclass=ABCMeta):
-    @abstractmethod
-    def apply(self, X):
-        return X

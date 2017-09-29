@@ -1,9 +1,0 @@
-from unittest import TestCase
-from unittest.mock import patch
-from nlp_api.app.controllers.annotate import get_firehose
-
-
-class TestFirehose(TestCase):
-    def test_fail_no_target(self):
-        self.assertNone(get_firehose())
-        

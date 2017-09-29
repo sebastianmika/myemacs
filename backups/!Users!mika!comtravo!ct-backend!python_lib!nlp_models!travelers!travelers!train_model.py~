@@ -1,2 +1,0 @@
-travelers = [{'id': r['id'], 'target': a['target'], 'type': e['type']}
-             for r in raw_data for e in r['ann']['events'] for a in e['args'] if a['name'] == 'who']

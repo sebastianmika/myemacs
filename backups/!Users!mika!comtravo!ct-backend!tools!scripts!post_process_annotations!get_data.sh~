@@ -1,2 +1,0 @@
-ssh ubuntu@54.229.183.160 "cd /opt/brat/brat-v1.3_Crunchy_Frog/data/ && tar -cjf /tmp/season_2.tar.bz2 ."
-scp ubuntu@54.229.183.160:/tmp/season_2.tar.bz2 /tmp

@@ -1,6 +1,0 @@
-from email_tagger import tag_mail
-
-
-def annotate(request_body=None) -> str:
-    annotations = tag_mail(requestBody)
-    return json.dumps(annotations)

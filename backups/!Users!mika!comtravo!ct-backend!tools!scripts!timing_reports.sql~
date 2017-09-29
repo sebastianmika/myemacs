@@ -1,4 +1,0 @@
--- Offers per ticket
-USE dfs.root;
-
-SELECT zendesk_ticket_id, COUNT(offer_id) offer_cnt FROM 'offer-prod/*' GROUP BY zendesk_ticket_id ORDER BY offer_cnt;

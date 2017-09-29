@@ -1,2 +1,0 @@
-booking-elastic-search:
-  image: elasticsearch:1.5

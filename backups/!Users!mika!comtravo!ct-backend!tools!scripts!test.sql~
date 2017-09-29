@@ -1,4 +1,0 @@
-SELECT b.meta_data.created_by agent,
-       CAST(b.meta_data.create_at AS DATE),
-       COUNT(DISTINCT(b.booking_id)) bookings_created,
-FROM `booking-prod` b GROUP BY b.meta_data.created_by, CAST(b.meta_data.created_at AS DATE)

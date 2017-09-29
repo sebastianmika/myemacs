@@ -1,7 +1,0 @@
-from unittest import TestCase
-from email_tagger.tag_flight_numbers import tag_flight_numbers
-
-
-class TestTagFlightNumbers(TestCase):
-    def test_empty(self):
-        self.assertEqual(tag_flight_numbers({'body': ''}), [])

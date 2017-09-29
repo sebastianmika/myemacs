@@ -1,6 +1,0 @@
-import json
-from email_tagger import tag_mail
-
-
-def annotate(requestBody=None) -> dict:
-    return tag_mail(requestBody)

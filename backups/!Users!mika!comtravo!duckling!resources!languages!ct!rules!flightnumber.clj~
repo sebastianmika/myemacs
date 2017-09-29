@@ -1,5 +1,0 @@
-(
- "LH 1234"
- #"(i?)(LH|AB)\s*(\d{3,4})"
- {:dim flightnumber :value {:airline (groups %1) :number (groups %2)}}
-)

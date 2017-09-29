@@ -1,6 +1,0 @@
-T1	Attributes 0 0	
-#1	AnnotatorNotes T1	{"language": "de", "source": "email"}
-T2	Greeting 0 17	Hi Comtravo-Team,
-T3	EndOfMsg 242 264;267 279	Vielen Dank im Voraus! Louisa Wörle
-T4	ReturnFlight 19 116;118 239	könnt ihr mir bitte Vorschläge für den günstigsten Flug von Teheran nach Frankfurt/Köln schicken? Der Passagier möchte am 9.10.15 Vormittags in Deutschland landen und wird am 11.10.15 wieder zurück nach Teheran fliegen.
-E1	ReturnFlight:T4 

@@ -1,5 +1,0 @@
-r = raw_data[102]
-A = r['pred_ann']['annotations']
-txt = r['pred_ann']['analyzed']['original_text'][r['pred_ann']['analyzed']['start']:r['pred_ann']['analyzed']['end']]
-A = sorted(sum([ann2tok(txt, a) for a in A], []), key=lambda t: t['start'])
-T = r['pred_ann']['spacy']
